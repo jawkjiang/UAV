@@ -1,0 +1,33 @@
+flight,attacked,attack_type,attack_start_time,attack_params,consistency_mode,reason
+2,False,none,,{},,not_selected
+18,False,none,,{},,not_selected
+76,False,none,,{},,not_selected
+77,False,none,,{},,not_selected
+95,False,none,,{},,not_selected
+108,True,takeover,48.12462519939112,"{'offset_profile': 'step', 'M': np.float64(30.0), 'direction_mode': np.str_('along_track_xy'), 'direction_vector': [-0.059499354104362676, 0.998228344048176], 'alpha': np.float64(0.5), 'alpha_clipped': False}",pos_vel_acc,
+112,False,none,,{},,not_selected
+117,False,none,,{},,not_selected
+118,False,none,,{},,not_selected
+131,False,none,,{},,not_selected
+136,True,takeover,134.47376436462628,"{'offset_profile': 'step', 'M': np.float64(5.0), 'direction_mode': np.str_('fixed_north'), 'direction_vector': [0.0, 1.0], 'tau_takeover': np.float64(1.0)}",pos_vel,
+149,False,none,,{},,not_selected
+150,False,none,,{},,not_selected
+154,True,takeover,64.93707046499375,"{'offset_profile': 'step', 'M': np.float64(15.0), 'direction_mode': np.str_('along_track_xy'), 'direction_vector': [0.9271847529088094, -0.37460436993370755], 'alpha': np.float64(0.8), 'alpha_clipped': False}",pos_vel,
+162,False,none,,{},,not_selected
+165,False,none,,{},,not_selected
+166,False,none,,{},,not_selected
+169,False,none,,{},,not_selected
+179,False,none,,{},,not_selected
+184,False,none,,{},,not_selected
+192,False,none,,{},,not_selected
+193,False,none,,{},,not_selected
+212,False,none,,{},,not_selected
+214,False,none,,{},,not_selected
+221,False,none,,{},,not_selected
+224,False,none,,{},,not_selected
+233,False,none,,{},,not_selected
+243,False,none,,{},,not_selected
+254,False,none,,{},,not_selected
+264,False,none,,{},,not_selected
+270,False,none,,{},,not_selected
+279,False,none,,{},,not_selected

@@ -1,0 +1,32 @@
+flight,attacked,attack_type,attack_start_time,attack_params,consistency_mode,reason
+8,False,none,,{},,not_selected
+10,False,none,,{},,not_selected
+17,True,drift,59.773192917008274,"{'profile': 'ramp', 'T_drift': np.float64(5.0), 'T_drift_clipped': False, 'M': np.float64(5.0), 'direction_mode': np.str_('fixed_east'), 'direction_vector': [1.0, 0.0]}",pos_vel_acc,
+59,False,none,,{},,not_selected
+92,False,none,,{},,not_selected
+109,False,none,,{},,not_selected
+110,False,none,,{},,not_selected
+114,False,none,,{},,not_selected
+119,False,none,,{},,not_selected
+123,False,none,,{},,not_selected
+134,False,none,,{},,not_selected
+142,False,none,,{},,not_selected
+145,False,none,,{},,not_selected
+151,False,none,,{},,not_selected
+153,False,none,,{},,not_selected
+170,False,none,,{},,not_selected
+173,False,none,,{},,not_selected
+194,False,none,,{},,not_selected
+196,False,none,,{},,not_selected
+197,False,none,,{},,not_selected
+228,False,none,,{},,not_selected
+238,False,none,,{},,not_selected
+239,False,none,,{},,not_selected
+246,True,drift,176.95243645171223,"{'profile': 'ramp', 'T_drift': np.float64(5.0), 'T_drift_clipped': False, 'M': np.float64(30.0), 'direction_mode': np.str_('fixed_east'), 'direction_vector': [1.0, 0.0]}",pos_vel_acc,
+250,False,none,,{},,not_selected
+251,False,none,,{},,not_selected
+255,False,none,,{},,not_selected
+256,False,none,,{},,not_selected
+258,False,none,,{},,not_selected
+261,False,none,,{},,not_selected
+276,False,none,,{},,not_selected

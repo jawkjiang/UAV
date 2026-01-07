@@ -1,0 +1,21 @@
+{
+  "pr_auc": 0.347908547223195,
+  "roc_auc": 0.77946691668899,
+  "recall@fpr0.01": 0.4043478260869565,
+  "actual_fpr@fpr0.01": 0.008974015537101527,
+  "threshold@fpr0.01": 0.8871716260910034,
+  "recall@fpr0.05": 0.4391304347826087,
+  "actual_fpr@fpr0.05": 0.041253683364586125,
+  "threshold@fpr0.05": 0.7045407891273499,
+  "recall@fpr0.10": 0.4608695652173913,
+  "actual_fpr@fpr0.10": 0.09067773908384677,
+  "threshold@fpr0.10": 0.5607221126556396,
+  "avg_fp_per_flight": 2.09375,
+  "true_negatives": 5998.0,
+  "false_positives": 1468.0,
+  "false_negatives": 115.0,
+  "true_positives": 115.0,
+  "precision": 0.07264687302590019,
+  "recall": 0.5,
+  "f1": 0.126861555432984
+}

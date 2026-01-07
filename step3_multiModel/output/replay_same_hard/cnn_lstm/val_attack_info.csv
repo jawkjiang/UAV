@@ -1,0 +1,32 @@
+flight,attacked,attack_type,attack_start_time,attack_params,consistency_mode,reason
+8,False,none,,{},,not_selected
+10,False,none,,{},,not_selected
+17,True,replay,68.54653456766357,"{'segment_duration': np.float64(15.0), 'donor_source': 'same_flight_earlier', 'donor_flight_id': None, 'donor_t_a': 24.734048768161458, 'donor_t_b': np.float64(39.73404876816146), 'stitching': 'hard', 'transition_seconds': 0.5}",pos_vel_acc,
+59,False,none,,{},,not_selected
+92,False,none,,{},,not_selected
+109,True,replay,232.00518661922519,"{'segment_duration': np.float64(10.0), 'donor_source': 'same_flight_earlier', 'donor_flight_id': None, 'donor_t_a': 65.0499076809842, 'donor_t_b': np.float64(75.0499076809842), 'stitching': 'hard', 'transition_seconds': 0.5}",pos_vel_acc,
+110,True,replay,220.76991836434726,"{'segment_duration': np.float64(5.0), 'donor_source': 'same_flight_earlier', 'donor_flight_id': None, 'donor_t_a': 120.44827607645072, 'donor_t_b': np.float64(125.44827607645072), 'stitching': 'hard', 'transition_seconds': 0.5}",pos_vel_acc,
+114,False,none,,{},,not_selected
+119,False,none,,{},,not_selected
+123,False,none,,{},,not_selected
+134,False,none,,{},,not_selected
+142,False,none,,{},,not_selected
+145,False,none,,{},,not_selected
+151,False,none,,{},,not_selected
+153,False,none,,{},,not_selected
+170,False,none,,{},,not_selected
+173,False,none,,{},,not_selected
+194,False,none,,{},,not_selected
+196,False,none,,{},,not_selected
+197,False,none,,{},,not_selected
+228,False,none,,{},,not_selected
+238,False,none,,{},,not_selected
+239,False,none,,{},,not_selected
+246,False,none,,{},,not_selected
+250,False,none,,{},,not_selected
+251,False,none,,{},,not_selected
+255,True,replay,99.77664654470543,"{'segment_duration': np.float64(15.0), 'donor_source': 'same_flight_earlier', 'donor_flight_id': None, 'donor_t_a': 15.252059755445602, 'donor_t_b': np.float64(30.2520597554456), 'stitching': 'hard', 'transition_seconds': 0.5}",pos_vel_acc,
+256,False,none,,{},,not_selected
+258,False,none,,{},,not_selected
+261,True,replay,150.821600639627,"{'segment_duration': np.float64(5.0), 'donor_source': 'same_flight_earlier', 'donor_flight_id': None, 'donor_t_a': 76.87656356504284, 'donor_t_b': np.float64(81.87656356504284), 'stitching': 'hard', 'transition_seconds': 0.5}",pos_vel_acc,
+276,False,none,,{},,not_selected

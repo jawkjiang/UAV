@@ -1,0 +1,33 @@
+flight,attacked,attack_type,attack_start_time,attack_params,consistency_mode,reason
+2,False,none,,{},,not_selected
+18,False,none,,{},,not_selected
+76,False,none,,{},,not_selected
+77,False,none,,{},,not_selected
+95,False,none,,{},,not_selected
+108,False,none,,{},,not_selected
+112,False,none,,{},,not_selected
+117,False,none,,{},,not_selected
+118,False,none,,{},,not_selected
+131,False,none,,{},,not_selected
+136,False,none,,{},,not_selected
+149,False,none,,{},,not_selected
+150,False,none,,{},,not_selected
+154,False,none,,{},,not_selected
+162,True,takeover,131.80363934015475,"{'offset_profile': 'ramp', 'M': np.float64(5.0), 'direction_mode': np.str_('along_track_xy'), 'direction_vector': [-0.8716223579414001, 0.490177993321481], 'tau_takeover': np.float64(2.0), 'T_takeover': np.float64(5.0), 'T_takeover_clipped': False}",pos_vel_acc,
+165,True,takeover,75.20928593802704,"{'offset_profile': 'ramp', 'M': np.float64(15.0), 'direction_mode': np.str_('along_track_xy'), 'direction_vector': [-0.0010223251532508692, 0.9999994774255041], 'alpha': np.float64(0.8), 'alpha_clipped': False, 'T_takeover': np.float64(10.0), 'T_takeover_clipped': False}",pos_vel,
+166,False,none,,{},,not_selected
+169,False,none,,{},,not_selected
+179,False,none,,{},,not_selected
+184,False,none,,{},,not_selected
+192,False,none,,{},,not_selected
+193,False,none,,{},,not_selected
+212,False,none,,{},,not_selected
+214,False,none,,{},,not_selected
+221,False,none,,{},,not_selected
+224,False,none,,{},,not_selected
+233,False,none,,{},,not_selected
+243,True,takeover,20.213304028311757,"{'offset_profile': 'ramp', 'M': np.float64(15.0), 'direction_mode': np.str_('fixed_north'), 'direction_vector': [0.0, 1.0], 'alpha': np.float64(0.5), 'alpha_clipped': False, 'T_takeover': np.float64(10.0), 'T_takeover_clipped': False}",pos_vel,
+254,False,none,,{},,not_selected
+264,True,takeover,36.69099040769545,"{'offset_profile': 'ramp', 'M': np.float64(30.0), 'direction_mode': np.str_('cross_track_xy'), 'direction_vector': [-0.9441904939874437, 0.3293999257190978], 'alpha': np.float64(0.3), 'alpha_clipped': False, 'T_takeover': np.float64(10.0), 'T_takeover_clipped': False}",pos_vel_acc,
+270,False,none,,{},,not_selected
+279,False,none,,{},,not_selected

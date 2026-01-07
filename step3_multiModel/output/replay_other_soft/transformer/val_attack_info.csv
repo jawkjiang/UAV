@@ -1,0 +1,32 @@
+flight,attacked,attack_type,attack_start_time,attack_params,consistency_mode,reason
+8,False,none,,{},,not_selected
+10,True,replay,45.418662547594394,"{'segment_duration': np.float64(10.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(246), 'donor_t_a': 168.69181958305492, 'donor_t_b': np.float64(178.69181958305492), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+17,False,none,,{},,not_selected
+59,False,none,,{},,not_selected
+92,False,none,,{},,not_selected
+109,False,none,,{},,not_selected
+110,False,none,,{},,not_selected
+114,False,none,,{},,not_selected
+119,False,none,,{},,not_selected
+123,False,none,,{},,not_selected
+134,False,none,,{},,not_selected
+142,True,replay,145.9161406718004,"{'segment_duration': np.float64(15.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(123), 'donor_t_a': 39.929918429715826, 'donor_t_b': np.float64(54.929918429715826), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+145,False,none,,{},,not_selected
+151,False,none,,{},,not_selected
+153,False,none,,{},,not_selected
+170,False,none,,{},,not_selected
+173,False,none,,{},,not_selected
+194,False,none,,{},,not_selected
+196,False,none,,{},,not_selected
+197,False,none,,{},,not_selected
+228,False,none,,{},,not_selected
+238,False,none,,{},,not_selected
+239,True,replay,32.3171043989705,"{'segment_duration': np.float64(5.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(123), 'donor_t_a': 192.88732064875092, 'donor_t_b': np.float64(197.88732064875092), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+246,False,none,,{},,not_selected
+250,False,none,,{},,not_selected
+251,False,none,,{},,not_selected
+255,False,none,,{},,not_selected
+256,False,none,,{},,not_selected
+258,False,none,,{},,not_selected
+261,False,none,,{},,not_selected
+276,False,none,,{},,not_selected

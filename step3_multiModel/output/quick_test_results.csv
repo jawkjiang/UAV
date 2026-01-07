@@ -1,0 +1,5 @@
+attack_type,model_type,auc_roc,f1_score
+step,cnn,0.9999982825030571,0.7824620573355817
+step,lstm,1.0,1.0
+drift_ramp,cnn,1.0,0.997289972899729
+drift_ramp,lstm,0.9999999999999999,0.5897435897435896

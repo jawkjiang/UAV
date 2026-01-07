@@ -1,0 +1,33 @@
+flight,attacked,attack_type,attack_start_time,attack_params,consistency_mode,reason
+2,False,none,,{},,not_selected
+18,False,none,,{},,not_selected
+76,False,none,,{},,not_selected
+77,True,step,81.90292674849695,"{'magnitude': np.float64(30.0), 'direction_mode': 'random_xy', 'direction_vector': [0.9016219151929667, 0.43252505366020905], 'attack_duration': 3.0, 'time_constant': 1.0}",pos_vel_acc,
+95,False,none,,{},,not_selected
+108,False,none,,{},,not_selected
+112,True,step,157.82602958989185,"{'magnitude': np.float64(5.0), 'direction_mode': 'random_xy', 'direction_vector': [-0.9996900755236588, 0.02489483680407162], 'attack_duration': 3.0, 'time_constant': 1.0}",pos_vel_acc,
+117,False,none,,{},,not_selected
+118,False,none,,{},,not_selected
+131,False,none,,{},,not_selected
+136,True,step,75.70111618568897,"{'magnitude': np.float64(5.0), 'direction_mode': 'random_xy', 'direction_vector': [-0.19992282566911834, 0.9798116470916619], 'attack_duration': 3.0, 'time_constant': 1.0}",pos_vel_acc,
+149,False,none,,{},,not_selected
+150,False,none,,{},,not_selected
+154,False,none,,{},,not_selected
+162,False,none,,{},,not_selected
+165,False,none,,{},,not_selected
+166,False,none,,{},,not_selected
+169,False,none,,{},,not_selected
+179,False,none,,{},,not_selected
+184,False,none,,{},,not_selected
+192,False,none,,{},,not_selected
+193,False,none,,{},,not_selected
+212,False,none,,{},,not_selected
+214,False,none,,{},,not_selected
+221,False,none,,{},,not_selected
+224,False,none,,{},,not_selected
+233,False,none,,{},,not_selected
+243,False,none,,{},,not_selected
+254,False,none,,{},,not_selected
+264,False,none,,{},,not_selected
+270,False,none,,{},,not_selected
+279,True,step,130.14418827083628,"{'magnitude': np.float64(5.0), 'direction_mode': 'random_xy', 'direction_vector': [-0.42187323948641176, 0.9066548239574092], 'attack_duration': 3.0, 'time_constant': 1.0}",pos_vel_acc,

@@ -1,0 +1,147 @@
+flight,attacked,attack_type,attack_start_time,attack_params,consistency_mode,reason
+1,True,replay,181.79407516827183,"{'segment_duration': np.float64(8.905924831728157), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(3), 'donor_t_a': 100.51361585981043, 'donor_t_b': np.float64(109.41954069153859), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+3,True,replay,34.97472270582604,"{'segment_duration': np.float64(15.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(4), 'donor_t_a': 127.79995582539118, 'donor_t_b': np.float64(142.79995582539118), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+4,False,none,,{},,not_selected
+5,False,none,,{},,not_selected
+6,False,replay,,{},,no_other_flights_same_route
+7,False,replay,,{},,no_other_flights_same_route
+12,False,none,,{},,not_selected
+14,False,none,,{},,not_selected
+15,True,replay,12.149418013859949,"{'segment_duration': np.float64(15.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(181), 'donor_t_a': 45.05048741833181, 'donor_t_b': np.float64(60.05048741833181), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+16,True,replay,89.93731045785455,"{'segment_duration': np.float64(5.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(263), 'donor_t_a': 190.67748775365448, 'donor_t_b': np.float64(195.67748775365448), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+20,False,none,,{},,not_selected
+23,True,replay,104.9914005674227,"{'segment_duration': np.float64(12.008599432577299), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(20), 'donor_t_a': 116.11873834296465, 'donor_t_b': np.float64(128.12733777554195), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+60,False,none,,{},,not_selected
+68,False,none,,{},,not_selected
+78,True,replay,16.54365275135781,"{'segment_duration': np.float64(15.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(88), 'donor_t_a': 57.999868143910014, 'donor_t_b': np.float64(72.99986814391002), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+79,True,replay,104.90256929425097,"{'segment_duration': np.float64(5.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(168), 'donor_t_a': 68.4048362897931, 'donor_t_b': np.float64(73.4048362897931), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+80,True,replay,146.2832032129263,"{'segment_duration': np.float64(10.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(159), 'donor_t_a': 118.24456800613765, 'donor_t_b': np.float64(128.24456800613765), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+81,True,replay,139.80533189887691,"{'segment_duration': np.float64(5.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(130), 'donor_t_a': 52.06353902516308, 'donor_t_b': np.float64(57.06353902516308), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+82,True,replay,63.021821317604385,"{'segment_duration': np.float64(5.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(155), 'donor_t_a': 132.48191412169916, 'donor_t_b': np.float64(137.48191412169916), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+83,False,none,,{},,not_selected
+84,False,none,,{},,not_selected
+85,True,replay,58.670345562422455,"{'segment_duration': np.float64(10.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(225), 'donor_t_a': 142.96035943112238, 'donor_t_b': np.float64(152.96035943112238), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+86,False,none,,{},,not_selected
+87,False,none,,{},,not_selected
+88,False,none,,{},,not_selected
+91,True,replay,18.61893433419951,"{'segment_duration': np.float64(5.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(127), 'donor_t_a': 111.99637938896592, 'donor_t_b': np.float64(116.99637938896592), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+93,False,none,,{},,not_selected
+94,True,replay,184.5876599143585,"{'segment_duration': np.float64(5.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(85), 'donor_t_a': 172.6971957410774, 'donor_t_b': np.float64(177.6971957410774), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+96,False,none,,{},,not_selected
+97,False,none,,{},,not_selected
+98,False,none,,{},,not_selected
+99,False,none,,{},,not_selected
+100,True,replay,140.32080955646455,"{'segment_duration': np.float64(5.689190443535438), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(88), 'donor_t_a': 21.672261617390504, 'donor_t_b': np.float64(27.36145206092594), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+101,True,replay,131.06581874842897,"{'segment_duration': np.float64(10.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(106), 'donor_t_a': 74.6265196461684, 'donor_t_b': np.float64(84.6265196461684), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+102,True,replay,185.23497891674572,"{'segment_duration': np.float64(10.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(101), 'donor_t_a': 29.626518957727065, 'donor_t_b': np.float64(39.626518957727065), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+105,True,replay,124.80889532086144,"{'segment_duration': np.float64(15.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(253), 'donor_t_a': 65.01249250909135, 'donor_t_b': np.float64(80.01249250909135), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+106,False,none,,{},,not_selected
+107,True,replay,145.72243621049662,"{'segment_duration': np.float64(10.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(249), 'donor_t_a': 117.712104327693, 'donor_t_b': np.float64(127.712104327693), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+111,False,none,,{},,not_selected
+113,False,none,,{},,not_selected
+115,False,none,,{},,not_selected
+116,False,none,,{},,not_selected
+120,False,none,,{},,not_selected
+121,False,none,,{},,not_selected
+122,True,replay,34.593981545489115,"{'segment_duration': np.float64(10.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(144), 'donor_t_a': 127.0599303428643, 'donor_t_b': np.float64(137.0599303428643), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+124,True,replay,78.33959540116078,"{'segment_duration': np.float64(15.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(159), 'donor_t_a': 62.920676997202925, 'donor_t_b': np.float64(77.92067699720292), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+125,False,none,,{},,not_selected
+126,True,replay,82.95988730674789,"{'segment_duration': np.float64(15.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(101), 'donor_t_a': 23.085432525878744, 'donor_t_b': np.float64(38.085432525878744), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+127,False,none,,{},,not_selected
+128,True,replay,104.39592034615603,"{'segment_duration': np.float64(15.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(137), 'donor_t_a': 93.58039205953828, 'donor_t_b': np.float64(108.58039205953828), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+129,False,none,,{},,not_selected
+130,False,none,,{},,not_selected
+135,True,replay,182.0671867842671,"{'segment_duration': np.float64(4.232813215732904), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(152), 'donor_t_a': 124.75265324819846, 'donor_t_b': np.float64(128.98546646393135), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+137,False,none,,{},,not_selected
+138,False,none,,{},,not_selected
+139,True,replay,78.63026418387072,"{'segment_duration': np.float64(10.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(187), 'donor_t_a': 38.21187270673067, 'donor_t_b': np.float64(48.21187270673067), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+140,True,replay,172.40082082936976,"{'segment_duration': np.float64(10.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(277), 'donor_t_a': 91.29187809548357, 'donor_t_b': np.float64(101.29187809548357), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+141,False,none,,{},,not_selected
+143,True,replay,87.40045245370224,"{'segment_duration': np.float64(5.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(102), 'donor_t_a': 79.45817894850637, 'donor_t_b': np.float64(84.45817894850637), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+144,True,replay,15.094565925332425,"{'segment_duration': np.float64(5.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(236), 'donor_t_a': 40.96132427607474, 'donor_t_b': np.float64(45.96132427607474), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+146,False,none,,{},,not_selected
+147,True,replay,96.20743965796697,"{'segment_duration': np.float64(5.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(155), 'donor_t_a': 114.10154152270505, 'donor_t_b': np.float64(119.10154152270505), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+148,False,none,,{},,not_selected
+152,False,none,,{},,not_selected
+155,False,none,,{},,not_selected
+156,False,none,,{},,not_selected
+157,False,none,,{},,not_selected
+158,False,none,,{},,not_selected
+159,False,none,,{},,not_selected
+160,True,replay,26.709691347819383,"{'segment_duration': np.float64(15.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(247), 'donor_t_a': 87.43631546987265, 'donor_t_b': np.float64(102.43631546987265), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+163,False,none,,{},,not_selected
+164,True,replay,153.7921811710253,"{'segment_duration': np.float64(15.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(23), 'donor_t_a': 74.4031530950336, 'donor_t_b': np.float64(89.4031530950336), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+167,True,replay,58.893764040911805,"{'segment_duration': np.float64(10.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(116), 'donor_t_a': 14.436404493459257, 'donor_t_b': np.float64(24.436404493459257), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+168,False,none,,{},,not_selected
+171,False,none,,{},,not_selected
+172,False,none,,{},,not_selected
+174,False,none,,{},,not_selected
+175,True,replay,54.54133843277146,"{'segment_duration': np.float64(15.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(88), 'donor_t_a': 159.7371460583393, 'donor_t_b': np.float64(174.7371460583393), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+176,False,none,,{},,not_selected
+177,False,none,,{},,not_selected
+178,False,none,,{},,not_selected
+180,False,none,,{},,not_selected
+181,True,replay,42.22396926827448,"{'segment_duration': np.float64(15.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(186), 'donor_t_a': 51.50899158730259, 'donor_t_b': np.float64(66.50899158730259), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+182,True,replay,83.68413178316769,"{'segment_duration': np.float64(5.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(198), 'donor_t_a': 85.51613638832248, 'donor_t_b': np.float64(90.51613638832248), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+183,True,replay,51.97622793117261,"{'segment_duration': np.float64(5.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(189), 'donor_t_a': 110.33688547220228, 'donor_t_b': np.float64(115.33688547220228), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+185,False,none,,{},,not_selected
+186,True,replay,56.58532465132886,"{'segment_duration': np.float64(15.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(176), 'donor_t_a': 140.05549095384376, 'donor_t_b': np.float64(155.05549095384376), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+187,False,none,,{},,not_selected
+188,True,replay,24.454984785272387,"{'segment_duration': np.float64(5.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(163), 'donor_t_a': 167.91960548729074, 'donor_t_b': np.float64(172.91960548729074), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+189,False,none,,{},,not_selected
+190,False,none,,{},,not_selected
+191,True,replay,60.029428209199324,"{'segment_duration': np.float64(15.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(139), 'donor_t_a': 101.59608038854243, 'donor_t_b': np.float64(116.59608038854243), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+195,True,replay,175.03468308442493,"{'segment_duration': np.float64(5.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(252), 'donor_t_a': 143.77652610545533, 'donor_t_b': np.float64(148.77652610545533), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+198,True,replay,102.01450079507462,"{'segment_duration': np.float64(15.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(128), 'donor_t_a': 95.83184094045433, 'donor_t_b': np.float64(110.83184094045433), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+199,False,none,,{},,not_selected
+200,False,none,,{},,not_selected
+201,True,replay,195.25108486812414,"{'segment_duration': np.float64(15.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(209), 'donor_t_a': 18.777847363389057, 'donor_t_b': np.float64(33.77784736338906), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+202,True,replay,167.20947378147855,"{'segment_duration': np.float64(15.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(249), 'donor_t_a': 29.82713319215373, 'donor_t_b': np.float64(44.82713319215373), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+203,True,replay,53.09461882769541,"{'segment_duration': np.float64(5.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(98), 'donor_t_a': 98.04732387196871, 'donor_t_b': np.float64(103.04732387196871), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+204,False,none,,{},,not_selected
+205,True,replay,62.82176649428146,"{'segment_duration': np.float64(10.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(252), 'donor_t_a': 18.441617722336474, 'donor_t_b': np.float64(28.441617722336474), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+206,False,none,,{},,not_selected
+207,True,replay,131.18260631683347,"{'segment_duration': np.float64(10.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(183), 'donor_t_a': 83.78001230115167, 'donor_t_b': np.float64(93.78001230115167), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+208,True,replay,51.65470452588472,"{'segment_duration': np.float64(15.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(198), 'donor_t_a': 78.9524746761192, 'donor_t_b': np.float64(93.9524746761192), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+209,True,replay,134.68279275700831,"{'segment_duration': np.float64(15.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(189), 'donor_t_a': 13.143577165489972, 'donor_t_b': np.float64(28.143577165489972), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+210,False,none,,{},,not_selected
+211,False,none,,{},,not_selected
+213,False,none,,{},,not_selected
+215,True,replay,40.00200647856826,"{'segment_duration': np.float64(8.587993521431741), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(216), 'donor_t_a': 26.500270443715028, 'donor_t_b': np.float64(35.088263965146766), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+216,True,replay,21.449610218902677,"{'segment_duration': np.float64(15.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(215), 'donor_t_a': 29.002356301259187, 'donor_t_b': np.float64(44.002356301259184), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+217,True,replay,106.7980659941968,"{'segment_duration': np.float64(5.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(218), 'donor_t_a': 29.54314067087862, 'donor_t_b': np.float64(34.54314067087862), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+218,True,replay,54.54614212901588,"{'segment_duration': np.float64(10.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(217), 'donor_t_a': 102.46422077760407, 'donor_t_b': np.float64(112.46422077760407), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+219,True,replay,95.14995745700965,"{'segment_duration': np.float64(10.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(217), 'donor_t_a': 26.5906923187918, 'donor_t_b': np.float64(36.590692318791795), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+222,False,none,,{},,not_selected
+223,False,none,,{},,not_selected
+225,False,none,,{},,not_selected
+226,False,none,,{},,not_selected
+227,False,none,,{},,not_selected
+229,False,none,,{},,not_selected
+230,True,replay,131.10695860739764,"{'segment_duration': np.float64(10.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(146), 'donor_t_a': 89.78999088305842, 'donor_t_b': np.float64(99.78999088305842), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+231,True,replay,81.21135614076589,"{'segment_duration': np.float64(10.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(208), 'donor_t_a': 173.20534655604033, 'donor_t_b': np.float64(183.20534655604033), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+232,True,replay,140.04409816310172,"{'segment_duration': np.float64(10.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(210), 'donor_t_a': 124.85622842257341, 'donor_t_b': np.float64(134.8562284225734), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+234,True,replay,70.63305400838416,"{'segment_duration': np.float64(15.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(126), 'donor_t_a': 138.2912784693146, 'donor_t_b': np.float64(153.2912784693146), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+235,True,replay,94.367308688246,"{'segment_duration': np.float64(5.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(187), 'donor_t_a': 52.181236769238815, 'donor_t_b': np.float64(57.181236769238815), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+236,False,none,,{},,not_selected
+237,True,replay,50.19060006199574,"{'segment_duration': np.float64(15.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(267), 'donor_t_a': 45.7818856047165, 'donor_t_b': np.float64(60.7818856047165), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+240,True,replay,120.65114221666953,"{'segment_duration': np.float64(10.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(257), 'donor_t_a': 187.99129743465934, 'donor_t_b': np.float64(197.99129743465934), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+241,True,replay,160.699010860793,"{'segment_duration': np.float64(2.000989139206979), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(242), 'donor_t_a': 132.19939529097246, 'donor_t_b': np.float64(134.20038443017944), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+242,False,none,,{},,not_selected
+247,False,none,,{},,not_selected
+248,False,none,,{},,not_selected
+249,True,replay,79.52430748501973,"{'segment_duration': np.float64(15.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(240), 'donor_t_a': 91.08422479449116, 'donor_t_b': np.float64(106.08422479449116), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+252,True,replay,167.36098131583006,"{'segment_duration': np.float64(5.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(143), 'donor_t_a': 15.92996781536562, 'donor_t_b': np.float64(20.92996781536562), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+253,True,replay,84.50201442351214,"{'segment_duration': np.float64(10.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(225), 'donor_t_a': 120.68878845697313, 'donor_t_b': np.float64(130.68878845697313), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+257,False,none,,{},,not_selected
+260,False,none,,{},,not_selected
+262,False,none,,{},,not_selected
+263,False,none,,{},,not_selected
+267,False,none,,{},,not_selected
+268,True,replay,144.0450219908836,"{'segment_duration': np.float64(5.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(272), 'donor_t_a': 91.2483847216793, 'donor_t_b': np.float64(96.2483847216793), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+269,True,replay,40.81299264481194,"{'segment_duration': np.float64(10.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(271), 'donor_t_a': 85.12762596454375, 'donor_t_b': np.float64(95.12762596454375), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+271,False,none,,{},,not_selected
+272,False,none,,{},,not_selected
+275,False,none,,{},,not_selected
+277,True,replay,49.411458899489304,"{'segment_duration': np.float64(10.0), 'donor_source': 'same_route_other_flight', 'donor_flight_id': np.int64(160), 'donor_t_a': 93.57981820105256, 'donor_t_b': np.float64(103.57981820105256), 'stitching': 'soft', 'transition_seconds': 0.5}",pos_vel_acc,
+278,False,none,,{},,not_selected
