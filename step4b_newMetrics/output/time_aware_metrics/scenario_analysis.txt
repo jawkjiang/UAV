@@ -1,0 +1,134 @@
+================================================================================
+SCENARIO ANALYSIS REPORT
+Time-Aware Evaluation of GPS Spoofing Detection Models
+================================================================================
+
+--------------------------------------------------------------------------------
+SCENARIO: Safety-Critical
+Description: Quick response required, tolerates some false alarms
+--------------------------------------------------------------------------------
+
+Requirements:
+  - DR@5s >= 0.95
+  - ADD <= 3.0s
+  - MTBFA >= 5.0h
+
+Model Performance:
+
+  1. TCN - Score: 0.745 [✗ FAIL]
+     ADD: 0.00s | MTBFA: inf | DR@5s: 0.490 | DR@10s: 0.490
+     Failures: DR@5s=0.490 < 0.95
+
+  2. CNN - Score: 0.507 [✗ FAIL]
+     ADD: 0.02s | MTBFA: inf | DR@5s: 0.015 | DR@10s: 0.015
+     Failures: DR@5s=0.015 < 0.95
+
+  3. LSTM - Score: 0.200 [✗ FAIL]
+     ADD: N/A | MTBFA: inf | DR@5s: 0.000 | DR@10s: 0.000
+     Failures: DR@5s=0.000 < 0.95; ADD=N/A > 3.0
+
+  4. BILSTM - Score: 0.200 [✗ FAIL]
+     ADD: N/A | MTBFA: inf | DR@5s: 0.000 | DR@10s: 0.000
+     Failures: DR@5s=0.000 < 0.95; ADD=N/A > 3.0
+
+  5. GRU - Score: 0.200 [✗ FAIL]
+     ADD: N/A | MTBFA: inf | DR@5s: 0.000 | DR@10s: 0.000
+     Failures: DR@5s=0.000 < 0.95; ADD=N/A > 3.0
+
+  6. CNN_LSTM - Score: 0.200 [✗ FAIL]
+     ADD: N/A | MTBFA: inf | DR@5s: 0.000 | DR@10s: 0.000
+     Failures: DR@5s=0.000 < 0.95; ADD=N/A > 3.0
+
+  7. TRANSFORMER - Score: 0.200 [✗ FAIL]
+     ADD: N/A | MTBFA: inf | DR@5s: 0.000 | DR@10s: 0.000
+     Failures: DR@5s=0.000 < 0.95; ADD=N/A > 3.0
+
+  ⭐ RECOMMENDED: TCN
+
+--------------------------------------------------------------------------------
+SCENARIO: Long-term Monitoring
+Description: Low false alarm rate, slower detection acceptable
+--------------------------------------------------------------------------------
+
+Requirements:
+  - DR@10s >= 0.90
+  - MTBFA >= 24.0h
+  - ADD <= 10.0s
+
+Model Performance:
+
+  1. TCN - Score: 0.847 [✗ FAIL]
+     ADD: 0.00s | MTBFA: inf | DR@5s: 0.490 | DR@10s: 0.490
+     Failures: DR@10s=0.490 < 0.9
+
+  2. CNN - Score: 0.704 [✗ FAIL]
+     ADD: 0.02s | MTBFA: inf | DR@5s: 0.015 | DR@10s: 0.015
+     Failures: DR@10s=0.015 < 0.9
+
+  3. LSTM - Score: 0.500 [✗ FAIL]
+     ADD: N/A | MTBFA: inf | DR@5s: 0.000 | DR@10s: 0.000
+     Failures: DR@10s=0.000 < 0.9; ADD=N/A > 10.0
+
+  4. BILSTM - Score: 0.500 [✗ FAIL]
+     ADD: N/A | MTBFA: inf | DR@5s: 0.000 | DR@10s: 0.000
+     Failures: DR@10s=0.000 < 0.9; ADD=N/A > 10.0
+
+  5. GRU - Score: 0.500 [✗ FAIL]
+     ADD: N/A | MTBFA: inf | DR@5s: 0.000 | DR@10s: 0.000
+     Failures: DR@10s=0.000 < 0.9; ADD=N/A > 10.0
+
+  6. CNN_LSTM - Score: 0.500 [✗ FAIL]
+     ADD: N/A | MTBFA: inf | DR@5s: 0.000 | DR@10s: 0.000
+     Failures: DR@10s=0.000 < 0.9; ADD=N/A > 10.0
+
+  7. TRANSFORMER - Score: 0.500 [✗ FAIL]
+     ADD: N/A | MTBFA: inf | DR@5s: 0.000 | DR@10s: 0.000
+     Failures: DR@10s=0.000 < 0.9; ADD=N/A > 10.0
+
+  ⭐ RECOMMENDED: TCN
+
+--------------------------------------------------------------------------------
+SCENARIO: Balanced
+Description: Balance between detection speed and false alarm rate
+--------------------------------------------------------------------------------
+
+Requirements:
+  - DR@5s >= 0.90
+  - MTBFA >= 12.0h
+  - ADD <= 5.0s
+
+Model Performance:
+
+  1. TCN - Score: 0.832 [✗ FAIL]
+     ADD: 0.00s | MTBFA: inf | DR@5s: 0.490 | DR@10s: 0.490
+     Failures: DR@5s=0.490 < 0.9
+
+  2. CNN - Score: 0.675 [✗ FAIL]
+     ADD: 0.02s | MTBFA: inf | DR@5s: 0.015 | DR@10s: 0.015
+     Failures: DR@5s=0.015 < 0.9
+
+  3. LSTM - Score: 0.330 [✗ FAIL]
+     ADD: N/A | MTBFA: inf | DR@5s: 0.000 | DR@10s: 0.000
+     Failures: DR@5s=0.000 < 0.9; ADD=N/A > 5.0
+
+  4. BILSTM - Score: 0.330 [✗ FAIL]
+     ADD: N/A | MTBFA: inf | DR@5s: 0.000 | DR@10s: 0.000
+     Failures: DR@5s=0.000 < 0.9; ADD=N/A > 5.0
+
+  5. GRU - Score: 0.330 [✗ FAIL]
+     ADD: N/A | MTBFA: inf | DR@5s: 0.000 | DR@10s: 0.000
+     Failures: DR@5s=0.000 < 0.9; ADD=N/A > 5.0
+
+  6. CNN_LSTM - Score: 0.330 [✗ FAIL]
+     ADD: N/A | MTBFA: inf | DR@5s: 0.000 | DR@10s: 0.000
+     Failures: DR@5s=0.000 < 0.9; ADD=N/A > 5.0
+
+  7. TRANSFORMER - Score: 0.330 [✗ FAIL]
+     ADD: N/A | MTBFA: inf | DR@5s: 0.000 | DR@10s: 0.000
+     Failures: DR@5s=0.000 < 0.9; ADD=N/A > 5.0
+
+  ⭐ RECOMMENDED: TCN
+
+================================================================================
+END OF REPORT
+================================================================================

@@ -1,0 +1,50 @@
+{
+  "step": {
+    "auc_roc": 1.0,
+    "f1_score": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "n_samples": 683,
+    "n_positive": 48
+  },
+  "drift_ramp": {
+    "auc_roc": 1.0,
+    "f1_score": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "n_samples": 609,
+    "n_positive": 43
+  },
+  "drift_sigmoid": {
+    "auc_roc": 0.9743572753776836,
+    "f1_score": 0.9767441860465116,
+    "precision": 1.0,
+    "recall": 0.9545454545454546,
+    "n_samples": 708,
+    "n_positive": 22
+  },
+  "delay": {
+    "auc_roc": 1.0,
+    "f1_score": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "n_samples": 822,
+    "n_positive": 13
+  },
+  "takeover_step": {
+    "auc_roc": 0.9250027880004461,
+    "f1_score": 0.2724252491694352,
+    "precision": 0.1583011583011583,
+    "recall": 0.9761904761904762,
+    "n_samples": 469,
+    "n_positive": 42
+  },
+  "takeover_ramp": {
+    "auc_roc": 1.0,
+    "f1_score": 0.3006993006993007,
+    "precision": 0.17695473251028807,
+    "recall": 1.0,
+    "n_samples": 590,
+    "n_positive": 43
+  }
+}

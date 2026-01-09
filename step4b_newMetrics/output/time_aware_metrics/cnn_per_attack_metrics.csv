@@ -1,0 +1,8 @@
+model,attack_type,n_instances,ADD,DR@5s,DR@10s
+cnn,takeover_ramp,27,0.0,0.037037037037037035,0.037037037037037035
+cnn,normal,51,,0.0,0.0
+cnn,step,28,0.05000000000001137,0.03571428571428571,0.03571428571428571
+cnn,drift_ramp,20,,0.0,0.0
+cnn,delay,25,,0.0,0.0
+cnn,takeover_step,26,,0.0,0.0
+cnn,drift_sigmoid,25,0.0,0.04,0.04

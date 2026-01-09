@@ -1,1 +1,9 @@
 /step1_benchmark/output/windows_data.pkl filter=lfs diff=lfs merge=lfs -text
+/step5_timegan/output/merged_normal_flights.csv filter=lfs diff=lfs merge=lfs -text
+/step5_timegan/output/normal_flights.csv filter=lfs diff=lfs merge=lfs -text
+/step5_timegan/output/synthetic_normal_flights.csv filter=lfs diff=lfs merge=lfs -text
+/step5_timegan/output/train_complete.csv filter=lfs diff=lfs merge=lfs -text
+/step5_timegan/output/train_with_attacks.csv filter=lfs diff=lfs merge=lfs -text
+/step5_timegan/output/val_complete.csv filter=lfs diff=lfs merge=lfs -text
+/step5_timegan/output/val_normal.csv filter=lfs diff=lfs merge=lfs -text
+/step5_timegan/output/val_with_attacks.csv filter=lfs diff=lfs merge=lfs -text

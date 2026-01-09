@@ -1,0 +1,8 @@
+model_type,EOC_rank,F1_rank,FNR_rank,FPR_rank,avg_rank
+cnn,3.0,3.0,3.5,3.5,3.25
+lstm,3.0,3.0,3.5,3.5,3.25
+gru,3.0,3.0,3.5,3.5,3.25
+cnn_lstm,3.0,3.0,3.5,3.5,3.25
+tcn,3.0,3.0,3.5,3.5,3.25
+bilstm,6.0,6.0,3.5,7.0,5.625
+transformer,7.0,7.0,7.0,3.5,6.125

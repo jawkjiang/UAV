@@ -1,0 +1,126 @@
+flight,attacked,attack_type,attack_start_time,attack_params,consistency_mode,reason
+1,True,takeover_step,66.19450553402015,"{'offset_profile': 'step', 'M': np.float64(5.0), 'direction_mode': np.str_('cross_track_xy'), 'direction_vector': [-0.9259503697694166, -0.37764522070837964], 'tau_takeover': np.float64(1.0)}",pos_vel,
+3,False,none,,{},,not_selected
+5,False,none,,{},,not_selected
+6,True,takeover_step,80.64617912332669,"{'offset_profile': 'step', 'M': np.float64(30.0), 'direction_mode': np.str_('cross_track_xy'), 'direction_vector': [-0.9993158833105786, 0.036983311955507456], 'tau_takeover': np.float64(1.0)}",pos_vel,
+7,True,delay,88.81471513572042,"{'delay_seconds': np.float64(1.0), 'source_time_clamped_count': 0}",pos_vel_acc,
+12,True,drift_sigmoid,20.668805870306294,"{'profile': 'sigmoid', 'T_drift': np.float64(5.0), 'T_drift_clipped': False, 'M': np.float64(30.0), 'direction_mode': np.str_('random_xy'), 'direction_vector': [-0.39343096417317863, 0.9193541626760402]}",pos_vel_acc,
+14,False,none,,{},,not_selected
+15,True,step,94.58519536991187,"{'magnitude': np.float64(30.0), 'direction_mode': 'random_xy', 'direction_vector': [-0.7923933904134941, -0.6100104219019605], 'attack_duration': 5.0, 'time_constant': 1.0}",pos_vel_acc,
+16,True,drift_ramp,31.483877576938603,"{'profile': 'ramp', 'T_drift': np.float64(5.0), 'T_drift_clipped': False, 'M': np.float64(30.0), 'direction_mode': np.str_('cross_track_xy'), 'direction_vector': [-0.9938426338548455, -0.11080080835654395]}",pos_vel_acc,
+20,True,step,115.7353827873423,"{'magnitude': np.float64(15.0), 'direction_mode': 'random_xy', 'direction_vector': [0.3571184723782189, -0.9340590969988181], 'attack_duration': 5.0, 'time_constant': 1.0}",pos_vel_acc,
+23,True,takeover_step,103.2462831500858,"{'offset_profile': 'step', 'M': np.float64(15.0), 'direction_mode': np.str_('cross_track_xy'), 'direction_vector': [-0.7705158879865887, 0.6374207922246018], 'alpha': np.float64(0.7), 'alpha_clipped': False}",pos_vel_acc,
+60,True,step,128.2594970619818,"{'magnitude': np.float64(5.0), 'direction_mode': 'random_xy', 'direction_vector': [0.1381937791238698, 0.9904052097053322], 'attack_duration': 5.0, 'time_constant': 1.0}",pos_vel_acc,
+68,True,drift_sigmoid,133.9210568895985,"{'profile': 'sigmoid', 'T_drift': np.float64(5.0), 'T_drift_clipped': False, 'M': np.float64(30.0), 'direction_mode': np.str_('cross_track_xy'), 'direction_vector': [-0.600094646003347, -0.7999290067487974]}",pos_vel_acc,
+78,True,drift_sigmoid,47.42516606431805,"{'profile': 'sigmoid', 'T_drift': np.float64(20.0), 'T_drift_clipped': False, 'M': np.float64(15.0), 'direction_mode': np.str_('fixed_east'), 'direction_vector': [1.0, 0.0]}",pos_vel_acc,
+80,False,none,,{},,not_selected
+81,True,delay,36.75827570549596,"{'delay_seconds': np.float64(1.0), 'source_time_clamped_count': 0}",pos_vel_acc,
+82,True,drift_sigmoid,20.506054806944114,"{'profile': 'sigmoid', 'T_drift': np.float64(10.0), 'T_drift_clipped': False, 'M': np.float64(15.0), 'direction_mode': np.str_('along_track_xy'), 'direction_vector': [0.285876408295762, 0.9582664969516126]}",pos_vel_acc,
+83,True,takeover_ramp,33.442161011623206,"{'offset_profile': 'ramp', 'M': np.float64(5.0), 'direction_mode': np.str_('cross_track_xy'), 'direction_vector': [-0.5990659132259275, 0.8006997137571522], 'tau_takeover': np.float64(1.0), 'T_takeover': np.float64(1.0), 'T_takeover_clipped': False}",pos_vel,
+84,True,step,198.28351816088733,"{'magnitude': np.float64(30.0), 'direction_mode': 'random_xy', 'direction_vector': [-0.42176449169548924, -0.9067054171807101], 'attack_duration': 5.0, 'time_constant': 1.0}",pos_vel_acc,
+85,True,drift_sigmoid,102.46722348434342,"{'profile': 'sigmoid', 'T_drift': np.float64(10.0), 'T_drift_clipped': False, 'M': np.float64(30.0), 'direction_mode': np.str_('fixed_east'), 'direction_vector': [1.0, 0.0]}",pos_vel_acc,
+86,False,none,,{},,not_selected
+87,False,none,,{},,not_selected
+88,True,takeover_ramp,78.49697070817825,"{'offset_profile': 'ramp', 'M': np.float64(5.0), 'direction_mode': np.str_('fixed_north'), 'direction_vector': [0.0, 1.0], 'tau_takeover': np.float64(1.0), 'T_takeover': np.float64(1.0), 'T_takeover_clipped': False}",pos_vel,
+91,False,none,,{},,not_selected
+93,True,delay,139.18022467375022,"{'delay_seconds': np.float64(1.0), 'source_time_clamped_count': 0}",pos_vel_acc,
+94,True,delay,47.15448727165096,"{'delay_seconds': np.float64(1.0), 'source_time_clamped_count': 0}",pos_vel_acc,
+96,True,takeover_ramp,68.99856184154115,"{'offset_profile': 'ramp', 'M': np.float64(30.0), 'direction_mode': np.str_('along_track_xy'), 'direction_vector': [-0.059153452577983226, 0.9982489013508127], 'tau_takeover': np.float64(2.0), 'T_takeover': np.float64(2.0), 'T_takeover_clipped': False}",pos_vel_acc,
+99,True,takeover_step,77.86554399964005,"{'offset_profile': 'step', 'M': np.float64(30.0), 'direction_mode': np.str_('along_track_xy'), 'direction_vector': [-0.008029736091109217, 0.9999677611494818], 'tau_takeover': np.float64(2.0)}",pos_vel_acc,
+100,True,takeover_ramp,38.435831136536436,"{'offset_profile': 'ramp', 'M': np.float64(30.0), 'direction_mode': np.str_('along_track_xy'), 'direction_vector': [0.7731167294535687, -0.6342637642487684], 'alpha': np.float64(0.5), 'alpha_clipped': False, 'T_takeover': np.float64(0.5), 'T_takeover_clipped': False}",pos_vel_acc,
+105,False,none,,{},,not_selected
+106,True,delay,52.27578044939896,"{'delay_seconds': np.float64(3.0), 'source_time_clamped_count': 0}",pos_vel_acc,
+111,True,step,114.26841101951368,"{'magnitude': np.float64(30.0), 'direction_mode': 'random_xy', 'direction_vector': [0.3756653419562217, 0.9267553888987725], 'attack_duration': 5.0, 'time_constant': 1.0}",pos_vel_acc,
+115,False,none,,{},,not_selected
+116,True,drift_ramp,90.47111466387143,"{'profile': 'ramp', 'T_drift': np.float64(20.0), 'T_drift_clipped': False, 'M': np.float64(15.0), 'direction_mode': np.str_('random_xy'), 'direction_vector': [-0.6275365604888604, -0.778587095481174]}",pos_vel_acc,
+120,True,takeover_step,29.13683974880227,"{'offset_profile': 'step', 'M': np.float64(15.0), 'direction_mode': np.str_('fixed_east'), 'direction_vector': [1.0, 0.0], 'tau_takeover': np.float64(1.0)}",pos_vel,
+121,True,drift_ramp,10.825544325318267,"{'profile': 'ramp', 'T_drift': np.float64(10.0), 'T_drift_clipped': False, 'M': np.float64(15.0), 'direction_mode': np.str_('along_track_xy'), 'direction_vector': [-0.9566554530240075, -0.2912221560929577]}",pos_vel_acc,
+122,True,drift_sigmoid,110.66281846720153,"{'profile': 'sigmoid', 'T_drift': np.float64(5.0), 'T_drift_clipped': False, 'M': np.float64(5.0), 'direction_mode': np.str_('fixed_east'), 'direction_vector': [1.0, 0.0]}",pos_vel_acc,
+125,False,none,,{},,not_selected
+126,True,step,88.91268080060401,"{'magnitude': np.float64(30.0), 'direction_mode': 'random_xy', 'direction_vector': [-0.18157696887569919, -0.9833767357294525], 'attack_duration': 5.0, 'time_constant': 1.0}",pos_vel_acc,
+127,True,takeover_ramp,87.90877710768353,"{'offset_profile': 'ramp', 'M': np.float64(30.0), 'direction_mode': np.str_('cross_track_xy'), 'direction_vector': [-0.9956946399834358, -0.09269403383312344], 'tau_takeover': np.float64(1.0), 'T_takeover': np.float64(1.0), 'T_takeover_clipped': False}",pos_vel_acc,
+128,True,step,82.84100838075071,"{'magnitude': np.float64(15.0), 'direction_mode': 'random_xy', 'direction_vector': [0.8309413927253301, -0.5563599570922487], 'attack_duration': 5.0, 'time_constant': 1.0}",pos_vel_acc,
+129,False,none,,{},,not_selected
+135,True,drift_ramp,71.71882327657133,"{'profile': 'ramp', 'T_drift': np.float64(5.0), 'T_drift_clipped': False, 'M': np.float64(30.0), 'direction_mode': np.str_('random_xy'), 'direction_vector': [0.337301048193127, 0.9413968360302778]}",pos_vel_acc,
+137,True,drift_sigmoid,59.80901709700782,"{'profile': 'sigmoid', 'T_drift': np.float64(20.0), 'T_drift_clipped': False, 'M': np.float64(5.0), 'direction_mode': np.str_('random_xy'), 'direction_vector': [0.9994138633155389, -0.03423346042557357]}",pos_vel_acc,
+138,True,step,60.57246583103363,"{'magnitude': np.float64(15.0), 'direction_mode': 'random_xy', 'direction_vector': [-0.6852736515341987, 0.7282856736974754], 'attack_duration': 5.0, 'time_constant': 1.0}",pos_vel_acc,
+139,True,takeover_step,136.90114750574205,"{'offset_profile': 'step', 'M': np.float64(5.0), 'direction_mode': np.str_('fixed_north'), 'direction_vector': [0.0, 1.0], 'tau_takeover': np.float64(0.5)}",pos_vel_acc,
+140,False,none,,{},,not_selected
+141,True,drift_sigmoid,93.79726574377894,"{'profile': 'sigmoid', 'T_drift': np.float64(20.0), 'T_drift_clipped': False, 'M': np.float64(5.0), 'direction_mode': np.str_('cross_track_xy'), 'direction_vector': [-0.9930352506629002, -0.11781761727717625]}",pos_vel_acc,
+144,False,none,,{},,not_selected
+146,True,step,100.4802051494819,"{'magnitude': np.float64(30.0), 'direction_mode': 'random_xy', 'direction_vector': [0.5579874530417733, -0.8298493852790124], 'attack_duration': 5.0, 'time_constant': 1.0}",pos_vel_acc,
+147,False,none,,{},,not_selected
+148,False,none,,{},,not_selected
+152,False,none,,{},,not_selected
+155,True,takeover_step,21.84399320889328,"{'offset_profile': 'step', 'M': np.float64(15.0), 'direction_mode': np.str_('along_track_xy'), 'direction_vector': [0.3199891038716116, 0.9474212227955647], 'alpha': np.float64(0.5), 'alpha_clipped': False}",pos_vel_acc,
+157,False,none,,{},,not_selected
+158,True,takeover_ramp,136.36693246428405,"{'offset_profile': 'ramp', 'M': np.float64(5.0), 'direction_mode': np.str_('cross_track_xy'), 'direction_vector': [-0.011734605475962343, -0.9999311471468041], 'tau_takeover': np.float64(2.0), 'T_takeover': np.float64(0.5), 'T_takeover_clipped': False}",pos_vel_acc,
+159,True,step,123.57789793402114,"{'magnitude': np.float64(5.0), 'direction_mode': 'random_xy', 'direction_vector': [-0.7644159926912347, -0.644723343859887], 'attack_duration': 5.0, 'time_constant': 1.0}",pos_vel_acc,
+160,False,none,,{},,not_selected
+163,False,none,,{},,not_selected
+164,False,none,,{},,not_selected
+167,False,none,,{},,not_selected
+171,False,none,,{},,not_selected
+172,True,drift_sigmoid,11.042157417571342,"{'profile': 'sigmoid', 'T_drift': np.float64(5.0), 'T_drift_clipped': False, 'M': np.float64(5.0), 'direction_mode': np.str_('fixed_east'), 'direction_vector': [1.0, 0.0]}",pos_vel_acc,
+174,False,none,,{},,not_selected
+175,True,drift_sigmoid,14.838458432273065,"{'profile': 'sigmoid', 'T_drift': np.float64(10.0), 'T_drift_clipped': False, 'M': np.float64(15.0), 'direction_mode': np.str_('cross_track_xy'), 'direction_vector': [0.3153627659860609, 0.948971193361327]}",pos_vel_acc,
+176,True,delay,109.52102600536955,"{'delay_seconds': np.float64(1.0), 'source_time_clamped_count': 0}",pos_vel_acc,
+177,True,step,112.38814957908936,"{'magnitude': np.float64(5.0), 'direction_mode': 'random_xy', 'direction_vector': [0.9725921517900716, 0.23251775475511188], 'attack_duration': 5.0, 'time_constant': 1.0}",pos_vel_acc,
+178,True,drift_ramp,52.538514750670146,"{'profile': 'ramp', 'T_drift': np.float64(5.0), 'T_drift_clipped': False, 'M': np.float64(5.0), 'direction_mode': np.str_('fixed_north'), 'direction_vector': [0.0, 1.0]}",pos_vel_acc,
+180,True,delay,156.718278219397,"{'delay_seconds': np.float64(5.0), 'source_time_clamped_count': 0}",pos_vel_acc,
+181,True,takeover_step,18.041675813835358,"{'offset_profile': 'step', 'M': np.float64(15.0), 'direction_mode': np.str_('cross_track_xy'), 'direction_vector': [-0.6555782519011955, -0.7551272446642172], 'tau_takeover': np.float64(0.5)}",pos_vel_acc,
+182,True,takeover_step,61.93140084895236,"{'offset_profile': 'step', 'M': np.float64(5.0), 'direction_mode': np.str_('cross_track_xy'), 'direction_vector': [-0.9792302448487399, 0.2027513935179658], 'alpha': np.float64(0.7), 'alpha_clipped': False}",pos_vel_acc,
+183,False,none,,{},,not_selected
+185,True,drift_ramp,173.93902501965064,"{'profile': 'ramp', 'T_drift': np.float64(16.36097498034937), 'T_drift_clipped': True, 'M': np.float64(30.0), 'direction_mode': np.str_('random_xy'), 'direction_vector': [-0.3768715879476704, -0.9262655160361964]}",pos_vel_acc,
+187,True,drift_ramp,117.8121771143994,"{'profile': 'ramp', 'T_drift': np.float64(19.987822885600607), 'T_drift_clipped': True, 'M': np.float64(15.0), 'direction_mode': np.str_('random_xy'), 'direction_vector': [-0.5347792861309256, -0.8449917840578673]}",pos_vel_acc,
+188,False,none,,{},,not_selected
+189,False,none,,{},,not_selected
+190,True,delay,178.63875721792672,"{'delay_seconds': np.float64(5.0), 'source_time_clamped_count': 0}",pos_vel_acc,
+191,True,delay,85.37141147127515,"{'delay_seconds': np.float64(1.0), 'source_time_clamped_count': 0}",pos_vel_acc,
+195,True,delay,56.76913350792351,"{'delay_seconds': np.float64(5.0), 'source_time_clamped_count': 0}",pos_vel_acc,
+198,False,none,,{},,not_selected
+199,False,none,,{},,not_selected
+201,True,drift_ramp,13.087403311082634,"{'profile': 'ramp', 'T_drift': np.float64(10.0), 'T_drift_clipped': False, 'M': np.float64(5.0), 'direction_mode': np.str_('random_xy'), 'direction_vector': [-0.37636642391216707, 0.9264708926628872]}",pos_vel_acc,
+202,False,none,,{},,not_selected
+203,False,none,,{},,not_selected
+204,False,none,,{},,not_selected
+205,True,drift_sigmoid,34.861832270308206,"{'profile': 'sigmoid', 'T_drift': np.float64(10.0), 'T_drift_clipped': False, 'M': np.float64(15.0), 'direction_mode': np.str_('fixed_north'), 'direction_vector': [0.0, 1.0]}",pos_vel_acc,
+206,False,none,,{},,not_selected
+207,False,none,,{},,not_selected
+209,False,none,,{},,not_selected
+210,True,step,50.09450086546941,"{'magnitude': np.float64(15.0), 'direction_mode': 'random_xy', 'direction_vector': [-0.5889350748603372, -0.8081803496740371], 'attack_duration': 5.0, 'time_constant': 1.0}",pos_vel_acc,
+211,False,none,,{},,not_selected
+213,True,takeover_ramp,46.64651669674341,"{'offset_profile': 'ramp', 'M': np.float64(15.0), 'direction_mode': np.str_('fixed_east'), 'direction_vector': [1.0, 0.0], 'alpha': np.float64(0.5), 'alpha_clipped': False, 'T_takeover': np.float64(2.0), 'T_takeover_clipped': False}",pos_vel_acc,
+215,False,none,,{},,not_selected
+216,True,drift_sigmoid,30.868513478598416,"{'profile': 'sigmoid', 'T_drift': np.float64(5.0), 'T_drift_clipped': False, 'M': np.float64(30.0), 'direction_mode': np.str_('along_track_xy'), 'direction_vector': [0.9861583554974699, 0.16580620580221267]}",pos_vel_acc,
+218,True,takeover_step,125.4602736469848,"{'offset_profile': 'step', 'M': np.float64(15.0), 'direction_mode': np.str_('cross_track_xy'), 'direction_vector': [0.28271052533410074, -0.9592052746233816], 'tau_takeover': np.float64(0.5)}",pos_vel,
+219,True,delay,51.08518168838039,"{'delay_seconds': np.float64(1.0), 'source_time_clamped_count': 0}",pos_vel_acc,
+223,True,drift_ramp,32.404584610639205,"{'profile': 'ramp', 'T_drift': np.float64(5.0), 'T_drift_clipped': False, 'M': np.float64(5.0), 'direction_mode': np.str_('fixed_east'), 'direction_vector': [1.0, 0.0]}",pos_vel_acc,
+226,True,drift_sigmoid,13.043044883808804,"{'profile': 'sigmoid', 'T_drift': np.float64(20.0), 'T_drift_clipped': False, 'M': np.float64(15.0), 'direction_mode': np.str_('cross_track_xy'), 'direction_vector': [0.9565704930981235, -0.29150110074236896]}",pos_vel_acc,
+229,False,none,,{},,not_selected
+230,False,none,,{},,not_selected
+231,True,takeover_ramp,126.9809181519244,"{'offset_profile': 'ramp', 'M': np.float64(5.0), 'direction_mode': np.str_('along_track_xy'), 'direction_vector': [0.9962161026066312, 0.08691074103500644], 'tau_takeover': np.float64(1.0), 'T_takeover': np.float64(1.0), 'T_takeover_clipped': False}",pos_vel,
+232,True,takeover_ramp,31.28148545466029,"{'offset_profile': 'ramp', 'M': np.float64(5.0), 'direction_mode': np.str_('along_track_xy'), 'direction_vector': [-0.6612497064219458, 0.7501658654970181], 'tau_takeover': np.float64(0.5), 'T_takeover': np.float64(0.5), 'T_takeover_clipped': False}",pos_vel,
+234,False,none,,{},,not_selected
+235,False,none,,{},,not_selected
+236,False,none,,{},,not_selected
+237,True,step,154.99884002627638,"{'magnitude': np.float64(5.0), 'direction_mode': 'random_xy', 'direction_vector': [0.003862588872631698, -0.999992540175776], 'attack_duration': 5.0, 'time_constant': 1.0}",pos_vel_acc,
+241,False,none,,{},,not_selected
+242,False,none,,{},,not_selected
+247,True,takeover_ramp,176.00866179931285,"{'offset_profile': 'ramp', 'M': np.float64(15.0), 'direction_mode': np.str_('random_xy'), 'direction_vector': [0.6297081094602069, -0.776831833075893], 'tau_takeover': np.float64(2.0), 'T_takeover': np.float64(1.0), 'T_takeover_clipped': False}",pos_vel_acc,
+248,True,delay,174.20799381532257,"{'delay_seconds': np.float64(1.0), 'source_time_clamped_count': 0}",pos_vel_acc,
+249,False,none,,{},,not_selected
+252,False,none,,{},,not_selected
+253,True,takeover_step,60.27571475006484,"{'offset_profile': 'step', 'M': np.float64(5.0), 'direction_mode': np.str_('fixed_east'), 'direction_vector': [1.0, 0.0], 'tau_takeover': np.float64(1.0)}",pos_vel,
+257,False,none,,{},,not_selected
+260,True,drift_ramp,97.4575092283538,"{'profile': 'ramp', 'T_drift': np.float64(5.0), 'T_drift_clipped': False, 'M': np.float64(5.0), 'direction_mode': np.str_('cross_track_xy'), 'direction_vector': [-0.36721798874352735, 0.9301349088939509]}",pos_vel_acc,
+262,True,takeover_ramp,58.69852286891417,"{'offset_profile': 'ramp', 'M': np.float64(15.0), 'direction_mode': np.str_('fixed_east'), 'direction_vector': [1.0, 0.0], 'tau_takeover': np.float64(2.0), 'T_takeover': np.float64(0.5), 'T_takeover_clipped': False}",pos_vel,
+263,True,takeover_ramp,81.78033670878965,"{'offset_profile': 'ramp', 'M': np.float64(30.0), 'direction_mode': np.str_('fixed_north'), 'direction_vector': [0.0, 1.0], 'tau_takeover': np.float64(2.0), 'T_takeover': np.float64(0.5), 'T_takeover_clipped': False}",pos_vel,
+267,False,none,,{},,not_selected
+268,True,drift_ramp,115.06925895234558,"{'profile': 'ramp', 'T_drift': np.float64(20.0), 'T_drift_clipped': False, 'M': np.float64(15.0), 'direction_mode': np.str_('along_track_xy'), 'direction_vector': [0.01762385281166248, 0.9998446878451038]}",pos_vel_acc,
+269,True,takeover_step,171.12718621245898,"{'offset_profile': 'step', 'M': np.float64(30.0), 'direction_mode': np.str_('cross_track_xy'), 'direction_vector': [-0.7989206801080205, -0.6014364030350492], 'alpha': np.float64(0.3), 'alpha_clipped': False}",pos_vel_acc,
+271,False,none,,{},,not_selected
+272,False,none,,{},,not_selected
+275,True,drift_ramp,122.17281046722287,"{'profile': 'ramp', 'T_drift': np.float64(10.0), 'T_drift_clipped': False, 'M': np.float64(30.0), 'direction_mode': np.str_('fixed_north'), 'direction_vector': [0.0, 1.0]}",pos_vel_acc,
+277,True,drift_ramp,55.53957042036766,"{'profile': 'ramp', 'T_drift': np.float64(20.0), 'T_drift_clipped': False, 'M': np.float64(15.0), 'direction_mode': np.str_('along_track_xy'), 'direction_vector': [-0.02355603080637816, 0.9997225182082521]}",pos_vel_acc,
+278,False,none,,{},,not_selected

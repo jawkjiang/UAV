@@ -1,0 +1,8 @@
+model,attack_type,n_instances,ADD,DR@5s,DR@10s
+gru,takeover_ramp,27,,0.0,0.0
+gru,normal,51,,0.0,0.0
+gru,step,28,,0.0,0.0
+gru,drift_ramp,20,,0.0,0.0
+gru,delay,25,,0.0,0.0
+gru,takeover_step,26,,0.0,0.0
+gru,drift_sigmoid,25,,0.0,0.0
