@@ -1,0 +1,34 @@
+# --- Figure geometry ---
+figure.figsize : 3.5, 2.5
+figure.dpi     : 300
+savefig.dpi    : 300
+
+# --- Typography (Serif - Times New Roman) ---
+font.family       : serif
+font.serif        : Times New Roman
+font.sans-serif   : Arial, DejaVu Sans, Liberation Sans, Helvetica
+font.monospace    : JetBrains Mono, Consolas, Courier New, DejaVu Sans Mono, Liberation Mono
+axes.unicode_minus: False
+font.size         : 8
+
+# --- Title/label/ticks/legend (Small font -4) ---
+axes.titlesize    : 8
+axes.labelsize    : 8
+xtick.labelsize   : 6
+ytick.labelsize   : 6
+legend.fontsize   : 6
+figure.titlesize  : 8
+
+# --- Embed TrueType fonts in vector outputs ---
+pdf.fonttype      : 42
+ps.fonttype       : 42
+
+# --- Lines/axes defaults ---
+lines.linewidth   : 1.5
+lines.markersize  : 5
+axes.spines.top   : False
+axes.spines.right : False
+
+# --- Math text ---
+mathtext.fontset  : dejavusans
+mathtext.default  : regular

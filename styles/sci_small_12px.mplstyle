@@ -1,0 +1,34 @@
+# --- Figure geometry ---
+figure.figsize : 3.5, 2.5
+figure.dpi     : 300
+savefig.dpi    : 300
+
+# --- Typography (Serif - Times New Roman) ---
+font.family       : serif
+font.serif        : Times New Roman
+font.sans-serif   : Arial, DejaVu Sans, Liberation Sans, Helvetica
+font.monospace    : JetBrains Mono, Consolas, Courier New, DejaVu Sans Mono, Liberation Mono
+font.size         : 12
+axes.unicode_minus: False
+
+# --- Title/label/ticks/legend (小两号) ---
+axes.titlesize    : 12
+axes.labelsize    : 12
+xtick.labelsize   : 10
+ytick.labelsize   : 10
+legend.fontsize   : 10
+figure.titlesize  : 12
+
+# --- 矢量输出嵌入 TrueType ---
+pdf.fonttype      : 42
+ps.fonttype       : 42
+
+# --- 线条与坐标轴 ---
+lines.linewidth   : 1.5
+lines.markersize  : 5
+axes.spines.top   : False
+axes.spines.right : False
+
+# --- 数学文本 ---
+mathtext.fontset  : dejavusans
+mathtext.default  : regular

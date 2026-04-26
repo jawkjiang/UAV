@@ -1,3 +1,4 @@
+data/src/*.csv filter=lfs diff=lfs merge=lfs -text
 /step1_benchmark/output/windows_data.pkl filter=lfs diff=lfs merge=lfs -text
 /step5_timegan/output/merged_normal_flights.csv filter=lfs diff=lfs merge=lfs -text
 /step5_timegan/output/normal_flights.csv filter=lfs diff=lfs merge=lfs -text

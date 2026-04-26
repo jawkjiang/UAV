@@ -34,3 +34,6 @@ paper_analysis/output/
 # Data directory - only track source data
 data/*
 !data/src/
+
+# Claude Code workspace
+.claude/
