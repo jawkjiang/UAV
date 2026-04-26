@@ -1,0 +1,58 @@
+% ============================================================
+% NEW §III-D: Relation to Prior Time-Series Evaluation Frameworks
+% Insert as new subsection after §III-C (Window-Based Instantiation)
+% ============================================================
+
+\subsection{Relation to Prior Time-Series Evaluation Frameworks}
+\label{sec:related_eval}
+
+Several evaluation frameworks for time-series anomaly detection have been proposed;
+we position our work by identifying the axes on which our contributions are distinct.
+
+\begin{table}[!t]
+\caption{Comparison of time-series evaluation frameworks.
+\emph{Causality}: metric is computed without future information;
+\emph{Event agg.}: consecutive abnormal windows are aggregated into events;
+\emph{DR@$\Delta t$}: explicit time-budgeted detection rate;
+\emph{Deployment semantics}: thresholds are grounded in physical operating constraints.}
+\label{tab:eval_comparison}
+\centering
+\small
+\begin{tabular}{lcccc}
+\hline
+\textbf{Framework} & \textbf{Causality} & \textbf{Event agg.} & \textbf{DR@$\Delta t$} & \textbf{Deploy. sem.} \\
+\hline
+Tatbul et al.\ \cite{tatbul2018precision} & post-hoc & segment-level & \texttimes & \texttimes \\
+NAB Score~\cite{lavin2015evaluating}      & reward-shaping & window-weighted & \texttimes & \texttimes \\
+Classical IDS metrics~\cite{axelsson2000base} & online & \texttimes & \texttimes & partial \\
+\textbf{This work} & \textbf{online} & \textbf{FP events} & \textbf{\checkmark} & \textbf{risk-based} \\
+\hline
+\end{tabular}
+\end{table}
+
+\textbf{Tatbul et al.'s point-adjusted (PA) and range-based metrics}
+\cite{tatbul2018precision} score anomaly \emph{segments} against predicted ranges.
+Their metrics are computed in a post-hoc, offline manner and reward any detection
+within a labelled anomaly range equally regardless of when the first detection occurs.
+Our DR@$\Delta t$ instead scores only the \emph{first detection event} within a
+specified time budget, enforcing causality and response-time accountability.
+
+\textbf{The Numenta Anomaly Benchmark (NAB) score} \cite{lavin2015evaluating}
+applies a window-weighted reward that discounts late detections and penalises
+false positives via score penalties. While NAB is causal, it does not expose
+the time-to-first-detection as an interpretable parameter, making it difficult
+to translate a score into a concrete operational response-time budget.
+
+\textbf{Classical IDS false-alarm metrics} (FAR, FPR) quantify false positives
+as a fraction of normal-class windows \cite{axelsson2000base}. These metrics
+treat each window as independent and therefore count the same persistent alarm
+multiple times. Our MTBFA instead aggregates consecutive false-positive windows
+into a single event—matching operator experience of a false alarm as a single
+disruptive episode—and expresses the rate in operational time (hours), a unit
+directly interpretable by flight operators.
+
+In summary, compared with existing frameworks our evaluation makes
+three specific additions: (i) an explicit, user-specified time budget for
+detection recall (DR@$\Delta t$); (ii) event-level (rather than window-level)
+false-alarm counting for MTBFA; and (iii) threshold definitions grounded in
+UAV-specific physical risk analysis (Section~\ref{sec:deployability_standard}).

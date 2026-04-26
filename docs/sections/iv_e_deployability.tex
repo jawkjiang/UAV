@@ -1,0 +1,48 @@
+% ============================================================
+% NEW §IV-E (revised): Deployability Safety Standards
+% Replaces current §IV-E with risk-based reasoning as primary basis
+% ============================================================
+
+\subsection{Deployability Safety Standard}
+\label{sec:deployability_standard}
+
+\subsubsection{Risk-based derivation of DR@5s threshold}
+
+We derive the DR@$5\,\text{s}$ threshold from first principles of UAV
+power-line inspection risk.
+A typical inspection UAV cruises at $v \approx 5\,\text{m/s}$.
+Under the Chinese national standard \emph{GB\,26860-2011},
+the minimum safe approach distance to a $\SI{500}{\kV}$ transmission line is
+$d_{\min} = \SI{5}{\metre}$.
+Over a $5\,\text{s}$ response window, a spoofed UAV drifts up to
+\[
+  \Delta x = v \cdot \Delta t = 5 \times 5 = \SI{25}{\metre},
+\]
+leaving $25 - 5 = \SI{20}{\metre}$ of margin for the operator to abort
+the approach after a timely alarm.
+If DR@5s~$\geq 0.85$, at least 85\% of attacks are detected before the UAV
+exhausts this safety margin; we adopt this as the primary deployability threshold.
+
+The analogous threshold adopted in human-machine interface engineering
+\cite{eemua191} and process-control alarm management \cite{iso11064}
+corroborates the $5\,\text{s}$ response budget, but we treat these domain
+analogies as supporting evidence rather than primary justification.
+
+\subsubsection{Risk-based derivation of MTBFA threshold}
+
+A false alarm requires the remote pilot to intervene (verify sensor data,
+abort the mission leg, re-arm).
+During a typical $\SI{1}{\hour}$ inspection tour the pilot can reasonably
+absorb at most 10 nuisance alarms without significant workload increase
+\cite{axelsson2000base,iso11064}, giving a minimum tolerable
+$\text{MTBFA} \geq 0.1\,\text{h}$.
+
+\subsubsection{Deployability verdict}
+
+A model passes the time-aware deployability standard if and only if both
+conditions hold simultaneously:
+\begin{equation}
+  \text{DR@5s} \geq 0.85 \quad \text{and} \quad \text{MTBFA} \geq 0.1\,\text{h}.
+\end{equation}
+Table~\ref{tab:deployability} reports the pass/fail verdict for all seven
+detectors evaluated on the MATLAB test set.

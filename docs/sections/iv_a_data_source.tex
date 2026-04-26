@@ -1,0 +1,89 @@
+% ============================================================
+% REVISED §IV-A: Data Source and Generation Pipeline
+% Replaces lines 384–441 of main.tex
+% ============================================================
+
+\subsection{Data Source and Generation Pipeline}
+\label{sec:data}
+
+\subsubsection{Simulation environment and flight characteristics}
+
+We generate the experimental dataset using the MATLAB UAV Toolbox
+(\textit{UAV Toolbox + Navigation Toolbox + Sensor Fusion and Tracking Toolbox})
+because it provides physics-grounded sensor models for GPS, IMU, and INS fusion
+that are absent in software-in-the-loop flight stacks.
+Four mission profiles modelling power-line inspection tasks are generated:
+power-line scan, rectangular area survey, tower orbit, and long-distance transit.
+For each flight we simulate a complete waypoint mission executed by a
+\texttt{uavWaypointFollower} controller at a cruise speed of 5 m/s
+and a flight altitude of 50 m AGL.
+
+The sensor pipeline combines:
+\begin{itemize}
+  \item \textbf{GPS model:} \texttt{gpsSensor} with horizontal position noise
+        $\sigma_{xy}=\SI{1.5}{\metre}$, vertical noise $\sigma_z=\SI{3.0}{\metre}$,
+        and velocity noise $\sigma_v=\SI{0.05}{\metre\per\second}$ (1-$\sigma$);
+  \item \textbf{IMU model:} \texttt{imuSensor} with accelerometer noise
+        $\sigma_a=\SI{0.02}{\metre\per\second\squared}$ and gyroscope noise
+        $\sigma_\omega=\SI{0.001}{\radian\per\second}$;
+  \item \textbf{INS fusion:} \texttt{insfilterAsync} for tight GPS/IMU fusion,
+        producing a smoothed 9-dimensional navigation state vector at 10 Hz.
+\end{itemize}
+
+The 9-d state vector consists of ENU position $(x,y,z)$, velocity $(v_x,v_y,v_z)$,
+and linear acceleration $(a_x,a_y,a_z)$. This matches the feature set used in
+our earlier formulation (Section~\ref{sec:framework}) and is sufficient to
+characterise kinematic disturbances from GNSS spoofing.
+
+\textbf{Simulation fidelity and limitations.}
+The MATLAB sensor models use additive Gaussian white noise and do not include
+multipath propagation, ionospheric delay, or receiver clock dynamics.
+We assess the resulting \emph{sim-to-real gap} quantitatively in the
+cross-domain evaluation (Section~\ref{sec:cross_domain}).
+
+\subsubsection{Dataset scale and split}
+
+We generate \num{3000} independent flights totalling approximately
+$3000 \times 60\,\text{s} = 180{,}000$ seconds of simulated flight time
+(Table~\ref{tab:dataset}).
+Flights are partitioned at the \emph{flight level} to prevent overlapping windows
+from appearing in more than one split; within each split, 40\% of flights are
+randomly selected for attack injection.
+
+\begin{table}[!t]
+\caption{MATLAB-generated dataset statistics.}
+\label{tab:dataset}
+\centering
+\begin{tabular}{lccc}
+\hline
+\textbf{Split} & \textbf{Flights} & \textbf{Attacked} & \textbf{Windows} \\
+\hline
+Train      & 1800 & 739 (41\%) & 212{,}758 \\
+Validation & 600  & 237 (40\%) & 69{,}993  \\
+Test       & 600  & 229 (38\%) & 69{,}636  \\
+\hline
+\textbf{Total} & \textbf{3000} & \textbf{1205 (40\%)} & \textbf{352{,}387} \\
+\hline
+\end{tabular}
+\end{table}
+
+The test set flights are drawn from mission seeds, origin coordinates, and attack
+parameter ranges that are held out from training, providing a mild out-of-distribution
+evaluation within the simulated domain.
+
+\subsubsection{Train-only data augmentation}
+
+If needed to address class imbalance, TimeGAN-based augmentation is applied
+\emph{exclusively to the training split}. The validation and test sets contain
+only original simulated flights and are never subjected to any synthetic augmentation.
+This constraint is enforced programmatically; an assertion in the data pipeline
+raises an error if any augmented flight ID appears in the evaluation splits.
+The data-flow is summarised in Fig.~\ref{fig:dataflow}.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=0.9\columnwidth]{dataflow.pdf}
+\caption{Data-flow diagram.  Augmentation is applied only to the training split;
+evaluation splits are strictly isolated from synthetic data.}
+\label{fig:dataflow}
+\end{figure}

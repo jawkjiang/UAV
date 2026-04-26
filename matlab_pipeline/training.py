@@ -103,7 +103,7 @@ def train_one_model(model_class, model_name: str,
                       f'(best ep{best_epoch} va={best_val_loss:.4f})')
                 break
 
-    model.load_state_dict(torch.load(ckpt_path, map_location='cpu'))
+    model.load_state_dict(torch.load(ckpt_path, map_location='cpu', weights_only=True))
     model.to('cpu')
     return {'model': model, 'val_loss_history': val_loss_history,
             'best_epoch': best_epoch, 'seed': seed}

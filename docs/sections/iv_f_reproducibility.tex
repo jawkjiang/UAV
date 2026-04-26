@@ -1,0 +1,56 @@
+% ============================================================
+% §IV-F: Reproducibility
+% Insert after §IV-E (Deployability Standard)
+% ============================================================
+
+\subsection{Reproducibility}
+\label{sec:reproducibility}
+
+\subsubsection{Model architectures}
+
+Table~\ref{tab:architectures} summarises the seven detector architectures.
+All models receive the same input shape $(L, F) = (50, 9)$ and output a
+single sigmoid probability.
+No batch normalisation layers are used; dropout ($p=0.3$) is applied to
+intermediate representations in LSTM, BiLSTM, GRU, and Transformer models.
+
+\begin{table}[!t]
+\caption{Detector architecture summary.}
+\label{tab:architectures}
+\centering
+\small
+\begin{tabular}{lllr}
+\toprule
+\textbf{Model} & \textbf{Type} & \textbf{Key parameters} & \textbf{Param.}\\
+\midrule
+CNN         & 1-D convolution   & 3 conv layers, 64/128/256 filters       & $\sim$200K \\
+LSTM        & Recurrent         & 2 layers, 128 hidden units              & $\sim$200K \\
+BiLSTM      & Recurrent (bi-dir)& 2 layers, 64 hidden units per direction & $\sim$200K \\
+GRU         & Recurrent (gated) & 2 layers, 128 hidden units              & $\sim$130K \\
+CNN-LSTM    & Hybrid            & 2 conv + 1 LSTM (64 units)              & $\sim$160K \\
+TCN         & Temporal conv.    & 8 blocks, dilation $2^i$, 64 filters    & $\sim$170K \\
+Transformer & Self-attention    & 2 layers, 4 heads, $d_{model}=64$       & $\sim$130K \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Training hyperparameters}
+
+All models share the same training configuration:
+\begin{itemize}
+  \item Optimiser: Adam, learning rate $10^{-3}$, default betas
+  \item Loss: binary cross-entropy (BCELoss; models output sigmoid probabilities)
+  \item Batch size: 64
+  \item Maximum epochs: 100; early stopping patience: 10 (monitored on validation BCELoss)
+  \item Random seeds: $\{0, 1, 2, 3, 4\}$ (5 independent runs per model)
+  \item Hardware: AMD Radeon 8060S iGPU with 62 GB HBM3E unified memory; ROCm 7.2
+\end{itemize}
+
+\subsubsection{Code availability}
+
+The complete experimental code---including the MATLAB UAV simulation pipeline,
+the Python detection pipeline, statistical tests, and figure generation scripts---
+is publicly available at
+\texttt{https://github.com/[PLACEHOLDER]/uav-gps-spoofing-detection}.
+A requirements file and step-by-step README enable full reproduction of all
+tables and figures from the raw simulation data.

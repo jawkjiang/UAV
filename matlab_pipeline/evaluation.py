@@ -12,7 +12,7 @@ import torch.nn as nn
 from torch.utils.data import DataLoader, TensorDataset
 import config
 
-_DR_THRESHOLDS = [1.0, 5.0, 10.0, 15.0]
+_DR_THRESHOLDS = [1.0, 3.0, 5.0, 10.0, 15.0]
 
 
 def _predict(model: nn.Module, X: np.ndarray, device: torch.device) -> np.ndarray:
@@ -45,6 +45,25 @@ def _count_fp_events(preds: np.ndarray) -> int:
         return 0
     prev = np.concatenate(([0], preds[:-1]))
     return int(np.sum((preds == 1) & (prev == 0)))
+
+
+def _fp_event_durations(preds: np.ndarray, times: np.ndarray) -> list:
+    """Return list of durations (seconds) for each FP run in a binary prediction sequence."""
+    if len(preds) == 0:
+        return []
+    durations = []
+    in_event = False
+    t_start = 0.0
+    for i, (p, t) in enumerate(zip(preds, times)):
+        if p == 1 and not in_event:
+            in_event = True
+            t_start = float(t)
+        elif p == 0 and in_event:
+            in_event = False
+            durations.append(float(t) - t_start)
+    if in_event and len(times) > 0:
+        durations.append(float(times[-1]) - t_start)
+    return durations
 
 
 def _prf(y_true: np.ndarray, y_pred: np.ndarray):
@@ -86,6 +105,7 @@ def compute_time_aware_metrics(model: nn.Module, X_test: np.ndarray,
 
     detection_delays = []
     fp_events = 0
+    fp_event_durations_s = []
     normal_time_s = 0.0
 
     for fid, windows in flights.items():
@@ -106,10 +126,12 @@ def compute_time_aware_metrics(model: nn.Module, X_test: np.ndarray,
             if len(pre_times) > 1:
                 normal_time_s += float(pre_times[-1] - pre_times[0])
             fp_events += _count_fp_events(pre_preds)
+            fp_event_durations_s.extend(_fp_event_durations(pre_preds, pre_times))
         else:
             if len(times) > 1:
                 normal_time_s += float(times[-1] - times[0])
             fp_events += _count_fp_events(wred)
+            fp_event_durations_s.extend(_fp_event_durations(wred, times))
 
     n_total    = len(detection_delays)
     n_detected = sum(1 for d in detection_delays if not math.isinf(d))
@@ -128,11 +150,16 @@ def compute_time_aware_metrics(model: nn.Module, X_test: np.ndarray,
 
     prec, rec, f1 = _prf(y_true, preds)
 
+    fp_windows = int(np.sum((preds == 1) & (y_true == 0)))
+
     return {**dr,
             'add_s': add_s, 'mtbfa_h': mtbfa_h,
             'precision': prec, 'recall': rec, 'f1': f1,
             'n_attacks_detected': n_detected, 'n_attacks_total': n_total,
-            'n_fp_events': fp_events, 'normal_time_h': normal_time_h}
+            'n_fp_events': fp_events, 'normal_time_h': normal_time_h,
+            'fp_windows': fp_windows,
+            'fp_events': fp_events,
+            'fp_event_durations_s': fp_event_durations_s}
 
 
 def evaluate_all_models(model_results_dict: dict, X_test: np.ndarray,

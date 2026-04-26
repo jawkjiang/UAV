@@ -1,0 +1,50 @@
+% data_flow.tex — compile standalone or include in main.tex
+% Requires: \usepackage{tikz}, \usetikzlibrary{shapes,arrows,positioning}
+\begin{tikzpicture}[
+    node distance = 1.2cm and 1.8cm,
+    box/.style  = {rectangle, rounded corners=3pt, minimum width=2.8cm,
+                   minimum height=0.7cm, text centered, font=\small,
+                   draw=black!70, fill=white},
+    split/.style = {box, fill=blue!10},
+    data/.style  = {box, fill=gray!15},
+    model/.style = {box, fill=green!10},
+    aug/.style   = {box, fill=orange!15, dashed},
+    arrow/.style = {->, >=stealth, thick},
+    note/.style  = {font=\footnotesize, text=gray}
+]
+
+% MATLAB sim box
+\node[data] (matlab) {MATLAB UAV Toolbox\\3\,000 flights};
+
+% Three splits
+\node[split, below left=of matlab, xshift=-0.5cm] (train) {Train (1800)};
+\node[split, below=of matlab] (val)   {Val (600)};
+\node[split, below right=of matlab, xshift=0.5cm] (test) {Test (600)};
+
+% Arrows from MATLAB to splits
+\draw[arrow] (matlab) -- (train);
+\draw[arrow] (matlab) -- (val);
+\draw[arrow] (matlab) -- (test);
+
+% TimeGAN augmentation (train only)
+\node[aug, below=of train] (aug) {TimeGAN augmentation\\(train-only, optional)};
+\draw[arrow] (train) -- (aug);
+
+% Model training
+\node[model, below=of aug] (models) {7 detectors $\times$ 5 seeds\\training};
+\draw[arrow] (aug) -- (models);
+
+% Val for early stopping
+\node[note, right=0.6cm of models] (valnote) {val: early stopping};
+\draw[->, dashed, gray] (val) -- (valnote.west);
+
+% Test evaluation
+\node[model, below=of test, fill=red!10] (eval) {Time-aware\\evaluation};
+\draw[arrow] (test) -- (eval);
+\draw[arrow] (models) |- (eval);
+
+% Barrier annotation
+\node[note, right=2.5cm of val] (barrier) {\textbf{Evaluation splits:}\\strictly isolated\\from augmentation};
+\draw[->, dashed, gray] (barrier.west) -- (test.east);
+
+\end{tikzpicture}

@@ -1,0 +1,31 @@
+% ============================================================
+% Notation Table — insert at beginning of §III
+% ============================================================
+
+\begin{table}[!t]
+\caption{Summary of mathematical notation.}
+\label{tab:notation}
+\centering
+\begin{tabular}{lll}
+\toprule
+\textbf{Symbol} & \textbf{Description} & \textbf{Unit} \\
+\midrule
+$k$          & Window index (decision step)          & --- \\
+$\tau_k$     & Timestamp of the $k$-th window (end-point) & s \\
+$t_s$        & Attack onset time                     & s \\
+$t_d$        & First detection time after $t_s$      & s \\
+$\delta_k = t_d - t_s$ & Detection delay             & s \\
+$\Delta t$   & Detection time budget                 & s \\
+$L$          & Window length (number of samples)     & samples \\
+$S$          & Window stride (step size)             & samples \\
+$f_s$        & Sensor sampling rate                  & Hz \\
+$K$          & Number of windows per flight          & --- \\
+$N$          & Total number of windows in a split    & --- \\
+$F$          & Feature dimensionality (state vector) & --- \\
+$\hat{y}_k \in \{0,1\}$ & Binary detector decision at step $k$ & --- \\
+$\text{DR}@\Delta t$  & Detection rate at time budget $\Delta t$ & --- \\
+$\text{ADD}$ & Average detection delay               & s \\
+$\text{MTBFA}$ & Mean time between false alarms      & h \\
+\bottomrule
+\end{tabular}
+\end{table}
