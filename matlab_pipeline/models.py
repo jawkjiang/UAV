@@ -4,8 +4,8 @@ Re-exports the seven detector architectures from step3_multiModel,
 parameterised for n_features=9 (MATLAB 9-d state vector).
 """
 import sys, os
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(__file__)),
-                                'step3_multiModel'))
+# Append (not insert) so matlab_pipeline/ config.py takes precedence over step3_multiModel/config.py
+sys.path.append(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'step3_multiModel'))
 
 from model import (
     GPSSpoofingDetector  as CNN,
