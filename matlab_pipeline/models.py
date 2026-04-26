@@ -13,7 +13,7 @@ from model import (
     BiLSTMDetector       as BiLSTM,
     GRUDetector          as GRU,
     CNNLSTMDetector      as CNNLSTM,
-    TCNDetector          as TCN,
+    TemporalConvNet      as TCN,
     TransformerDetector  as Transformer,
 )
 
