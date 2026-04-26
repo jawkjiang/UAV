@@ -26,13 +26,14 @@ dt_sim = 1 / SIM_FS;
 t_sim  = (0 : dt_sim : dur)';
 N_sim  = length(t_sim);
 
-% Distribute time equally among segments
-seg_len  = norm(waypoints(2,:) - waypoints(1,:)) + eps;
+% Distribute time proportionally to cumulative segment length
+seg_len    = zeros(n_wp, 1);
+seg_len(1) = 0;
 for k = 2:n_wp
-    seg_len(k) = seg_len(k-1) + norm(waypoints(k,:) - waypoints(k-1,:)) + eps;
+    seg_len(k) = seg_len(k-1) + norm(waypoints(k,:) - waypoints(k-1,:));
 end
-seg_frac = seg_len / seg_len(end);
-t_wp     = [0; seg_frac(:) * dur];
+total_len = max(seg_len(end), 1e-6);   % avoid div-by-zero for trivial missions
+t_wp = seg_len / total_len * dur;      % [n_wp × 1], starts at 0, ends at dur
 
 % Interpolate true position along waypoint path
 pos_true = zeros(N_sim, 3);
