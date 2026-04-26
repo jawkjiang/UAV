@@ -1,7 +1,0 @@
-model,attack_type,n_instances,ADD,DR@5s,DR@10s
-cnn,takeover_ramp,2,1.6270071498042569,1.0,1.0
-cnn,step,2,0.0,1.0,1.0
-cnn,delay,2,0.8344376881026978,1.0,1.0
-cnn,drift_ramp,2,0.0,1.0,1.0
-cnn,takeover_step,2,0.0677094391948998,1.0,1.0
-cnn,drift_sigmoid,2,0.0,1.0,1.0

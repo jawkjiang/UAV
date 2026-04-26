@@ -1,9 +1,0 @@
-attack_type,model_type,auc_roc,f1_score
-drift_ramp,bilstm,1.0,1.0
-drift_sigmoid,bilstm,1.0,0.9509043927648578
-takeover_ramp,gru,1.0,1.0
-step,bilstm,1.0,1.0
-takeover_step,cnn,1.0,1.0
-delay,tcn,0.9997649478478038,0.9976133651551313
-replay_other_soft,tcn,0.8809414272237039,0.21638655462184875
-replay_same_hard,tcn,0.6702298146828463,0.08582483292296868

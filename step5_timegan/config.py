@@ -33,7 +33,7 @@ TIMEGAN_LR = 0.001             # 学习率
 TIMEGAN_DEVICE = 'cuda'  # 'cuda' or 'cpu'
 
 # ============================================================================
-# 数据划分配置
+# 数据集划分比例
 # ============================================================================
 TRAIN_RATIO = 0.60
 VAL_RATIO = 0.20
@@ -52,10 +52,10 @@ ATTACK_TYPES = [
     'takeover_ramp'
 ]
 
-# 攻击比例（大幅降低，避免过拟合）
+# 攻击比例（提高测试集攻击比例以获得足够的测试样本）
 TRAIN_ATTACK_RATIO = 0.15  # 15%（vs step3b的60%）
 VAL_ATTACK_RATIO = 0.10    # 10%（vs step3b的50%）
-TEST_ATTACK_RATIO = 0.05   # 5%（vs step3b的70%）真实场景模拟
+TEST_ATTACK_RATIO = 0.25   # 25%（提升以增加测试攻击数量，原5%仅51个攻击样本太少）
 
 # 测试集保证覆盖
 MIN_TEST_FLIGHTS_PER_ATTACK = 2  # 每种攻击至少2个flights
@@ -207,3 +207,38 @@ TEST_POS_RATIO = None
 
 # 设备
 DEVICE = 'cuda'  # 'cuda' or 'cpu'
+
+# ============================================================================
+# 数据泄漏修复配置（新增）
+# ============================================================================
+
+# 数据划分比例（Split-First策略）- 标准60/20/20划分
+SPLIT_RATIOS = {
+    'train': 0.60,  # 125 / 209 ≈ 60% (标准训练集比例)
+    'val': 0.20,    # 42 / 209 ≈ 20% (标准验证集比例)
+    'test': 0.20    # 42 / 209 ≈ 20% (标准测试集比例)
+}
+
+# 每个split的扩充倍数（基于原始flight数量）- 统一5x增强
+AUGMENTATION_MULTIPLIERS = {
+    'train': 5,     # 125 × 5 = 625 synthetic → 750 total (含原始)
+    'val': 5,       # 42 × 5 = 210 synthetic → 252 total (含原始)
+    'test': 5       # 42 × 5 = 210 synthetic → 252 total (含原始)
+}
+
+# 每个split的攻击注入比例
+ATTACK_INJECTION_RATIOS = {
+    'train': 0.08,  # 8% attack (89 flights)
+    'val': 0.15,    # 15% attack (22 flights)
+    'test': 0.40    # 40% attack (53 flights，约8-9每种)
+}
+
+# 测试集每种攻击类型最少实例数
+TEST_ATTACKS_PER_TYPE = 8  # 6种攻击 × 8 = 48，加上余量5 → 53 total
+
+# 合成flight ID范围（避免与原始ID冲突）
+SYNTHETIC_FLIGHT_ID_RANGES = {
+    'train': (1000, 2000),  # [1000, 1999] - 1000个合成IDs
+    'val': (2000, 2200),    # [2000, 2199] - 200个合成IDs
+    'test': (2200, 2400)    # [2200, 2399] - 200个合成IDs
+}

@@ -46,14 +46,12 @@ MODELS = MODEL_NAMES
 # ATTACK CONFIGURATION
 # ============================================================================
 
-# Attack types (from step5)
+# Attack types (from step5 - actual data)
 ATTACK_TYPES = [
     'step',
-    'drift_ramp',
-    'drift_sigmoid', 
+    'drift',
     'delay',
-    'takeover_step',
-    'takeover_ramp'
+    'takeover'
 ]
 
 # ============================================================================
@@ -70,7 +68,8 @@ ACCELERATION_FEATURES = ['linear_acceleration_x', 'linear_acceleration_y', 'line
 # ============================================================================
 
 # Detection Rate within Δt thresholds (seconds)
-DELTA_T_VALUES = [1, 2, 5, 10, 15, 30]
+# 使用更细粒度的阈值以区分模型性能
+DELTA_T_VALUES = [0.5, 1, 1.5, 2, 3, 5, 10, 15, 30]
 
 # Sampling rate (from step5)
 # 注意：实际数据的采样间隔不是固定的，平均约0.156秒
@@ -145,6 +144,24 @@ SCENARIOS = [SCENARIO_SAFETY_CRITICAL, SCENARIO_MONITORING, SCENARIO_BALANCED]
 # ============================================================================
 # OUTPUT FILE NAMES
 # ============================================================================
+
+# Visualization settings
+FIGSIZE_SINGLE = (10, 6)
+FIGSIZE_WIDE = (14, 6)
+FIGSIZE_LARGE = (12, 10)
+FIGSIZE_HEATMAP = (8, 6)
+FIGURE_DPI = 300
+
+# Model colors for visualization
+MODEL_COLORS = {
+    'cnn': '#1f77b4',
+    'lstm': '#ff7f0e',
+    'bilstm': '#2ca02c',
+    'gru': '#d62728',
+    'cnn_lstm': '#9467bd',
+    'tcn': '#8c564b',
+    'transformer': '#e377c2'
+}
 
 # CSV files
 OVERALL_METRICS_CSV = 'overall_metrics.csv'

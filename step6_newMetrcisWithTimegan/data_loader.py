@@ -34,12 +34,6 @@ def load_test_data() -> Tuple[pd.DataFrame, pd.DataFrame]:
     test_path = config.get_step5_test_data_path()
     attack_info_path = config.get_step5_test_attack_info_path()
     
-    # 尝试使用 complete 版本（包含正常+攻击）
-    complete_path = test_path.replace('test_with_attacks.csv', 'test_complete.csv')
-    if os.path.exists(complete_path):
-        test_path = complete_path
-        print(f"  Using complete test data: {complete_path}")
-    
     if not os.path.exists(test_path):
         raise FileNotFoundError(f"Test data not found: {test_path}")
     if not os.path.exists(attack_info_path):
@@ -167,11 +161,13 @@ def reconstruct_metadata(test_df: pd.DataFrame,
         for i, win_idx in enumerate(window_indices):
             # 窗口起始位置 = i * step_size
             start_pos = i * config.STEP_SIZE
-            center_pos = start_pos + config.WINDOW_SIZE // 2
+            # 使用窗口最后一个点的时间戳（修复时间不一致性问题）
+            # 原因：窗口标签使用最后点，时间戳也应使用最后点以保持一致性
+            last_pos = start_pos + config.WINDOW_SIZE - 1
             
-            # 窗口中心时间戳
-            if center_pos < len(flight_timestamps):
-                timestamps[win_idx] = flight_timestamps[center_pos]
+            # 窗口最后点时间戳
+            if last_pos < len(flight_timestamps):
+                timestamps[win_idx] = flight_timestamps[last_pos]
             
             # 攻击类型
             if fid in attack_dict:

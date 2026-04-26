@@ -7,3 +7,4 @@
 /step5_timegan/output/val_complete.csv filter=lfs diff=lfs merge=lfs -text
 /step5_timegan/output/val_normal.csv filter=lfs diff=lfs merge=lfs -text
 /step5_timegan/output/val_with_attacks.csv filter=lfs diff=lfs merge=lfs -text
+/data/src/flights.csv filter=lfs diff=lfs merge=lfs -text
