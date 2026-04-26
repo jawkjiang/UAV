@@ -50,8 +50,9 @@ acc_true = gradient_nd(vel_true, dt_sim);
 %% Add sensor noise
 
 % GPS position noise (at SIM_FS, will decimate later)
-gps_pos = pos_true + GPS_HPOS_SIGMA * randn(N_sim, 2, 'double');
-gps_pos = [gps_pos, pos_true(:,3) + GPS_VPOS_SIGMA * randn(N_sim, 1)];
+gps_pos = pos_true;
+gps_pos(:,1:2) = pos_true(:,1:2) + GPS_HPOS_SIGMA * randn(N_sim, 2);
+gps_pos(:,3)   = pos_true(:,3)   + GPS_VPOS_SIGMA * randn(N_sim, 1);
 
 % GPS velocity noise
 gps_vel = vel_true + GPS_VEL_SIGMA * randn(N_sim, 3);
