@@ -1,0 +1,32 @@
+\begin{table}[!t]
+\caption{Pairwise Bonferroni-corrected paired $t$-tests on DR@5s ($\alpha=0.05/21$).}
+\label{tab:pairwise}
+\centering
+\begin{tabular}{llcc}
+\hline
+\textbf{Model A} & \textbf{Model B} & $\boldsymbol{p}$\textbf{-value} & \textbf{Significant} \\
+\hline
+BiLSTM & CNN-LSTM & 0.0566 & --- \\
+BiLSTM & GRU & 0.0570 & --- \\
+BiLSTM & TCN & 0.7058 & --- \\
+BiLSTM & Transformer & 0.2202 & --- \\
+CNN & BiLSTM & 0.1919 & --- \\
+CNN & CNN-LSTM & 0.4170 & --- \\
+CNN & GRU & 0.4322 & --- \\
+CNN & LSTM & 0.5736 & --- \\
+CNN & TCN & 0.1344 & --- \\
+CNN & Transformer & 0.7715 & --- \\
+CNN-LSTM & TCN & 0.0005 & \checkmark \\
+CNN-LSTM & Transformer & 0.2871 & --- \\
+GRU & CNN-LSTM & 0.3469 & --- \\
+GRU & TCN & 0.0008 & \checkmark \\
+GRU & Transformer & 0.4661 & --- \\
+LSTM & BiLSTM & 0.0838 & --- \\
+LSTM & CNN-LSTM & 0.0426 & --- \\
+LSTM & GRU & 0.2948 & --- \\
+LSTM & TCN & 0.0008 & \checkmark \\
+LSTM & Transformer & 0.6544 & --- \\
+TCN & Transformer & 0.0069 & --- \\
+\hline
+\end{tabular}
+\end{table}

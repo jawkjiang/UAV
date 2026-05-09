@@ -1,0 +1,13 @@
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Model} & \textbf{MTBFA} $\boldsymbol{\geq 0.05}$\,\textbf{h} & \textbf{MTBFA} $\boldsymbol{\geq 0.10}$\,\textbf{h} & \textbf{MTBFA} $\boldsymbol{\geq 0.20}$\,\textbf{h} & \textbf{MTBFA} $\boldsymbol{\geq 0.50}$\,\textbf{h} \\
+\midrule
+CNN         & 0.854 & 0.776 & 0.732 & 0.699 \\
+LSTM        & 0.679 & ---   & ---   & ---   \\
+BiLSTM      & 0.687 & 0.560 & 0.486 & ---   \\
+GRU         & 0.659 & ---   & ---   & ---   \\
+\textbf{CNN-LSTM} & \textbf{0.916} & \textbf{0.884} & \textbf{0.857} & \textbf{0.831} \\
+TCN         & 0.718 & 0.612 & 0.574 & 0.534 \\
+Transformer & 0.619 & 0.521 & 0.472 & 0.394 \\
+\bottomrule
+\end{tabular}

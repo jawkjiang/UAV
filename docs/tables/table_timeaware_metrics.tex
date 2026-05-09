@@ -1,0 +1,20 @@
+\begin{table}[!t]
+\caption{Overall performance under time-aware metrics (mean $\pm$ 95\% CI, 5 seeds).}
+\label{tab:overall-timeaware}
+\centering
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lcccccc}
+\hline
+\textbf{Model} & \textbf{DR@1s} & \textbf{DR@3s} & \textbf{DR@5s} & \textbf{DR@10s} & \textbf{ADD (s)} & \textbf{MTBFA (h)} \\
+\hline
+CNN & $0.687 \pm 0.128$ & --- & $0.893 \pm 0.131$ & $0.933 \pm 0.128$ & $2.12 \pm 2.25$ & $0.024 \pm 0.010$ \\
+LSTM & $0.737 \pm 0.024$ & --- & $0.935 \pm 0.007$ & $0.990 \pm 0.002$ & $1.22 \pm 0.08$ & $0.021 \pm 0.002$ \\
+BiLSTM & $0.522 \pm 0.128$ & --- & $0.783 \pm 0.112$ & $0.871 \pm 0.087$ & $3.84 \pm 1.78$ & $0.022 \pm 0.004$ \\
+GRU & $0.713 \pm 0.028$ & --- & $0.947 \pm 0.012$ & $0.990 \pm 0.006$ & $1.22 \pm 0.15$ & $0.021 \pm 0.001$ \\
+CNN-LSTM & $0.809 \pm 0.021$ & --- & $0.958 \pm 0.011$ & $0.999 \pm 0.002$ & $0.90 \pm 0.08$ & $0.020 \pm 0.002$ \\
+TCN & $0.387 \pm 0.030$ & --- & $0.754 \pm 0.034$ & $0.808 \pm 0.035$ & $4.68 \pm 0.67$ & $0.043 \pm 0.003$ \\
+Transformer & $0.770 \pm 0.121$ & --- & $0.919 \pm 0.065$ & $0.970 \pm 0.049$ & $1.46 \pm 0.94$ & $0.016 \pm 0.008$ \\
+\hline
+\end{tabular}%
+}
+\end{table}

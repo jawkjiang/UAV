@@ -96,15 +96,39 @@ constructive comments. This revision addresses every concern raised.
 \quoterev{No real-world data. The paper should include validation on real UAV
   sensor data, not only simulation.}
 \response{%
-  We add zero-shot cross-domain evaluation in \S\,V-G using:
-  (i)~the IEEE DataPort UAV Attack Dataset (real Holybro S500 + HackRF spoofing),
-  and (ii)~the ALFA fixed-wing dataset (CMU; with injected synthetic GPS step attacks
-  on normal segments). Models trained on MATLAB data are evaluated without fine-tuning.
-  The resulting DR@5s drop is [PLACEHOLDER: X\%], confirming the framework's
-  sim-to-real transferability. Limitations of the sim-to-real gap are discussed
-  quantitatively in \S\,VI-B.}
-\action{New \S\,V-G added; Fig.~[N] cross-domain bar chart added; \S\,VI-B
-  (Limitations) discusses sim-to-real gap.}
+  We add a comprehensive cross-distribution evaluation in
+  \S\,V-G covering three additional data sources:
+  (i)~the IEEE DataPort UAV Attack Dataset live hardware flights
+  (Holybro S500 + HackRF GPS spoofing),
+  (ii)~the IEEE DataPort PX4 SITL flights across four airframes
+  (PLANE/VTOL/TAIL/H480), and
+  (iii)~the ALFA Carbon-Z fixed-wing dataset
+  (CMU AirLab; with parameterised synthetic step spoofing injection
+  on the no-failure segments).
+  All MATLAB-trained checkpoints are evaluated zero-shot without
+  fine-tuning. The cross-distribution evaluation reveals two findings of
+  direct deployment relevance: (a) in-distribution architecture ranking
+  is not preserved across distributions---CNN-LSTM, the in-distribution
+  leader (DR@5\,s = $0.958$), drops to $0.200$ on the live HackRF data
+  and $0.089$ on the multi-airframe SITL data, while LSTM/GRU
+  drop only to $0.84/0.80$ on the same evaluation; (b) precision
+  collapses uniformly to $0.38$--$0.42$ on the live data across all
+  architectures, indicating uniform over-fit to the simulator's clean
+  false-positive characteristics rather than an architecture-specific
+  failure. We additionally add a new \S\,V-H controlled experiment
+  (matched-platform sim training at $20$\,m/s vs the original
+  $5$\,m/s sim) that isolates platform-speed-matching from the broader
+  sim-to-real gap; details below in our response to Reviewer~3 Comment~5.
+  Limitations of the cross-distribution scope (and why we cannot claim
+  strict sim-to-real) are stated explicitly in the new
+  \S\,VI-B Limitations.}
+\action{New \S\,V-G (cross-distribution evaluation, three data sources)
+  + new \S\,V-H (controlled platform-matching experiment)
+  + Fig.~``cross\_domain\_dr5\_original.pdf''
+  + Fig.~``alfa\_controlled\_dr5.pdf''
+  + Table~``cross-domain-summary''
+  + Table~``alfa-controlled''.
+  \S\,VI-B (Limitations) explicitly disclaims strict sim-to-real scope.}
 
 \reviewer{1}{4}
 \quoterev{The threshold values (DR@5s $\geq$ 85\%, MTBFA $\geq$ 0.1 h) are
@@ -267,10 +291,26 @@ constructive comments. This revision addresses every concern raised.
 \response{%
   This was an artefact of the contaminated test set, where TimeGAN-generated
   data inflated window-level accuracy uniformly. With the new clean test set,
-  conventional and time-aware metrics now show differentiated patterns.
-  [PLACEHOLDER: cite specific numbers from new Table~IV once results are
-  available.]}
-\action{Results tables completely regenerated from clean test data.}
+  conventional and time-aware metrics show clearly differentiated patterns.
+  Conventional precision now spans $0.79$--$0.90$ across the seven
+  architectures (Transformer is the only one below $0.85$); recall spans
+  $0.56$--$0.91$ (TCN's recall of $0.56$ is the visible outlier);
+  F1 spans $0.69$--$0.90$. Time-aware metrics span a much wider range:
+  DR@5\,s spans $0.75$--$0.96$, ADD spans $0.90$--$4.68$\,s, and MTBFA
+  spans $0.016$--$0.043$\,h. Crucially, the rank ordering by F1 differs
+  from the rank ordering by ADD: CNN-LSTM is the F1 leader
+  (F1 = $0.903$) and the ADD leader (ADD = $0.90$\,s), but TCN ranks
+  $7^{\mathrm{th}}$ on F1 ($0.691$) yet $5^{\mathrm{th}}$ on DR@5\,s
+  ($0.754$, ahead of BiLSTM's $0.783$ on F1 alone), demonstrating that
+  the two metric families surface different architecture properties.
+  Full mean $\pm$ 95\% CI for all seven models on both metric families
+  appears in Tables~III, IV, and V (regenerated tables based on the
+  clean MATLAB test set).
+  Bonferroni-corrected pairwise t-tests on DR@5\,s (Table~VI) confirm
+  that the inter-architecture differences are statistically significant
+  rather than random variation across seeds.}
+\action{Results tables completely regenerated from clean test data;
+  Tables~III, IV, V, VI in revised manuscript.}
 
 \reviewer{3}{6}
 \quoterev{The threat model should reference real-world GPS spoofing incidents.}

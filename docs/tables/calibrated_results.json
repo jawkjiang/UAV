@@ -1,0 +1,79 @@
+{
+  "CNN": {
+    "p_star_mean": 0.962,
+    "p_star_std": 0.020396078054371124,
+    "calibrated_dr_at_5s": 0.7641921397379912,
+    "calibrated_dr_at_5s_std": 0.04215726947125646,
+    "calibrated_add_s": 4.76513556710559,
+    "calibrated_mtbfa_h": 0.1613820698818248,
+    "default_dr_at_5s": 0.9615720524017467,
+    "default_mtbfa_h": 0.019379353284606694,
+    "dr_drop": 0.19737991266375554
+  },
+  "LSTM": {
+    "p_star_mean": 0.99,
+    "p_star_std": 0.0,
+    "calibrated_dr_at_5s": 0.6358078602620088,
+    "calibrated_dr_at_5s_std": 0.04667384878912625,
+    "calibrated_add_s": 6.758309858853876,
+    "calibrated_mtbfa_h": 0.11658464211640876,
+    "default_dr_at_5s": 0.9362445414847163,
+    "default_mtbfa_h": 0.023345608822891956,
+    "dr_drop": 0.3004366812227075
+  },
+  "BiLSTM": {
+    "p_star_mean": 0.986,
+    "p_star_std": 0.008000000000000007,
+    "calibrated_dr_at_5s": 0.5100436681222708,
+    "calibrated_dr_at_5s_std": 0.017335749555702388,
+    "calibrated_add_s": 8.517298526940527,
+    "calibrated_mtbfa_h": 0.29398911483253587,
+    "default_dr_at_5s": 0.9283842794759825,
+    "default_mtbfa_h": 0.020647076034748267,
+    "dr_drop": 0.4183406113537117
+  },
+  "GRU": {
+    "p_star_mean": 0.99,
+    "p_star_std": 0.0,
+    "calibrated_dr_at_5s": 0.6034934497816593,
+    "calibrated_dr_at_5s_std": 0.05887266217066454,
+    "calibrated_add_s": 7.029953454669306,
+    "calibrated_mtbfa_h": 0.09914635443780409,
+    "default_dr_at_5s": 0.9467248908296944,
+    "default_mtbfa_h": 0.020937562070142544,
+    "dr_drop": 0.34323144104803505
+  },
+  "CNN-LSTM": {
+    "p_star_mean": 0.938,
+    "p_star_std": 0.02712931993250105,
+    "calibrated_dr_at_5s": 0.8803493449781659,
+    "calibrated_dr_at_5s_std": 0.013416848467892747,
+    "calibrated_add_s": 2.415378006586322,
+    "calibrated_mtbfa_h": 0.17847165170220727,
+    "default_dr_at_5s": 0.9580786026200873,
+    "default_mtbfa_h": 0.02042677613261355,
+    "dr_drop": 0.0777292576419214
+  },
+  "TCN": {
+    "p_star_mean": 0.8019999999999999,
+    "p_star_std": 0.02712931993250105,
+    "calibrated_dr_at_5s": 0.6034934497816593,
+    "calibrated_dr_at_5s_std": 0.05308147213632399,
+    "calibrated_add_s": 6.37311618250034,
+    "calibrated_mtbfa_h": 0.1577094598969599,
+    "default_dr_at_5s": 0.7537117903930131,
+    "default_mtbfa_h": 0.04345734332206449,
+    "dr_drop": 0.15021834061135375
+  },
+  "Transformer": {
+    "p_star_mean": 0.95,
+    "p_star_std": 0.050596442562694056,
+    "calibrated_dr_at_5s": 0.4899563318777293,
+    "calibrated_dr_at_5s_std": 0.04155590306854262,
+    "calibrated_add_s": 5.628822382413216,
+    "calibrated_mtbfa_h": 0.10950025820859452,
+    "default_dr_at_5s": 0.9187772925764193,
+    "default_mtbfa_h": 0.015530758759783655,
+    "dr_drop": 0.42882096069868997
+  }
+}

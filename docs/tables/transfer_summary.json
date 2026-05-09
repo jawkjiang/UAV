@@ -1,0 +1,62 @@
+{
+  "regimes": {
+    "5ms_3000": {
+      "label": "5 m/s, 3000 flights",
+      "datasets": [
+        "IEEE_DataPort_Live (HackRF spoofing)",
+        "IEEE_DataPort_SITL (multi-platform)",
+        "ALFA (injected)"
+      ]
+    },
+    "5ms_600": {
+      "label": "5 m/s, 600 flights",
+      "datasets": [
+        "ALFA_matched"
+      ]
+    },
+    "20ms_matched_600": {
+      "label": "20 m/s matched, 600 flights",
+      "datasets": [
+        "ALFA_matched"
+      ]
+    }
+  },
+  "alfa_matrix": {
+    "CNN": {
+      "5ms_3000": 0.96,
+      "5ms_600": 0.96,
+      "20ms_matched_600": 0.0
+    },
+    "LSTM": {
+      "5ms_3000": 0.9199999999999999,
+      "5ms_600": 0.96,
+      "20ms_matched_600": 0.6
+    },
+    "BiLSTM": {
+      "5ms_3000": 0.8400000000000001,
+      "5ms_600": 0.8800000000000001,
+      "20ms_matched_600": 0.6
+    },
+    "GRU": {
+      "5ms_3000": 0.8800000000000001,
+      "5ms_600": 0.8400000000000001,
+      "20ms_matched_600": 0.4800000000000001
+    },
+    "CNN-LSTM": {
+      "5ms_3000": 0.96,
+      "5ms_600": 0.9199999999999999,
+      "20ms_matched_600": 0.08
+    },
+    "TCN": {
+      "5ms_3000": 1.0,
+      "5ms_600": 0.68,
+      "20ms_matched_600": 0.16
+    },
+    "Transformer": {
+      "5ms_3000": 0.76,
+      "5ms_600": 0.64,
+      "20ms_matched_600": 0.27999999999999997
+    }
+  },
+  "all_domain_rows": []
+}

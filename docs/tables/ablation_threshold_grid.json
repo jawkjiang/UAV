@@ -1,0 +1,716 @@
+{
+  "CNN": {
+    "dt1_mtbfa0.05": {
+      "dr_mean": 0.6873362445414848,
+      "mtbfa_mean": 0.02427247241606209,
+      "passes": false
+    },
+    "dt1_mtbfa0.1": {
+      "dr_mean": 0.6873362445414848,
+      "mtbfa_mean": 0.02427247241606209,
+      "passes": false
+    },
+    "dt1_mtbfa0.15": {
+      "dr_mean": 0.6873362445414848,
+      "mtbfa_mean": 0.02427247241606209,
+      "passes": false
+    },
+    "dt1_mtbfa0.2": {
+      "dr_mean": 0.6873362445414848,
+      "mtbfa_mean": 0.02427247241606209,
+      "passes": false
+    },
+    "dt3_mtbfa0.05": {
+      "dr_mean": NaN,
+      "mtbfa_mean": 0.02427247241606209,
+      "passes": false
+    },
+    "dt3_mtbfa0.1": {
+      "dr_mean": NaN,
+      "mtbfa_mean": 0.02427247241606209,
+      "passes": false
+    },
+    "dt3_mtbfa0.15": {
+      "dr_mean": NaN,
+      "mtbfa_mean": 0.02427247241606209,
+      "passes": false
+    },
+    "dt3_mtbfa0.2": {
+      "dr_mean": NaN,
+      "mtbfa_mean": 0.02427247241606209,
+      "passes": false
+    },
+    "dt5_mtbfa0.05": {
+      "dr_mean": 0.8934497816593886,
+      "mtbfa_mean": 0.02427247241606209,
+      "passes": false
+    },
+    "dt5_mtbfa0.1": {
+      "dr_mean": 0.8934497816593886,
+      "mtbfa_mean": 0.02427247241606209,
+      "passes": false
+    },
+    "dt5_mtbfa0.15": {
+      "dr_mean": 0.8934497816593886,
+      "mtbfa_mean": 0.02427247241606209,
+      "passes": false
+    },
+    "dt5_mtbfa0.2": {
+      "dr_mean": 0.8934497816593886,
+      "mtbfa_mean": 0.02427247241606209,
+      "passes": false
+    },
+    "dt10_mtbfa0.05": {
+      "dr_mean": 0.9327510917030567,
+      "mtbfa_mean": 0.02427247241606209,
+      "passes": false
+    },
+    "dt10_mtbfa0.1": {
+      "dr_mean": 0.9327510917030567,
+      "mtbfa_mean": 0.02427247241606209,
+      "passes": false
+    },
+    "dt10_mtbfa0.15": {
+      "dr_mean": 0.9327510917030567,
+      "mtbfa_mean": 0.02427247241606209,
+      "passes": false
+    },
+    "dt10_mtbfa0.2": {
+      "dr_mean": 0.9327510917030567,
+      "mtbfa_mean": 0.02427247241606209,
+      "passes": false
+    },
+    "dt15_mtbfa0.05": {
+      "dr_mean": 0.9467248908296944,
+      "mtbfa_mean": 0.02427247241606209,
+      "passes": false
+    },
+    "dt15_mtbfa0.1": {
+      "dr_mean": 0.9467248908296944,
+      "mtbfa_mean": 0.02427247241606209,
+      "passes": false
+    },
+    "dt15_mtbfa0.15": {
+      "dr_mean": 0.9467248908296944,
+      "mtbfa_mean": 0.02427247241606209,
+      "passes": false
+    },
+    "dt15_mtbfa0.2": {
+      "dr_mean": 0.9467248908296944,
+      "mtbfa_mean": 0.02427247241606209,
+      "passes": false
+    }
+  },
+  "LSTM": {
+    "dt1_mtbfa0.05": {
+      "dr_mean": 0.737117903930131,
+      "mtbfa_mean": 0.021095666773706896,
+      "passes": false
+    },
+    "dt1_mtbfa0.1": {
+      "dr_mean": 0.737117903930131,
+      "mtbfa_mean": 0.021095666773706896,
+      "passes": false
+    },
+    "dt1_mtbfa0.15": {
+      "dr_mean": 0.737117903930131,
+      "mtbfa_mean": 0.021095666773706896,
+      "passes": false
+    },
+    "dt1_mtbfa0.2": {
+      "dr_mean": 0.737117903930131,
+      "mtbfa_mean": 0.021095666773706896,
+      "passes": false
+    },
+    "dt3_mtbfa0.05": {
+      "dr_mean": NaN,
+      "mtbfa_mean": 0.021095666773706896,
+      "passes": false
+    },
+    "dt3_mtbfa0.1": {
+      "dr_mean": NaN,
+      "mtbfa_mean": 0.021095666773706896,
+      "passes": false
+    },
+    "dt3_mtbfa0.15": {
+      "dr_mean": NaN,
+      "mtbfa_mean": 0.021095666773706896,
+      "passes": false
+    },
+    "dt3_mtbfa0.2": {
+      "dr_mean": NaN,
+      "mtbfa_mean": 0.021095666773706896,
+      "passes": false
+    },
+    "dt5_mtbfa0.05": {
+      "dr_mean": 0.9353711790393012,
+      "mtbfa_mean": 0.021095666773706896,
+      "passes": false
+    },
+    "dt5_mtbfa0.1": {
+      "dr_mean": 0.9353711790393012,
+      "mtbfa_mean": 0.021095666773706896,
+      "passes": false
+    },
+    "dt5_mtbfa0.15": {
+      "dr_mean": 0.9353711790393012,
+      "mtbfa_mean": 0.021095666773706896,
+      "passes": false
+    },
+    "dt5_mtbfa0.2": {
+      "dr_mean": 0.9353711790393012,
+      "mtbfa_mean": 0.021095666773706896,
+      "passes": false
+    },
+    "dt10_mtbfa0.05": {
+      "dr_mean": 0.9895196506550219,
+      "mtbfa_mean": 0.021095666773706896,
+      "passes": false
+    },
+    "dt10_mtbfa0.1": {
+      "dr_mean": 0.9895196506550219,
+      "mtbfa_mean": 0.021095666773706896,
+      "passes": false
+    },
+    "dt10_mtbfa0.15": {
+      "dr_mean": 0.9895196506550219,
+      "mtbfa_mean": 0.021095666773706896,
+      "passes": false
+    },
+    "dt10_mtbfa0.2": {
+      "dr_mean": 0.9895196506550219,
+      "mtbfa_mean": 0.021095666773706896,
+      "passes": false
+    },
+    "dt15_mtbfa0.05": {
+      "dr_mean": 1.0,
+      "mtbfa_mean": 0.021095666773706896,
+      "passes": false
+    },
+    "dt15_mtbfa0.1": {
+      "dr_mean": 1.0,
+      "mtbfa_mean": 0.021095666773706896,
+      "passes": false
+    },
+    "dt15_mtbfa0.15": {
+      "dr_mean": 1.0,
+      "mtbfa_mean": 0.021095666773706896,
+      "passes": false
+    },
+    "dt15_mtbfa0.2": {
+      "dr_mean": 1.0,
+      "mtbfa_mean": 0.021095666773706896,
+      "passes": false
+    }
+  },
+  "BiLSTM": {
+    "dt1_mtbfa0.05": {
+      "dr_mean": 0.5222707423580786,
+      "mtbfa_mean": 0.021766381239011156,
+      "passes": false
+    },
+    "dt1_mtbfa0.1": {
+      "dr_mean": 0.5222707423580786,
+      "mtbfa_mean": 0.021766381239011156,
+      "passes": false
+    },
+    "dt1_mtbfa0.15": {
+      "dr_mean": 0.5222707423580786,
+      "mtbfa_mean": 0.021766381239011156,
+      "passes": false
+    },
+    "dt1_mtbfa0.2": {
+      "dr_mean": 0.5222707423580786,
+      "mtbfa_mean": 0.021766381239011156,
+      "passes": false
+    },
+    "dt3_mtbfa0.05": {
+      "dr_mean": NaN,
+      "mtbfa_mean": 0.021766381239011156,
+      "passes": false
+    },
+    "dt3_mtbfa0.1": {
+      "dr_mean": NaN,
+      "mtbfa_mean": 0.021766381239011156,
+      "passes": false
+    },
+    "dt3_mtbfa0.15": {
+      "dr_mean": NaN,
+      "mtbfa_mean": 0.021766381239011156,
+      "passes": false
+    },
+    "dt3_mtbfa0.2": {
+      "dr_mean": NaN,
+      "mtbfa_mean": 0.021766381239011156,
+      "passes": false
+    },
+    "dt5_mtbfa0.05": {
+      "dr_mean": 0.782532751091703,
+      "mtbfa_mean": 0.021766381239011156,
+      "passes": false
+    },
+    "dt5_mtbfa0.1": {
+      "dr_mean": 0.782532751091703,
+      "mtbfa_mean": 0.021766381239011156,
+      "passes": false
+    },
+    "dt5_mtbfa0.15": {
+      "dr_mean": 0.782532751091703,
+      "mtbfa_mean": 0.021766381239011156,
+      "passes": false
+    },
+    "dt5_mtbfa0.2": {
+      "dr_mean": 0.782532751091703,
+      "mtbfa_mean": 0.021766381239011156,
+      "passes": false
+    },
+    "dt10_mtbfa0.05": {
+      "dr_mean": 0.8707423580786026,
+      "mtbfa_mean": 0.021766381239011156,
+      "passes": false
+    },
+    "dt10_mtbfa0.1": {
+      "dr_mean": 0.8707423580786026,
+      "mtbfa_mean": 0.021766381239011156,
+      "passes": false
+    },
+    "dt10_mtbfa0.15": {
+      "dr_mean": 0.8707423580786026,
+      "mtbfa_mean": 0.021766381239011156,
+      "passes": false
+    },
+    "dt10_mtbfa0.2": {
+      "dr_mean": 0.8707423580786026,
+      "mtbfa_mean": 0.021766381239011156,
+      "passes": false
+    },
+    "dt15_mtbfa0.05": {
+      "dr_mean": 0.9030567685589519,
+      "mtbfa_mean": 0.021766381239011156,
+      "passes": false
+    },
+    "dt15_mtbfa0.1": {
+      "dr_mean": 0.9030567685589519,
+      "mtbfa_mean": 0.021766381239011156,
+      "passes": false
+    },
+    "dt15_mtbfa0.15": {
+      "dr_mean": 0.9030567685589519,
+      "mtbfa_mean": 0.021766381239011156,
+      "passes": false
+    },
+    "dt15_mtbfa0.2": {
+      "dr_mean": 0.9030567685589519,
+      "mtbfa_mean": 0.021766381239011156,
+      "passes": false
+    }
+  },
+  "GRU": {
+    "dt1_mtbfa0.05": {
+      "dr_mean": 0.7126637554585153,
+      "mtbfa_mean": 0.020937562070142544,
+      "passes": false
+    },
+    "dt1_mtbfa0.1": {
+      "dr_mean": 0.7126637554585153,
+      "mtbfa_mean": 0.020937562070142544,
+      "passes": false
+    },
+    "dt1_mtbfa0.15": {
+      "dr_mean": 0.7126637554585153,
+      "mtbfa_mean": 0.020937562070142544,
+      "passes": false
+    },
+    "dt1_mtbfa0.2": {
+      "dr_mean": 0.7126637554585153,
+      "mtbfa_mean": 0.020937562070142544,
+      "passes": false
+    },
+    "dt3_mtbfa0.05": {
+      "dr_mean": NaN,
+      "mtbfa_mean": 0.020937562070142544,
+      "passes": false
+    },
+    "dt3_mtbfa0.1": {
+      "dr_mean": NaN,
+      "mtbfa_mean": 0.020937562070142544,
+      "passes": false
+    },
+    "dt3_mtbfa0.15": {
+      "dr_mean": NaN,
+      "mtbfa_mean": 0.020937562070142544,
+      "passes": false
+    },
+    "dt3_mtbfa0.2": {
+      "dr_mean": NaN,
+      "mtbfa_mean": 0.020937562070142544,
+      "passes": false
+    },
+    "dt5_mtbfa0.05": {
+      "dr_mean": 0.9467248908296944,
+      "mtbfa_mean": 0.020937562070142544,
+      "passes": false
+    },
+    "dt5_mtbfa0.1": {
+      "dr_mean": 0.9467248908296944,
+      "mtbfa_mean": 0.020937562070142544,
+      "passes": false
+    },
+    "dt5_mtbfa0.15": {
+      "dr_mean": 0.9467248908296944,
+      "mtbfa_mean": 0.020937562070142544,
+      "passes": false
+    },
+    "dt5_mtbfa0.2": {
+      "dr_mean": 0.9467248908296944,
+      "mtbfa_mean": 0.020937562070142544,
+      "passes": false
+    },
+    "dt10_mtbfa0.05": {
+      "dr_mean": 0.9895196506550217,
+      "mtbfa_mean": 0.020937562070142544,
+      "passes": false
+    },
+    "dt10_mtbfa0.1": {
+      "dr_mean": 0.9895196506550217,
+      "mtbfa_mean": 0.020937562070142544,
+      "passes": false
+    },
+    "dt10_mtbfa0.15": {
+      "dr_mean": 0.9895196506550217,
+      "mtbfa_mean": 0.020937562070142544,
+      "passes": false
+    },
+    "dt10_mtbfa0.2": {
+      "dr_mean": 0.9895196506550217,
+      "mtbfa_mean": 0.020937562070142544,
+      "passes": false
+    },
+    "dt15_mtbfa0.05": {
+      "dr_mean": 0.9991266375545852,
+      "mtbfa_mean": 0.020937562070142544,
+      "passes": false
+    },
+    "dt15_mtbfa0.1": {
+      "dr_mean": 0.9991266375545852,
+      "mtbfa_mean": 0.020937562070142544,
+      "passes": false
+    },
+    "dt15_mtbfa0.15": {
+      "dr_mean": 0.9991266375545852,
+      "mtbfa_mean": 0.020937562070142544,
+      "passes": false
+    },
+    "dt15_mtbfa0.2": {
+      "dr_mean": 0.9991266375545852,
+      "mtbfa_mean": 0.020937562070142544,
+      "passes": false
+    }
+  },
+  "CNN-LSTM": {
+    "dt1_mtbfa0.05": {
+      "dr_mean": 0.8087336244541486,
+      "mtbfa_mean": 0.02042677613261355,
+      "passes": false
+    },
+    "dt1_mtbfa0.1": {
+      "dr_mean": 0.8087336244541486,
+      "mtbfa_mean": 0.02042677613261355,
+      "passes": false
+    },
+    "dt1_mtbfa0.15": {
+      "dr_mean": 0.8087336244541486,
+      "mtbfa_mean": 0.02042677613261355,
+      "passes": false
+    },
+    "dt1_mtbfa0.2": {
+      "dr_mean": 0.8087336244541486,
+      "mtbfa_mean": 0.02042677613261355,
+      "passes": false
+    },
+    "dt3_mtbfa0.05": {
+      "dr_mean": NaN,
+      "mtbfa_mean": 0.02042677613261355,
+      "passes": false
+    },
+    "dt3_mtbfa0.1": {
+      "dr_mean": NaN,
+      "mtbfa_mean": 0.02042677613261355,
+      "passes": false
+    },
+    "dt3_mtbfa0.15": {
+      "dr_mean": NaN,
+      "mtbfa_mean": 0.02042677613261355,
+      "passes": false
+    },
+    "dt3_mtbfa0.2": {
+      "dr_mean": NaN,
+      "mtbfa_mean": 0.02042677613261355,
+      "passes": false
+    },
+    "dt5_mtbfa0.05": {
+      "dr_mean": 0.9580786026200873,
+      "mtbfa_mean": 0.02042677613261355,
+      "passes": false
+    },
+    "dt5_mtbfa0.1": {
+      "dr_mean": 0.9580786026200873,
+      "mtbfa_mean": 0.02042677613261355,
+      "passes": false
+    },
+    "dt5_mtbfa0.15": {
+      "dr_mean": 0.9580786026200873,
+      "mtbfa_mean": 0.02042677613261355,
+      "passes": false
+    },
+    "dt5_mtbfa0.2": {
+      "dr_mean": 0.9580786026200873,
+      "mtbfa_mean": 0.02042677613261355,
+      "passes": false
+    },
+    "dt10_mtbfa0.05": {
+      "dr_mean": 0.9991266375545852,
+      "mtbfa_mean": 0.02042677613261355,
+      "passes": false
+    },
+    "dt10_mtbfa0.1": {
+      "dr_mean": 0.9991266375545852,
+      "mtbfa_mean": 0.02042677613261355,
+      "passes": false
+    },
+    "dt10_mtbfa0.15": {
+      "dr_mean": 0.9991266375545852,
+      "mtbfa_mean": 0.02042677613261355,
+      "passes": false
+    },
+    "dt10_mtbfa0.2": {
+      "dr_mean": 0.9991266375545852,
+      "mtbfa_mean": 0.02042677613261355,
+      "passes": false
+    },
+    "dt15_mtbfa0.05": {
+      "dr_mean": 1.0,
+      "mtbfa_mean": 0.02042677613261355,
+      "passes": false
+    },
+    "dt15_mtbfa0.1": {
+      "dr_mean": 1.0,
+      "mtbfa_mean": 0.02042677613261355,
+      "passes": false
+    },
+    "dt15_mtbfa0.15": {
+      "dr_mean": 1.0,
+      "mtbfa_mean": 0.02042677613261355,
+      "passes": false
+    },
+    "dt15_mtbfa0.2": {
+      "dr_mean": 1.0,
+      "mtbfa_mean": 0.02042677613261355,
+      "passes": false
+    }
+  },
+  "TCN": {
+    "dt1_mtbfa0.05": {
+      "dr_mean": 0.38689956331877734,
+      "mtbfa_mean": 0.04345734332206449,
+      "passes": false
+    },
+    "dt1_mtbfa0.1": {
+      "dr_mean": 0.38689956331877734,
+      "mtbfa_mean": 0.04345734332206449,
+      "passes": false
+    },
+    "dt1_mtbfa0.15": {
+      "dr_mean": 0.38689956331877734,
+      "mtbfa_mean": 0.04345734332206449,
+      "passes": false
+    },
+    "dt1_mtbfa0.2": {
+      "dr_mean": 0.38689956331877734,
+      "mtbfa_mean": 0.04345734332206449,
+      "passes": false
+    },
+    "dt3_mtbfa0.05": {
+      "dr_mean": NaN,
+      "mtbfa_mean": 0.04345734332206449,
+      "passes": false
+    },
+    "dt3_mtbfa0.1": {
+      "dr_mean": NaN,
+      "mtbfa_mean": 0.04345734332206449,
+      "passes": false
+    },
+    "dt3_mtbfa0.15": {
+      "dr_mean": NaN,
+      "mtbfa_mean": 0.04345734332206449,
+      "passes": false
+    },
+    "dt3_mtbfa0.2": {
+      "dr_mean": NaN,
+      "mtbfa_mean": 0.04345734332206449,
+      "passes": false
+    },
+    "dt5_mtbfa0.05": {
+      "dr_mean": 0.7537117903930131,
+      "mtbfa_mean": 0.04345734332206449,
+      "passes": false
+    },
+    "dt5_mtbfa0.1": {
+      "dr_mean": 0.7537117903930131,
+      "mtbfa_mean": 0.04345734332206449,
+      "passes": false
+    },
+    "dt5_mtbfa0.15": {
+      "dr_mean": 0.7537117903930131,
+      "mtbfa_mean": 0.04345734332206449,
+      "passes": false
+    },
+    "dt5_mtbfa0.2": {
+      "dr_mean": 0.7537117903930131,
+      "mtbfa_mean": 0.04345734332206449,
+      "passes": false
+    },
+    "dt10_mtbfa0.05": {
+      "dr_mean": 0.8078602620087336,
+      "mtbfa_mean": 0.04345734332206449,
+      "passes": false
+    },
+    "dt10_mtbfa0.1": {
+      "dr_mean": 0.8078602620087336,
+      "mtbfa_mean": 0.04345734332206449,
+      "passes": false
+    },
+    "dt10_mtbfa0.15": {
+      "dr_mean": 0.8078602620087336,
+      "mtbfa_mean": 0.04345734332206449,
+      "passes": false
+    },
+    "dt10_mtbfa0.2": {
+      "dr_mean": 0.8078602620087336,
+      "mtbfa_mean": 0.04345734332206449,
+      "passes": false
+    },
+    "dt15_mtbfa0.05": {
+      "dr_mean": 0.8593886462882097,
+      "mtbfa_mean": 0.04345734332206449,
+      "passes": false
+    },
+    "dt15_mtbfa0.1": {
+      "dr_mean": 0.8593886462882097,
+      "mtbfa_mean": 0.04345734332206449,
+      "passes": false
+    },
+    "dt15_mtbfa0.15": {
+      "dr_mean": 0.8593886462882097,
+      "mtbfa_mean": 0.04345734332206449,
+      "passes": false
+    },
+    "dt15_mtbfa0.2": {
+      "dr_mean": 0.8593886462882097,
+      "mtbfa_mean": 0.04345734332206449,
+      "passes": false
+    }
+  },
+  "Transformer": {
+    "dt1_mtbfa0.05": {
+      "dr_mean": 0.7703056768558951,
+      "mtbfa_mean": 0.015530758759783655,
+      "passes": false
+    },
+    "dt1_mtbfa0.1": {
+      "dr_mean": 0.7703056768558951,
+      "mtbfa_mean": 0.015530758759783655,
+      "passes": false
+    },
+    "dt1_mtbfa0.15": {
+      "dr_mean": 0.7703056768558951,
+      "mtbfa_mean": 0.015530758759783655,
+      "passes": false
+    },
+    "dt1_mtbfa0.2": {
+      "dr_mean": 0.7703056768558951,
+      "mtbfa_mean": 0.015530758759783655,
+      "passes": false
+    },
+    "dt3_mtbfa0.05": {
+      "dr_mean": NaN,
+      "mtbfa_mean": 0.015530758759783655,
+      "passes": false
+    },
+    "dt3_mtbfa0.1": {
+      "dr_mean": NaN,
+      "mtbfa_mean": 0.015530758759783655,
+      "passes": false
+    },
+    "dt3_mtbfa0.15": {
+      "dr_mean": NaN,
+      "mtbfa_mean": 0.015530758759783655,
+      "passes": false
+    },
+    "dt3_mtbfa0.2": {
+      "dr_mean": NaN,
+      "mtbfa_mean": 0.015530758759783655,
+      "passes": false
+    },
+    "dt5_mtbfa0.05": {
+      "dr_mean": 0.9187772925764193,
+      "mtbfa_mean": 0.015530758759783655,
+      "passes": false
+    },
+    "dt5_mtbfa0.1": {
+      "dr_mean": 0.9187772925764193,
+      "mtbfa_mean": 0.015530758759783655,
+      "passes": false
+    },
+    "dt5_mtbfa0.15": {
+      "dr_mean": 0.9187772925764193,
+      "mtbfa_mean": 0.015530758759783655,
+      "passes": false
+    },
+    "dt5_mtbfa0.2": {
+      "dr_mean": 0.9187772925764193,
+      "mtbfa_mean": 0.015530758759783655,
+      "passes": false
+    },
+    "dt10_mtbfa0.05": {
+      "dr_mean": 0.9703056768558952,
+      "mtbfa_mean": 0.015530758759783655,
+      "passes": false
+    },
+    "dt10_mtbfa0.1": {
+      "dr_mean": 0.9703056768558952,
+      "mtbfa_mean": 0.015530758759783655,
+      "passes": false
+    },
+    "dt10_mtbfa0.15": {
+      "dr_mean": 0.9703056768558952,
+      "mtbfa_mean": 0.015530758759783655,
+      "passes": false
+    },
+    "dt10_mtbfa0.2": {
+      "dr_mean": 0.9703056768558952,
+      "mtbfa_mean": 0.015530758759783655,
+      "passes": false
+    },
+    "dt15_mtbfa0.05": {
+      "dr_mean": 0.9755458515283844,
+      "mtbfa_mean": 0.015530758759783655,
+      "passes": false
+    },
+    "dt15_mtbfa0.1": {
+      "dr_mean": 0.9755458515283844,
+      "mtbfa_mean": 0.015530758759783655,
+      "passes": false
+    },
+    "dt15_mtbfa0.15": {
+      "dr_mean": 0.9755458515283844,
+      "mtbfa_mean": 0.015530758759783655,
+      "passes": false
+    },
+    "dt15_mtbfa0.2": {
+      "dr_mean": 0.9755458515283844,
+      "mtbfa_mean": 0.015530758759783655,
+      "passes": false
+    }
+  }
+}

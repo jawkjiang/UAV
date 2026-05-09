@@ -37,3 +37,6 @@ data/*
 
 # Claude Code workspace
 .claude/
+
+# Real-world cross-domain dataset CSVs (large; reproduced from extract_realworld_csvs.py)
+step9_realworld/data/

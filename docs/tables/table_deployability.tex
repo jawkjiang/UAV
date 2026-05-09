@@ -1,0 +1,20 @@
+\begin{table}[!t]
+\caption{Deployability decisions under conventional and time-aware frameworks.}
+\label{tab:deployability}
+\centering
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{llll}
+\hline
+\textbf{Model} & \textbf{Conventional} & \textbf{Time-aware} & \textbf{Reason (if fail)} \\
+\hline
+CNN & $\times$ Fail & $\times$ Fail & MTBFA $= 0.024\,\mathrm{h} < 0.1\,\mathrm{h}$ \\
+LSTM & \checkmark Pass & $\times$ Fail & MTBFA $= 0.021\,\mathrm{h} < 0.1\,\mathrm{h}$ \\
+BiLSTM & $\times$ Fail & $\times$ Fail & DR@5s $= 78.3\% < 85\%$ \\
+GRU & \checkmark Pass & $\times$ Fail & MTBFA $= 0.021\,\mathrm{h} < 0.1\,\mathrm{h}$ \\
+CNN-LSTM & \checkmark Pass & $\times$ Fail & MTBFA $= 0.020\,\mathrm{h} < 0.1\,\mathrm{h}$ \\
+TCN & $\times$ Fail & $\times$ Fail & DR@5s $= 75.4\% < 85\%$ \\
+Transformer & $\times$ Fail & $\times$ Fail & MTBFA $= 0.016\,\mathrm{h} < 0.1\,\mathrm{h}$ \\
+\hline
+\end{tabular}%
+}
+\end{table}
