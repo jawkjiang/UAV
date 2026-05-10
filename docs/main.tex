@@ -68,8 +68,13 @@ Takeover) and evaluated with significance testing.
 \textbf{(i) Calibration trade-off dominates.}
 At the default threshold $p=0.5$, no architecture meets the
 operational MTBFA budget; calibrated thresholding restores
-feasibility for five of seven, while LSTM and GRU remain borderline,
+MTBFA-feasibility for five of seven, while LSTM and GRU remain borderline,
 and the DR@5\,s cost varies roughly five-fold across them.
+Under the joint deployability criterion (DR@$5\,$s~$\geq 0.85$ \emph{and}
+MTBFA~$\geq 0.10$\,h), however, CNN-LSTM is the only architecture that
+remains feasible after calibration (calibrated DR@5\,s~$=0.880$,
+MTBFA~$=0.178$\,h); the other four MTBFA-feasible architectures fall
+below the DR@5\,s floor.
 \textbf{(ii) Architecture--attack interactions are pronounced and
 non-monotone.} TCN matches the field on temporally-structured attacks
 but collapses on positional perturbations
@@ -81,7 +86,10 @@ CNN-LSTM, the in-distribution leader (DR@5\,s~$=0.96$), drops to
 $0.20$ on real Holybro\,S500 hardware, and matching the simulator's
 cruise speed to the target further degrades transfer
 (CNN: $0.96 \to 0.00$; CNN-LSTM: $0.92 \to 0.08$), so this is an
-insufficient sim-to-real remedy.
+insufficient sim-to-real remedy. We frame this as a zero-shot
+cross-distribution stress test rather than a matched-platform deployment
+validation: the real flights differ from the training distribution along
+airframe, cruise speed, sensor noise, and attack mechanism.
 Thresholds follow UAV power-line inspection risk constraints; code,
 dataset, and trained checkpoints are released for reproducibility.
 \end{abstract}
@@ -356,7 +364,7 @@ If the detector produces a sustained false alarm over a time interval, an operat
 
 \subsection{Time-Aware Evaluation Metrics}
 
-Based on the above event-based modeling, we propose three time-aware metrics capturing detection speed and false-alarm frequency.
+Based on the above event-based modeling, we adopt and operationalise three time-aware metrics capturing detection speed and false-alarm frequency. The metrics themselves build on prior event-aware evaluation literature (see \S\ref{sec:positioning}); our contribution is their systematisation, time-budgeted instantiation, and mission-grounded threshold derivation, not the originality of any individual metric.
 
 \subsubsection{Detection Rate at Time Threshold (DR@$\Delta t$)}
 
@@ -914,7 +922,7 @@ A model passes the time-aware standard if and only if:
 \begin{equation}
   \text{DR@5s} \geq 0.85 \quad \text{and} \quad \text{MTBFA} \geq 0.1\,\text{h}.
 \end{equation}
-For completeness we also report DR at $\{1,3,10,15\}\,\text{s}$ and
+For completeness we also report DR at $\{1,10,15\}\,\text{s}$ and
 full CI bounds so practitioners can apply alternative thresholds.
 
 \section{Case Study: Validating the Framework on Seven Detectors}
@@ -1047,7 +1055,7 @@ The trade-off is illustrated in Fig.~\ref{fig:pareto-frontier}.
 
 To demonstrate that the framework's conclusions are not artifacts of the specific
 DR@5s and MTBFA thresholds, we evaluate deployability decisions across a grid of
-threshold combinations: DR time horizon $\Delta t \in \{1, 3, 5, 10, 15\}\,\mathrm{s}$
+threshold combinations: DR time horizon $\Delta t \in \{1, 5, 10, 15\}\,\mathrm{s}$
 and MTBFA threshold $\tau_{\mathrm{FA}} \in \{0.05, 0.10, 0.15, 0.20\}\,\mathrm{h}$.
 
 \input{tables/table_pairwise_tests}
@@ -1183,7 +1191,7 @@ of this study are not artifacts of the windowing hyperparameters.
 
 To test that deployability decisions are not artefacts of the specific
 DR@$\Delta t$ time horizon and MTBFA tolerance, we evaluate every architecture
-over a grid of $\Delta t \in \{1, 3, 5, 10, 15\}\,\text{s}$ and
+over a grid of $\Delta t \in \{1, 5, 10, 15\}\,\text{s}$ and
 MTBFA threshold $\tau_{\mathrm{FA}} \in \{0.05, 0.10, 0.15, 0.20\}\,\text{h}$.
 At the default decision threshold $p=0.5$, the empirical MTBFA of every
 architecture falls in the range $0.016$--$0.043$\,h
@@ -1208,7 +1216,7 @@ detector logits are not necessarily well-calibrated probabilities, the
 sweep also functions as a non-parametric probability-calibration step
 analogous to post-hoc calibration techniques~\cite{ref54}.
 For each model we sweep
-$p \in \{0.05,\,0.07,\,\ldots,\,0.99\}$, select the smallest $p^\star$ that
+$p \in [0.50, 0.99]$ in steps of $0.01$, select the smallest $p^\star$ that
 yields MTBFA$(\text{val})\ge 0.10$\,h, and report DR@5\,s, MTBFA on the
 held-out test set under that $p^\star$.
 Table~\ref{tab:calibrated-threshold} summarises the result.
@@ -1218,6 +1226,14 @@ Table~\ref{tab:calibrated-threshold} summarises the result.
 architecture, $p^\star$ is the smallest decision threshold (swept on
 validation) that yields MTBFA$(\text{val}) \ge 0.10$\,h; DR@5\,s and
 MTBFA are reported on the test set under that $p^\star$.
+``Test DR@5\,s ($p{=}0.5$)'' is the test-set detection rate evaluated
+at the fixed threshold sweep value $p=0.5$ (the leftmost point of the
+calibration sweep) and is the baseline against which $\Delta$DR is
+computed; for five of seven architectures it agrees with the per-seed
+default-threshold value reported in Table~\ref{tab:overall-timeaware},
+but for CNN and BiLSTM the per-seed defaults differ from $p=0.5$,
+which is why the two tables list slightly different default DR@5\,s
+for these two rows.
 The architectural cost of MTBFA-feasibility differs by an order of
 magnitude across the seven detectors.}
 \label{tab:calibrated-threshold}
@@ -1243,6 +1259,14 @@ calibration robustness.
 The default-threshold universal failure is therefore a calibration
 artefact for the majority but a genuine capacity limit for the borderline
 pair.
+MTBFA-feasibility alone, however, is not deployment-readiness:
+under the joint criterion (DR@$5\,$s~$\geq 0.85$ \emph{and}
+MTBFA~$\geq 0.10$\,h), only CNN-LSTM remains feasible after calibration
+(test DR@5\,s~$=0.880$, MTBFA~$=0.178$\,h). The other four
+MTBFA-feasible architectures fall below the DR@5\,s floor at their
+calibrated operating points (CNN $0.764$, BiLSTM $0.510$, TCN $0.603$,
+Transformer $0.490$), so the calibration cost translates directly into
+joint-deployability rejection for every architecture except CNN-LSTM.
 
 \textbf{(b) Calibration cost varies by a factor of five across architectures.}
 CNN-LSTM achieves operational MTBFA at the smallest DR@5\,s cost
@@ -1364,7 +1388,10 @@ literature~\cite{ref52}. We evaluate the 35 trained checkpoints
   containing real Holybro S500 multirotor flights with hardware
   GPS spoofing performed by a HackRF One SDR~\cite{ref48} (1 benign
   + 1 spoofing + 1 jamming flight; total $\approx$84\,k samples after
-  windowing).
+  windowing). Because the detection task in this study is GPS spoofing,
+  the loader retains only the benign and spoofing flights; the jamming
+  flight is excluded so that the test distribution does not introduce a
+  third anomaly class outside the trained label space.
 \item \textbf{IEEE DataPort UAV Attack Dataset (PX4 SITL)}~\cite{ref38},
   containing PX4 software-in-the-loop flights across four airframes
   (PLANE, VTOL, TAIL, H480; 5 normal + 4 spoofing + 5 DoS flights).
@@ -1653,7 +1680,7 @@ axes would require a sensor-realistic simulator we do not have.
 DR@$5\,\text{s}$ and MTBFA thresholds are derived for power-line
 inspection at 5\,m/s. Different speeds, safety-distance requirements,
 or operator workload budgets require threshold re-derivation; the
-full DR@$\{1,3,5,10,15\}\,\text{s}$ curves and CI bounds in
+full DR@$\{1,5,10,15\}\,\text{s}$ curves and CI bounds in
 Table~\ref{tab:overall-timeaware} support this.
 
 \textbf{Sliding-window bias on slow attacks.}
@@ -1684,10 +1711,14 @@ operational MTBFA budget; validation-calibrated thresholding restores
 MTBFA-feasibility with margin for five of the seven (CNN, BiLSTM,
 CNN-LSTM, TCN, Transformer), while LSTM and GRU remain borderline at
 the swept-threshold boundary. Among the feasible architectures, the
-DR@5\,s cost varies by a factor of five. The shape of the calibration
-trade-off curve is itself an architectural fingerprint, with CNN-LSTM
-uniquely sustaining DR@5\,s as MTBFA improves and Transformer/BiLSTM
-losing DR@5\,s sharply.
+DR@5\,s cost varies by a factor of five. Under the joint deployability
+criterion (DR@$5\,$s~$\geq 0.85$ \emph{and} MTBFA~$\geq 0.10$\,h), only
+CNN-LSTM remains feasible after calibration (DR@5\,s~$=0.880$,
+MTBFA~$=0.178$\,h); the other four MTBFA-feasible architectures drop
+below the DR@5\,s floor at their calibrated operating points. The shape
+of the calibration trade-off curve is itself an architectural fingerprint,
+with CNN-LSTM uniquely sustaining DR@5\,s as MTBFA improves and
+Transformer/BiLSTM losing DR@5\,s sharply.
 
 \textbf{Second}, attack-averaged metrics mask architecture-specific
 failure modes. TCN matches the field on temporally-structured attacks
