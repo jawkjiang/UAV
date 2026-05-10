@@ -1360,7 +1360,12 @@ under the default operating threshold $p=0.5$
 \label{sec:cross_domain}
 
 To examine how detectors trained on the MATLAB simulation generalise
-beyond the training distribution, we evaluate the 35 trained checkpoints
+beyond the training distribution, we conduct a zero-shot evaluation that
+probes sim-to-real transferability and broader cross-distribution
+robustness, motivated by the well-documented reality gap in
+simulation-trained learners~\cite{ref51} and by the cross-domain
+generalization challenges identified in the deep domain-adaptation
+literature~\cite{ref52}. We evaluate the 35 trained checkpoints
 \emph{without fine-tuning} on three additional data sources:
 
 \begin{itemize}
@@ -1624,7 +1629,12 @@ isolates the platform-speed-matching axis, but the remaining axes
 (true GNSS multipath/ionospheric noise, real RF spoofing vs state-level
 injection, real wind/operator dynamics) are jointly varied between sim
 and real. A rigorously isolated sim-to-real evaluation would require
-matched-platform real-flight data we did not collect.
+matched-platform real-flight data we did not collect. Closing this gap
+in future work likely requires sim-to-real techniques such as domain
+randomization or higher-fidelity sensor models~\cite{ref51}, together
+with unsupervised or few-shot domain-adaptation methods that align
+simulator-trained representations to in-flight distributions without
+labelled real-attack data~\cite{ref52}.
 
 \textbf{Operating-point selection at deployment time.}
 \S\ref{sec:ablation} reports a validation-calibrated operating-point
@@ -1749,6 +1759,8 @@ network intrusion detection and industrial fault diagnosis.
 \bibitem{ref35} Z. Li, X. Wang, Y. Liu, and J. Zhang, "Real-time GNSS spoofing detection for small UAVs using transformer-based sequence modeling," \textit{IEEE Internet Things J.}, vol. 11, no. 8, pp. 13892--13905, Apr. 2024, doi: 10.1109/JIOT.2024.3365871.
 \bibitem{ref36} J. Humphreys, B. Ledvina, M. Psiaki, B. O'Hanlon, and P. Kintner, "Assessing the spoofing threat: Development of a portable GPS civilian spoofer," in \textit{Proc. ION GNSS}, Sep. 2008, pp. 2314--2325.
 \bibitem{ref38} "UAV Attack Dataset," IEEE DataPort, 2023. [Online]. Available: \texttt{https://ieee-dataport.org/open-access/uav-attack-dataset}, doi: 10.21227/00dg-0d12.
+\bibitem{ref51} S. H\"ofer, K. Bekris, A. Handa, J. C. Gamboa, M. Mozifian, F. Golemo, C. Atkeson, D. Fox, K. Goldberg, J. Leonard, C. K. Liu, J. Peters, S. Song, P. Welinder, and M. White, "Sim2Real in robotics and automation: Applications and challenges," \textit{IEEE Trans. Autom. Sci. Eng.}, vol. 18, no. 2, pp. 398--400, Apr. 2021, doi: 10.1109/TASE.2021.3064065.
+\bibitem{ref52} G. Wilson and D. J. Cook, "A survey of unsupervised deep domain adaptation," \textit{ACM Trans. Intell. Syst. Technol.}, vol. 11, no. 5, pp. 1--46, Oct. 2020, doi: 10.1145/3400066.
 \EOD
 \end{thebibliography}
 
