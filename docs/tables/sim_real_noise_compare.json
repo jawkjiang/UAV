@@ -1,0 +1,29 @@
+{
+  "sim_matlab": {
+    "label": "MATLAB sim (test, normal segments)",
+    "n_flights_used": 120,
+    "sigma_xy_per_axis_m": 3.673973667091525,
+    "sigma_xy_per_axis_m_p95_across_flights": 3.8873622144816795,
+    "sigma_v_per_axis_mps": 1.5163047295629442,
+    "excess_kurtosis_innov": -0.029845718891223925,
+    "pos_step_p99_m_mean": 11.022785585766913
+  },
+  "ieee_live": {
+    "label": "IEEE DataPort Live (Holybro S500, normal segments)",
+    "n_flights_used": 1,
+    "sigma_xy_per_axis_m": 0.007142915268046047,
+    "sigma_xy_per_axis_m_p95_across_flights": 0.007142915268046047,
+    "sigma_v_per_axis_mps": 0.04299976091037326,
+    "excess_kurtosis_innov": 12.211765405481604,
+    "pos_step_p99_m_mean": 0.03793412821605497
+  },
+  "alfa": {
+    "label": "ALFA Carbon-Z (normal segments)",
+    "n_flights_used": 8,
+    "sigma_xy_per_axis_m": 2.7588472294932456,
+    "sigma_xy_per_axis_m_p95_across_flights": 3.2498434352929704,
+    "sigma_v_per_axis_mps": 0.42408922123977705,
+    "excess_kurtosis_innov": -0.9442779147459974,
+    "pos_step_p99_m_mean": 5.9587495685278995
+  }
+}
