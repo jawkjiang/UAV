@@ -607,21 +607,11 @@ The released codebase does include an optional TimeGAN-based augmentation
 script~\cite{ref23} for follow-on work that may need additional training
 data; if used, it is structurally restricted to the training split by a
 runtime assertion that raises an error when any augmented flight ID
-appears in the validation or test splits. Figure~\ref{fig:dataflow}
-documents this isolation guarantee. We emphasise that this safeguard is
-moot for the present results---the reported numbers come exclusively from
-unaugmented MATLAB simulation flights---but is included for downstream
-users who may extend the pipeline.
-
-\begin{figure}[!t]
-\centering
-\includegraphics[width=0.9\columnwidth]{dataflow.pdf}
-\caption{Data-flow diagram. The reported experiments use no augmentation.
-The optional augmentation pipeline (released alongside the codebase) is
-structurally constrained to the training split via a runtime assertion;
-evaluation splits remain isolated from all synthetic data.}
-\label{fig:dataflow}
-\end{figure}
+appears in the validation or test splits, so the evaluation splits
+remain isolated from all synthetic data. We emphasise that this
+safeguard is moot for the present results---the reported numbers come
+exclusively from unaugmented MATLAB simulation flights---but is included
+for downstream users who may extend the pipeline.
 
 \subsection{Threat Model and Attack Injection}
 \label{sec:threat_model}
