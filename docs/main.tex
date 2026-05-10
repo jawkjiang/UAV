@@ -68,8 +68,13 @@ Takeover) and evaluated with significance testing.
 \textbf{(i) Calibration trade-off dominates.}
 At the default threshold $p=0.5$, no architecture meets the
 operational MTBFA budget; calibrated thresholding restores
-feasibility for five of seven, while LSTM and GRU remain borderline,
+MTBFA-feasibility for five of seven, while LSTM and GRU remain borderline,
 and the DR@5\,s cost varies roughly five-fold across them.
+Under the joint deployability criterion (DR@$5\,$s~$\geq 0.85$ \emph{and}
+MTBFA~$\geq 0.10$\,h), however, CNN-LSTM is the only architecture that
+remains feasible after calibration (calibrated DR@5\,s~$=0.880$,
+MTBFA~$=0.178$\,h); the other four MTBFA-feasible architectures fall
+below the DR@5\,s floor.
 \textbf{(ii) Architecture--attack interactions are pronounced and
 non-monotone.} TCN matches the field on temporally-structured attacks
 but collapses on positional perturbations
@@ -1246,6 +1251,14 @@ calibration robustness.
 The default-threshold universal failure is therefore a calibration
 artefact for the majority but a genuine capacity limit for the borderline
 pair.
+MTBFA-feasibility alone, however, is not deployment-readiness:
+under the joint criterion (DR@$5\,$s~$\geq 0.85$ \emph{and}
+MTBFA~$\geq 0.10$\,h), only CNN-LSTM remains feasible after calibration
+(test DR@5\,s~$=0.880$, MTBFA~$=0.178$\,h). The other four
+MTBFA-feasible architectures fall below the DR@5\,s floor at their
+calibrated operating points (CNN $0.764$, BiLSTM $0.510$, TCN $0.603$,
+Transformer $0.490$), so the calibration cost translates directly into
+joint-deployability rejection for every architecture except CNN-LSTM.
 
 \textbf{(b) Calibration cost varies by a factor of five across architectures.}
 CNN-LSTM achieves operational MTBFA at the smallest DR@5\,s cost
@@ -1690,10 +1703,14 @@ operational MTBFA budget; validation-calibrated thresholding restores
 MTBFA-feasibility with margin for five of the seven (CNN, BiLSTM,
 CNN-LSTM, TCN, Transformer), while LSTM and GRU remain borderline at
 the swept-threshold boundary. Among the feasible architectures, the
-DR@5\,s cost varies by a factor of five. The shape of the calibration
-trade-off curve is itself an architectural fingerprint, with CNN-LSTM
-uniquely sustaining DR@5\,s as MTBFA improves and Transformer/BiLSTM
-losing DR@5\,s sharply.
+DR@5\,s cost varies by a factor of five. Under the joint deployability
+criterion (DR@$5\,$s~$\geq 0.85$ \emph{and} MTBFA~$\geq 0.10$\,h), only
+CNN-LSTM remains feasible after calibration (DR@5\,s~$=0.880$,
+MTBFA~$=0.178$\,h); the other four MTBFA-feasible architectures drop
+below the DR@5\,s floor at their calibrated operating points. The shape
+of the calibration trade-off curve is itself an architectural fingerprint,
+with CNN-LSTM uniquely sustaining DR@5\,s as MTBFA improves and
+Transformer/BiLSTM losing DR@5\,s sharply.
 
 \textbf{Second}, attack-averaged metrics mask architecture-specific
 failure modes. TCN matches the field on temporally-structured attacks
