@@ -1226,6 +1226,14 @@ Table~\ref{tab:calibrated-threshold} summarises the result.
 architecture, $p^\star$ is the smallest decision threshold (swept on
 validation) that yields MTBFA$(\text{val}) \ge 0.10$\,h; DR@5\,s and
 MTBFA are reported on the test set under that $p^\star$.
+``Test DR@5\,s ($p{=}0.5$)'' is the test-set detection rate evaluated
+at the fixed threshold sweep value $p=0.5$ (the leftmost point of the
+calibration sweep) and is the baseline against which $\Delta$DR is
+computed; for five of seven architectures it agrees with the per-seed
+default-threshold value reported in Table~\ref{tab:overall-timeaware},
+but for CNN and BiLSTM the per-seed defaults differ from $p=0.5$,
+which is why the two tables list slightly different default DR@5\,s
+for these two rows.
 The architectural cost of MTBFA-feasibility differs by an order of
 magnitude across the seven detectors.}
 \label{tab:calibrated-threshold}
