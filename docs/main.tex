@@ -55,52 +55,35 @@
 \corresp{Corresponding author: Xueyan Wang (e-mail: WXY421202@163.com).}
 
 \begin{abstract}
-Real-time GPS spoofing detection for UAVs in safety-critical missions
-(e.g., power-line inspection) raises two questions that conventional
-classification metrics cannot answer:
-\emph{when} is a threat detected, and \emph{how often} do false alarms
-disrupt operations.
-We adopt three operational metrics---DR@$\Delta t$ (detection rate within
-a time budget), ADD (average detection delay), and MTBFA (mean time
-between false alarms with event-level aggregation)---and apply them to
-a systematic empirical study of seven representative deep-learning
-detector architectures (CNN, LSTM, BiLSTM, GRU, CNN-LSTM, TCN,
-Transformer).
-Detector training uses a publicly released $3{,}000$-flight MATLAB
-UAV Toolbox simulation dataset with four parameterised attack families
-(Step, Drift, Delay, Takeover); evaluation reports mean~$\pm$ 95\% CI
-over $5$ random seeds with Bonferroni-corrected pairwise tests.
-The study reveals three findings of direct deployment relevance.
-\textbf{(i) Calibration trade-off dominates deployment performance.}
-At the default decision threshold $p=0.5$, no architecture meets the
-operational MTBFA budget; validation-calibrated thresholding restores
-MTBFA-feasibility with substantial margin for five of the seven
-architectures (CNN, BiLSTM, CNN-LSTM, TCN, Transformer), while
-LSTM and GRU remain borderline (mean test MTBFA $0.117$\,h and
-$0.099$\,h at $p^\star=0.99$, the boundary of the swept threshold range).
-Among the feasible architectures, the DR@5\,s cost of calibration
-varies by a factor of five (CNN-LSTM: $-0.08$; Transformer: $-0.43$).
-The shape of the calibration trade-off curve is itself an architectural
-fingerprint that conventional metrics cannot surface.
+Real-time GPS spoofing detection for safety-critical UAV missions
+raises two questions that conventional classification metrics cannot
+answer: \emph{when} is a threat detected, and \emph{how often} do
+false alarms disrupt operations.
+We adopt three operational metrics---DR@$\Delta t$, ADD, and MTBFA
+with event-level aggregation---and apply them to seven deep-learning
+architectures spanning convolutional, recurrent, and attention
+paradigms, trained on a public $3{,}000$-flight MATLAB UAV Toolbox
+dataset with four parameterised attack families (Step, Drift, Delay,
+Takeover) and evaluated with significance testing.
+\textbf{(i) Calibration trade-off dominates.}
+At the default threshold $p=0.5$, no architecture meets the
+operational MTBFA budget; calibrated thresholding restores
+feasibility for five of seven, while LSTM and GRU remain borderline,
+and the DR@5\,s cost varies roughly five-fold across them.
 \textbf{(ii) Architecture--attack interactions are pronounced and
-non-monotone}: TCN matches the field on temporally-structured attacks
+non-monotone.} TCN matches the field on temporally-structured attacks
 but collapses on positional perturbations
-(DR@5\,s~$=0.46$ on Drift vs $0.96$ on Takeover), demonstrating that
-attack-averaged metrics mask attack-specific failure modes.
-\textbf{(iii) In-distribution architecture ranking does not transfer
-across distributions, and naive platform-speed matching does not
-help---and may even hurt.}
-CNN-LSTM, the in-distribution leader (DR@5\,s~$=0.96$), drops to $0.20$
-on real Holybro\,S500 hardware data; a controlled experiment further
-shows that matching the simulator's nominal cruise speed to the target
-platform's speed degrades cross-distribution DR@5\,s
-(CNN: $0.96 \to 0.00$; CNN-LSTM: $0.92 \to 0.08$) under this dataset
-and attack configuration, suggesting that nominal speed matching alone
-is insufficient as a sim-to-real-gap remedy.
-Operational thresholds are derived from UAV power-line inspection risk
-constraints (5\,m/s cruise, GB\,26860-2011 safe-approach distance).
-The complete code, dataset, and trained checkpoints are released to
-support reproducibility and follow-on work.
+(DR@5\,s~$=0.46$ on Drift vs $0.96$ on Takeover), so attack-averaged
+metrics hide attack-specific failures.
+\textbf{(iii) In-distribution ranking does not transfer, and naive
+speed matching can hurt.}
+CNN-LSTM, the in-distribution leader (DR@5\,s~$=0.96$), drops to
+$0.20$ on real Holybro\,S500 hardware, and matching the simulator's
+cruise speed to the target further degrades transfer
+(CNN: $0.96 \to 0.00$; CNN-LSTM: $0.92 \to 0.08$), so this is an
+insufficient sim-to-real remedy.
+Thresholds follow UAV power-line inspection risk constraints; code,
+dataset, and trained checkpoints are released for reproducibility.
 \end{abstract}
 
 \begin{keywords}
