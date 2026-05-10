@@ -81,7 +81,10 @@ CNN-LSTM, the in-distribution leader (DR@5\,s~$=0.96$), drops to
 $0.20$ on real Holybro\,S500 hardware, and matching the simulator's
 cruise speed to the target further degrades transfer
 (CNN: $0.96 \to 0.00$; CNN-LSTM: $0.92 \to 0.08$), so this is an
-insufficient sim-to-real remedy.
+insufficient sim-to-real remedy. We frame this as a zero-shot
+cross-distribution stress test rather than a matched-platform deployment
+validation: the real flights differ from the training distribution along
+airframe, cruise speed, sensor noise, and attack mechanism.
 Thresholds follow UAV power-line inspection risk constraints; code,
 dataset, and trained checkpoints are released for reproducibility.
 \end{abstract}
