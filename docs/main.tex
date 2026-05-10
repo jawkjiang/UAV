@@ -1364,7 +1364,10 @@ literature~\cite{ref52}. We evaluate the 35 trained checkpoints
   containing real Holybro S500 multirotor flights with hardware
   GPS spoofing performed by a HackRF One SDR~\cite{ref48} (1 benign
   + 1 spoofing + 1 jamming flight; total $\approx$84\,k samples after
-  windowing).
+  windowing). Because the detection task in this study is GPS spoofing,
+  the loader retains only the benign and spoofing flights; the jamming
+  flight is excluded so that the test distribution does not introduce a
+  third anomaly class outside the trained label space.
 \item \textbf{IEEE DataPort UAV Attack Dataset (PX4 SITL)}~\cite{ref38},
   containing PX4 software-in-the-loop flights across four airframes
   (PLANE, VTOL, TAIL, H480; 5 normal + 4 spoofing + 5 DoS flights).
