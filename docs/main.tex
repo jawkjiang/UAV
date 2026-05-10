@@ -1344,7 +1344,12 @@ under the default operating threshold $p=0.5$
 \label{sec:cross_domain}
 
 To examine how detectors trained on the MATLAB simulation generalise
-beyond the training distribution, we evaluate the 35 trained checkpoints
+beyond the training distribution, we conduct a zero-shot evaluation that
+probes sim-to-real transferability and broader cross-distribution
+robustness, motivated by the well-documented reality gap in
+simulation-trained learners~\cite{ref51} and by the cross-domain
+generalization challenges identified in the deep domain-adaptation
+literature~\cite{ref52}. We evaluate the 35 trained checkpoints
 \emph{without fine-tuning} on three additional data sources:
 
 \begin{itemize}
@@ -1609,7 +1614,12 @@ isolates the platform-speed-matching axis, but the remaining axes
 (true GNSS multipath/ionospheric noise, real RF spoofing vs state-level
 injection, real wind/operator dynamics) are jointly varied between sim
 and real. A rigorously isolated sim-to-real evaluation would require
-matched-platform real-flight data we did not collect.
+matched-platform real-flight data we did not collect. Closing this gap
+in future work likely requires sim-to-real techniques such as domain
+randomization or higher-fidelity sensor models~\cite{ref51}, together
+with unsupervised or few-shot domain-adaptation methods that align
+simulator-trained representations to in-flight distributions without
+labelled real-attack data~\cite{ref52}.
 
 \textbf{Operating-point selection at deployment time.}
 \S\ref{sec:ablation} reports a validation-calibrated operating-point
@@ -1744,6 +1754,8 @@ network intrusion detection and industrial fault diagnosis.
 \bibitem{ref48} N. O. Tippenhauer, C. P\"opper, K. B. Rasmussen, and S. Capkun, "On the requirements for successful GPS spoofing attacks," in \textit{Proc. 18th ACM Conf. Comput. Commun. Secur. (CCS)}, Chicago, IL, USA, Oct. 2011, pp. 75--86, doi: 10.1145/2046707.2046719.
 \bibitem{ref49} J. Bhatti and T. E. Humphreys, "Hostile control of ships via false GPS signals: Demonstration and detection," \textit{NAVIGATION}, vol. 64, no. 1, pp. 51--66, Mar. 2017, doi: 10.1002/navi.183.
 \bibitem{ref50} D. A. Goward, "Mass GPS spoofing attack in Black Sea?," \textit{The Maritime Executive}, Jul. 11, 2017.
+\bibitem{ref51} S. H\"ofer, K. Bekris, A. Handa, J. C. Gamboa, M. Mozifian, F. Golemo, C. Atkeson, D. Fox, K. Goldberg, J. Leonard, C. K. Liu, J. Peters, S. Song, P. Welinder, and M. White, "Sim2Real in robotics and automation: Applications and challenges," \textit{IEEE Trans. Autom. Sci. Eng.}, vol. 18, no. 2, pp. 398--400, Apr. 2021, doi: 10.1109/TASE.2021.3064065.
+\bibitem{ref52} G. Wilson and D. J. Cook, "A survey of unsupervised deep domain adaptation," \textit{ACM Trans. Intell. Syst. Technol.}, vol. 11, no. 5, pp. 1--46, Oct. 2020, doi: 10.1145/3400066.
 \bibitem{ref56} \textit{Management of Alarm Systems for the Process Industries}, ANSI/ISA-18.2-2016, International Society of Automation, Research Triangle Park, NC, USA, 2016. [Online]. Available: \texttt{https://www.isa.org/products/ansi-isa-18-2-2016-management-of-alarm-systems-for}
 \EOD
 \end{thebibliography}
