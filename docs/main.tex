@@ -1208,7 +1208,7 @@ detector logits are not necessarily well-calibrated probabilities, the
 sweep also functions as a non-parametric probability-calibration step
 analogous to post-hoc calibration techniques~\cite{ref54}.
 For each model we sweep
-$p \in \{0.05,\,0.07,\,\ldots,\,0.99\}$, select the smallest $p^\star$ that
+$p \in [0.50, 0.99]$ in steps of $0.01$, select the smallest $p^\star$ that
 yields MTBFA$(\text{val})\ge 0.10$\,h, and report DR@5\,s, MTBFA on the
 held-out test set under that $p^\star$.
 Table~\ref{tab:calibrated-threshold} summarises the result.
