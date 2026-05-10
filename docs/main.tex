@@ -1344,22 +1344,16 @@ operating budget; on the cross-distribution evaluation in
 substantially, motivating the cross-distribution analysis as a complementary
 deployment-selection input.
 
-When the MTBFA threshold is relaxed to the operationally weaker $0.05$\,h
-(Table~\ref{tab:threshold-grid}), the deployability decision becomes driven
-entirely by DR@$\Delta t$ at the default threshold;
-architectures that pass conventional precision/recall (Table~\ref{tab:overall-conv})
-but fail DR@$5\,\text{s}$ continue to fail at every $\Delta t \leq 5\,\text{s}$,
-confirming that the framework identifies systematically slow detectors
-rather than threshold-boundary artefacts.
-
-\begin{table}[!t]
-\caption{Deployability decision matrix at MTBFA threshold $0.10$\,h
-under the default operating threshold $p=0.5$
-(``$-$'' = pass criterion not met at this $\Delta t$/MTBFA combination).}
-\label{tab:threshold-grid}
-\centering
-\input{tables/table_threshold_grid_mtbfa01}
-\end{table}
+At the default operating threshold $p=0.5$, every architecture's
+MTBFA falls in the range $0.016$--$0.024$\,h
+(Table~\ref{tab:deployability}), well below both the $0.10$\,h
+deployability target and a relaxed $0.05$\,h alternative; consequently
+the gap between conventional and time-aware deployability is
+structural under the uncalibrated operating point and not an
+artefact of where the MTBFA threshold is drawn, which is precisely
+why the per-architecture threshold calibration of
+Table~\ref{tab:multi-mtbfa-target} is required to recover deployable
+operating points for any architecture.
 
 \subsection{Cross-Distribution Generalization Evaluation}
 \label{sec:cross_domain}
