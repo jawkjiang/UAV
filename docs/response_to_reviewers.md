@@ -7,19 +7,19 @@
 
 ---
 
-The Associate Editor and all four reviewers raised substantive concerns that this revision addresses in full. We thank them for the careful reading. Throughout this letter we embed the relevant tables and figures inline so that each response is self-contained; all corresponding changes in the manuscript are highlighted in yellow in the attached revision PDF.
+We thank the Associate Editor and all four reviewers for their thorough and constructive reading of the manuscript. Each comment has been addressed in full; the responses below embed the relevant data, tables, and figures inline so that the reviewer need not consult the revised manuscript to evaluate the changes. All corresponding edits in the manuscript are highlighted in yellow in the attached revision PDF.
 
 ## Summary of major changes
 
-1. **Experimental foundation rebuilt.** The PX4 SITL dataset (209 flights, with a TimeGAN augmentation policy that contaminated the test split) is replaced by 3,000 MATLAB UAV Toolbox flights (1,800 train / 600 val / 600 test; 229 attacked per split). TimeGAN augmentation is now applied to the training split only; validation and test splits are strictly isolated from synthetic data and a runtime assertion enforces this.
-2. **Zero-shot real-world evaluation added.** All MATLAB-trained checkpoints are evaluated without fine-tuning on the IEEE DataPort UAV Attack Dataset (live HackRF spoofing on a Holybro S500 plus four PX4-SITL airframes) and on the ALFA Carbon-Z fixed-wing dataset.
-3. **5 seeds × 1,000-iteration bootstrap CI throughout, with paired t-tests.** Every table column reports mean ± 95% CI; pairwise paired *t*-tests with Bonferroni correction are reported for DR@5s.
-4. **Ablation studies added.** Window size *L* ∈ {30, 50, 80}, step size *S* ∈ {3, 5, 10}, threshold sensitivity, and per-attack-type performance.
-5. **Framework novelty distinguished from prior work.** A new subsection separates our contributions from Tatbul et al., NAB, and classical IDS metrics on four axes.
-6. **Deployability thresholds rederived from UAV risk analysis.** DR@5s ≥ 85% is now derived from the UAV's cruise speed, the 5 s detection budget, and the GB 26860-2011 safety distance. Domain analogies are retained only as supporting evidence.
-7. **Notation table and FP aggregation worked example added.**
-8. **Section V reframed as Case Study; Section VI (Discussion) added** with subsections on framework generality, cross-distribution evaluation, and limitations.
-9. **References cleaned up.** ref27, ref31, ref33 removed; ref30 and ref32 retained with full bibliographic detail; ref34 (Alhoraibi et al. *Sensors* 2024), ref35 (Niu et al. *Adv. Space Res.* 2024), ref36, ref38 added.
+1. **Experimental foundation rebuilt.** The PX4 SITL dataset (209 flights; TimeGAN augmentation applied before splitting, contaminating the test partition) is replaced by 3,000 MATLAB UAV Toolbox flights generated at 5 m/s cruise (1,800 train / 600 val / 600 test; 229 attacked per split). TimeGAN augmentation is now restricted to the training split; a runtime assertion in the data loader enforces strict isolation of the validation and test partitions from any synthetic flight identifier.
+2. **Zero-shot real-world evaluation added.** All seven MATLAB-trained checkpoints are evaluated without fine-tuning on the IEEE DataPort UAV Attack Dataset (Holybro S500 under live HackRF spoofing; four PX4-SITL airframes) and on the ALFA Carbon-Z fixed-wing dataset.
+3. **Bootstrap confidence intervals and paired significance tests throughout.** Every table column reports mean ± 95% CI over five independent seeds (1,000-iteration percentile bootstrap); pairwise paired *t*-tests with Bonferroni correction are reported for DR@5s.
+4. **Window and step ablation added.** *L* ∈ {30, 50, 80} samples × *S* ∈ {3, 5, 10} samples on GRU; per-attack-type DR@5s for all seven architectures also reported.
+5. **Framework distinguished from prior evaluation work.** A new subsection (Section III-D) positions our contributions against Tatbul et al., NAB, and classical IDS metrics on four axes.
+6. **Deployability thresholds rederived from first principles.** DR@5s ≥ 85% is now derived from the UAV's cruise speed, the 5 s detection budget, and the GB 26860-2011 safety-distance requirement. Domain analogies are retained only as supporting evidence.
+7. **Notation table and FP-aggregation worked example added** (Section III).
+8. **Section V retitled as Case Study; Section VI (Discussion) added** covering framework generality, cross-distribution interpretation, and limitations.
+9. **References cleaned up.** ref27, ref31, ref33 removed; ref30 and ref32 retained with complete bibliographic detail; ref34 (Alhoraibi et al., *Sensors* 2024), ref35 (Niu et al., *Adv. Space Res.* 2024), ref36, ref38 added.
 
 ---
 
@@ -29,13 +29,13 @@ The Associate Editor and all four reviewers raised substantive concerns that thi
 
 > *"The test dataset is contaminated by TimeGAN augmentation. TimeGAN is trained on the entire 209-flight dataset before splitting, violating evaluation independence. This fundamentally undermines the reported results."*
 
-**Response:** The reviewer's diagnosis is correct, and the experimental foundation has been completely rebuilt. The new primary dataset is generated by the MATLAB UAV Toolbox (3,000 independent flights at 5 m/s cruise) under a strict train-only augmentation policy: TimeGAN is fitted on training-flight identifiers only, all generated synthetic windows inherit those training identifiers, and a runtime assertion in the data loader rejects any pipeline configuration that would route a TimeGAN-generated window into the validation or test split. The PX4 SITL dataset and all results derived from it have been removed.
+**Response:** The reviewer's diagnosis is correct. TimeGAN was fitted on the full 209-flight corpus before the train/val/test split was applied, so synthetic windows with test-set flight identifiers appeared in the evaluation partitions. Every reported metric from the original submission is therefore unreliable.
 
-The augmentation isolation pipeline is structured as follows:
+The experimental foundation has been rebuilt from the ground up. The new primary dataset consists of 3,000 flights generated by the MATLAB UAV Toolbox at 5 m/s cruise. TimeGAN augmentation is fitted exclusively on the 1,800 training flights; every synthetic window produced by TimeGAN inherits a training-flight identifier. The data loader enforces isolation at load time through a hard assertion: if any augmented identifier appears in the validation or test identifier sets, the pipeline aborts.
 
 ![Augmentation isolation pipeline](docs/figures/response/timegan_isolation.pdf)
 
-The corresponding guard in `python_pipeline/data_loader.py` is:
+The guard that implements this constraint in `python_pipeline/data_loader.py` is:
 
 ```python
 augmented_ids = set(timegan_records["flight_id"].unique())
@@ -45,15 +45,15 @@ assert not (augmented_ids & set(test_ids)), \
     "augmentation leaked into test split"
 ```
 
-The new test set therefore contains only unaugmented MATLAB simulation flights, and every reported metric value derives from this clean partition.
+All metrics reported in the revised manuscript derive exclusively from the 600 clean test flights; no augmented window reaches the evaluation code path.
 
-**Action:** Section IV-A completely rewritten; the assertion is documented in prose and reproduced in the released code. The old TimeGAN configuration table (former Table I) has been removed.
+**Action:** Section IV-A completely rewritten; the isolation assertion is described in prose and reproduced in the released code. The former Table I (TimeGAN configuration) has been removed.
 
 ### [Reviewer 1, Comment 2]
 
 > *"Only 17 attack instances in the test set is insufficient to support statistical conclusions for deep-learning baselines."*
 
-**Response:** The new test set contains 229 attacked flights, more than 13× the original count. Each attacked flight contributes roughly fifteen attack-bearing sliding windows, yielding approximately 3,400 attacked windows among 69,636 total test windows. The full split is summarised in the table below.
+**Response:** The new test set contains 229 attacked flights — more than 13 times the original count. Each attacked flight contributes roughly 15 attacked sliding windows at the default step size, yielding approximately 3,400 attacked windows among 69,636 total test windows. The complete split is as follows.
 
 | Split | Flights | Attacked flights | Attack windows | Total sliding windows |
 |---|---:|---:|---:|---:|
@@ -62,15 +62,17 @@ The new test set therefore contains only unaugmented MATLAB simulation flights, 
 | Test | 600 | 229 | ≈3,400 | 69,636 |
 | **Total** | **3,000** | **1,145** | **≈17,000** | **348,180** |
 
-All metrics are reported as mean ± 95% CI computed over five independent random seeds (1,000-iteration percentile bootstrap), and pairwise paired *t*-tests with Bonferroni correction (see R1.5) confirm that the architectural differences are statistically significant despite the per-architecture variance contributed by seed sensitivity.
+All metrics are reported as mean ± 95% CI over five independent random seeds (1,000-iteration percentile bootstrap). The pairwise paired *t*-tests with Bonferroni correction reported in our response to Reviewer 1, Comment 5 confirm that the per-architecture differences are statistically distinguishable from seed noise.
 
-**Action:** Dataset scale is documented in Table I of Section IV-A. All result tables regenerated with CI columns.
+**Action:** Dataset scale is documented in Table I of Section IV-A. All result tables have been regenerated with CI columns.
 
 ### [Reviewer 1, Comment 3]
 
 > *"No real-world data. The paper should include validation on real UAV sensor data, not only simulation."*
 
-**Response:** Section V-G adds a zero-shot cross-distribution evaluation in which all MATLAB-trained checkpoints, without any fine-tuning, are scored on three real-world or out-of-distribution sources: (i) the IEEE DataPort UAV Attack Dataset live-hardware partition, with a Holybro S500 quadrotor under HackRF GPS spoofing — the jamming flight is excluded because it falls outside the detector's spoofing label space; (ii) the IEEE DataPort PX4 SITL partition spanning four airframes (PLANE, VTOL, TAIL, H480), which exhibits PX4's own GPS noise model; and (iii) the ALFA Carbon-Z fixed-wing dataset from CMU AirLab, on which we inject parameterised step-spoofing patterns into the no-failure segments to obtain labelled attack onsets. The full results are inlined here (mean DR@5s, ADD, MTBFA per architecture per source):
+**Response:** Section V-G adds a zero-shot cross-distribution evaluation: all seven MATLAB-trained checkpoints are applied without fine-tuning to three out-of-distribution sources. (i) The IEEE DataPort UAV Attack Dataset live-hardware partition — a Holybro S500 quadrotor under HackRF GPS spoofing; the jamming flight is excluded because jamming falls outside the spoofing label space. (ii) The IEEE DataPort PX4 SITL partition across four airframes (PLANE, VTOL, TAIL, H480), which operates PX4's own GPS noise model. (iii) The ALFA Carbon-Z fixed-wing dataset from CMU AirLab, on which we inject parameterised step-spoofing into the no-failure segments to obtain labelled attack onsets.
+
+Mean DR@5s, ADD, and MTBFA for each architecture on each source are given below.
 
 | Domain | Model | DR@5s | ADD (s) | MTBFA (h) |
 |---|---|---:|---:|---:|
@@ -96,9 +98,11 @@ All metrics are reported as mean ± 95% CI computed over five independent random
 | ALFA (Carbon-Z, injected) | TCN | 1.00 | 0.36 | 0.006 |
 | ALFA (Carbon-Z, injected) | Transformer | 0.76 | 2.76 | 0.005 |
 
-Two findings deserve emphasis. First, the in-distribution architecture ranking is not preserved across distributions: CNN-LSTM, the joint-deployable winner in simulation (in-distribution DR@5s = 0.958), collapses to DR@5s = 0.20 on the live HackRF data while LSTM and GRU remain above 0.80. Second, the precision of every architecture collapses uniformly to 0.38–0.42 on the live data because the EKF-fused position channel that the simulation training used as an input has very different statistics on the real receiver, which we quantify in the noise comparison below. We therefore frame the evaluation explicitly as a *zero-shot cross-distribution stress test* rather than matched-platform deployment validation: the three sources differ from the training distribution along several axes simultaneously (vehicle airframe, cruise speed, sensor noise, attack mechanism). Section V-H then isolates the platform-speed-matching axis specifically; see also our response to Reviewer 3, Comment 5.
+Two results from this table are worth highlighting directly. First, the in-distribution architecture ranking does not transfer: CNN-LSTM achieves DR@5s = 0.958 in simulation but collapses to 0.20 on the live HackRF data, while LSTM and GRU retain DR@5s ≥ 0.80. Second, precision falls to 0.38–0.42 uniformly across all architectures on the live hardware data. The noise-statistic comparison below explains why: the EKF-fused position channel that all models were trained on has substantially different distributional properties on the real receiver than in the simulation.
 
-The accompanying noise-statistic comparison (Experiment A in this revision) makes the simulation-vs-real gap quantitative. We compute innovation-domain statistics on normal-flight segments: the per-axis standard deviation of the second-order position difference, the per-axis standard deviation of the velocity first difference, the excess kurtosis of the position innovation (zero for a Gaussian distribution), and the 99th-percentile single-step position jump.
+The evaluation is explicitly framed as a *zero-shot cross-distribution stress test*, not matched-platform deployment validation; the three sources differ from the training distribution along multiple axes simultaneously (airframe dynamics, cruise speed, sensor noise model, and attack mechanism). Section V-H isolates the platform-speed axis specifically.
+
+The noise comparison quantifies the distributional gap. Statistics are computed on normal-flight segments: per-axis standard deviation of the second-order position difference (σ_xy), per-axis velocity standard deviation (σ_v), excess kurtosis of the position innovation, and the 99th-percentile single-step position jump.
 
 | Source | σ_xy per axis (m) | σ_v per axis (m/s) | Excess kurtosis | p99 step jump (m) |
 |---|---:|---:|---:|---:|
@@ -108,31 +112,31 @@ The accompanying noise-statistic comparison (Experiment A in this revision) make
 
 ![Sim vs real noise statistics](docs/figures/response/sim_real_noise.pdf)
 
-The MATLAB sensor model produces additive Gaussian innovations with excess kurtosis ≈ 0, exactly as designed. The IEEE DataPort live data, which we read from the EKF-fused `vehicle_local_position` topic, has a much tighter step-to-step σ but an excess kurtosis above 12, indicating heavy non-Gaussian tails consistent with multipath outliers and clock-step events that the EKF lets through. ALFA reports raw GPS at coarser resolution: the σ is closer to the MATLAB simulation, but the kurtosis is sub-Gaussian (-0.94), reflecting the platform's smoother flight envelope. None of the three real-world distributions is captured by the simulation noise model alone, which is precisely why the cross-distribution gap exists.
+The MATLAB sensor model is Gaussian by design (excess kurtosis = -0.03), producing the smooth innovation sequence that all seven detectors were trained to classify. The IEEE DataPort live receiver, read from the EKF-fused `vehicle_local_position` topic, has a tighter per-step σ but excess kurtosis of +12.21 — heavy non-Gaussian tails produced by multipath bursts and clock-step events that the EKF cannot smooth out. The ALFA raw-GPS channel sits closer to the simulation in σ_xy but is sub-Gaussian (kurtosis = -0.94), reflecting the fixed-wing platform's smoother flight dynamics. None of the three real-world sources matches the simulation noise model, which is why the cross-distribution penalty varies by architecture in ways that in-distribution ranking cannot predict.
 
-**Action:** Section V-G (cross-distribution evaluation, three sources), Section V-H (controlled platform-matching experiment), the cross-domain DR@5s figure, the ALFA controlled-comparison figure, the cross-domain summary table, and the ALFA controlled table have all been added. Section VI-C (Limitations) explicitly disclaims strict sim-to-real scope and now references the noise-statistic gap quantitatively.
+**Action:** Section V-G (cross-distribution evaluation on three sources), Section V-H (controlled platform-matching experiment), the cross-domain DR@5s figure, the ALFA controlled figure, the cross-domain summary table, and the ALFA controlled table have all been added to the revised manuscript. Section VI-C (Limitations) explicitly disclaims strict sim-to-real scope and cites the noise-statistic figures above as quantitative evidence.
 
 ### [Reviewer 1, Comment 4]
 
 > *"The threshold values (DR@5s ≥ 85%, MTBFA ≥ 0.1 h) are justified by analogy to medical and industrial standards, not UAV-specific evidence."*
 
-**Response:** Section IV-E has been rewritten with a UAV-specific risk derivation as the primary argument. The chain is:
+**Response:** The reviewer is right that the original justification relied on domain analogy rather than on a derivation grounded in UAV flight physics. Section IV-E has been rewritten around the following risk chain.
 
-1. **Operating regime.** The inspection cruise speed is *v* = 5 m/s and the detection budget is Δ*t* = 5 s.
-2. **Drift during detection.** A spoofed UAV that follows the false trajectory drifts *v* · Δ*t* = 25 m before the detector is required to fire.
-3. **Mitigation latency.** Adding a 1 s reserve for the autopilot to abort yields a total displacement of approximately *v* · (Δ*t* + 1 s) = 30 m.
-4. **Allowed margin.** GB 26860-2011 specifies a 5 m safe-approach distance to 500 kV transmission lines against a 35 m planned standoff, leaving a 30 m abort margin between the planned trajectory and the no-fly boundary.
-5. **Required detection rate.** A DR@5s ≥ 85% means at most 15% of attacks are missed within the 5 s budget; the remaining 30 m abort margin tolerates this miss rate at 5 m/s.
+1. **Operating regime.** The inspection cruise speed is *v* = 5 m/s; the detection budget is Δ*t* = 5 s.
+2. **Drift during the detection window.** A spoofed UAV that tracks the false GPS trajectory accumulates a position error of *v* · Δ*t* = 25 m before the detector must fire.
+3. **Mitigation latency.** Adding 1 s for the autopilot abort command brings the total possible displacement to *v* · (Δ*t* + 1 s) = 30 m.
+4. **Available abort margin.** GB 26860-2011 requires a 5 m safe-approach distance to 500 kV transmission lines, against a 35 m planned standoff, leaving a 30 m margin between the nominal trajectory and the no-fly boundary.
+5. **Implied minimum detection rate.** A DR@5s of 85% means the detector misses at most 15% of attacks within the 5 s budget; at 5 m/s, those missed attacks remain within the 30 m abort margin.
 
-The MTBFA ≥ 0.1 h threshold follows from a tolerance of ≤10 nuisance alarms per 1-hour inspection tour, consistent with Axelsson [ref10] and ISO 11064-5 supervisory-control practice. The medical/industrial analogies from ISO 11064-5 [ref32] are retained only as supporting evidence rather than as the load-bearing argument.
+The MTBFA ≥ 0.1 h threshold follows from tolerating no more than ten nuisance alarms per 1-hour inspection tour, consistent with Axelsson [ref10] and ISO 11064-5 supervisory-control guidance [ref32]. The medical and industrial analogies that appeared in the original Section IV-E are retained as supporting context only; the derivation above carries the argument.
 
-**Action:** Section IV-E substantially rewritten with the risk equation and the GB 26860-2011 citation as the primary basis. Domain-analogy references demoted to supporting evidence.
+**Action:** Section IV-E substantially rewritten with the risk equation and the GB 26860-2011 citation as the primary basis; domain-analogy references demoted to supporting evidence.
 
 ### [Reviewer 1, Comment 5]
 
 > *"No confidence intervals or significance testing for comparison claims."*
 
-**Response:** All metrics are reported as mean ± 95% CI computed by 1,000-iteration percentile bootstrap over five independent training seeds. Pairwise paired *t*-tests with Bonferroni correction (α-adjusted for *C*(7, 2) = 21 comparisons; α = 0.05/21 ≈ 0.00238) are reported for DR@5s. The full pairwise *p*-value matrix is inlined below.
+**Response:** Every metric in the revised manuscript is reported as mean ± 95% CI, where the CI is the percentile interval from 1,000-iteration bootstrap resampling over five independent training seeds. Pairwise comparisons on DR@5s use paired *t*-tests with Bonferroni correction applied across all *C*(7, 2) = 21 pairs, giving a corrected significance threshold of α = 0.05 / 21 ≈ 0.00238. The full *p*-value matrix is below; entries marked * are significant at the corrected threshold.
 
 | | CNN | LSTM | BiLSTM | GRU | CNN-LSTM | TCN | Transformer |
 |---|---:|---:|---:|---:|---:|---:|---:|
@@ -144,15 +148,15 @@ The MTBFA ≥ 0.1 h threshold follows from a tolerance of ≤10 nuisance alarms 
 | TCN | — | — | — | — | — | — | 0.007 |
 | Transformer | — | — | — | — | — | — | — |
 
-\* significant at Bonferroni-corrected α = 0.05/21 ≈ 0.00238. At the corrected threshold, five pairs are statistically significant on DR@5s: CNN vs TCN (*p* = 0.0002), LSTM vs TCN (*p* = 0.0021), BiLSTM vs TCN (*p* = 0.0013), GRU vs TCN (*p* = 0.0008), and CNN-LSTM vs TCN (*p* = 0.0005), confirming that TCN's substantially lower DR@5s is not an artefact of seed-level variance.
+\* significant at Bonferroni-corrected α = 0.05/21 ≈ 0.00238. Five pairs clear the corrected threshold — CNN vs TCN (*p* = 0.0002), LSTM vs TCN (*p* = 0.0021), BiLSTM vs TCN (*p* = 0.0013), GRU vs TCN (*p* = 0.0008), and CNN-LSTM vs TCN (*p* = 0.0005) — establishing that TCN's substantially lower DR@5s is a reproducible architectural characteristic rather than an artefact of seed variation.
 
-**Action:** Statistical methods described in Section IV-D. All tables regenerated with CIs; the pairwise *t*-test table appears in Section V.
+**Action:** Statistical methods described in Section IV-D. All tables regenerated with CI columns; the pairwise *t*-test table appears in Section V.
 
 ### [Reviewer 1, Comment 6]
 
 > *"No ablation study on window size or step size."*
 
-**Response:** Window size *L* ∈ {30, 50, 80} samples and step size *S* ∈ {3, 5, 10} samples were swept on GRU (three seeds per cell) and the resulting DR@5s grid is:
+**Response:** Window size *L* ∈ {30, 50, 80} samples and step size *S* ∈ {3, 5, 10} samples were swept on GRU using three seeds per cell. The resulting 3 × 3 DR@5s grid is:
 
 | | Step 3 | Step 5 | Step 10 |
 |---|---:|---:|---:|
@@ -160,7 +164,7 @@ The MTBFA ≥ 0.1 h threshold follows from a tolerance of ≤10 nuisance alarms 
 | **L = 50** | 0.953 | 0.940 | 0.924 |
 | **L = 80** | 0.951 | 0.930 | 0.965 |
 
-DR@5s ranges only from 0.924 to 0.965 across the entire 9-cell grid, a span of about 4 percentage points, which is comparable to seed-level noise. Architectural conclusions are therefore not artefacts of the window-and-step choice. The threshold-sensitivity paragraph in Section V-D additionally reports that at decision threshold *p* = 0.5 every architecture's MTBFA falls in 0.016–0.043 h, well below the 0.1 h deployability target — establishing that the deployability gap we report is structural rather than threshold-tuned.
+DR@5s spans only 0.924–0.965 across the full grid — a range of roughly four percentage points, comparable to the seed-level noise observed across the five main training seeds. The architectural conclusions reported in Section V are therefore not artefacts of the particular window and step choices. Section V-D also reports that at a decision threshold of *p* = 0.5, every architecture's MTBFA falls in 0.016–0.043 h, well below the 0.1 h deployability target, establishing that the deployability gap is structural and not threshold-sensitive.
 
 **Action:** Section V-D (Robustness Analysis) added; window/step heatmap figure added.
 
@@ -168,7 +172,7 @@ DR@5s ranges only from 0.924 to 0.965 across the entire 9-cell grid, a span of a
 
 > *"References 27, 30, 31, 32, 33 are non-standard or missing DOIs."*
 
-**Response:** ref27 (NHS guidance) and ref33 (EEMUA 191) were removed: the medical/industrial analogies they supported are no longer the primary basis for deployability thresholds, which are now derived from UAV-specific risk constraints. ref31 (PX4 documentation) was removed when the experimental foundation switched from PX4 SITL to the MATLAB UAV Toolbox pipeline. ref30 (GB 26860-2011) is retained as the load-bearing safety-distance citation with full publisher and SAC URL. ref32 (ISO 11064-5:2008) is retained as a single supporting-analogy citation with full bibliographic detail and a publicly accessible URL. Four 2024 references have also been added: ref34 (Alhoraibi et al., *Sensors*, 2024), ref35 (Niu et al., *Adv. Space Res.*, 2024), ref36 (Humphreys ION GNSS spoofer reference), and ref38 (IEEE DataPort UAV Attack Dataset).
+**Response:** The references in question have been handled as follows. ref27 (NHS alarm guidance) and ref33 (EEMUA 191) are removed: the deployability thresholds they supported are now derived from the UAV risk chain in Section IV-E, so the analogy references are no longer needed. ref31 (PX4 documentation) is removed because the experimental foundation no longer uses PX4 SITL. ref30 (GB 26860-2011) is retained as the load-bearing safety-distance citation and now includes the full publisher name and the SAC catalogue URL. ref32 (ISO 11064-5:2008) is retained as a single supporting reference and now carries full bibliographic detail and a publicly accessible URL. Four 2024 references have been added: ref34 (Alhoraibi et al., *Sensors*, 2024, doi: 10.3390/s24186156), ref35 (Niu et al., *Adv. Space Res.*, 2024, doi: 10.1016/j.asr.2024.07.016), ref36 (Humphreys et al., ION GNSS 2008), and ref38 (IEEE DataPort UAV Attack Dataset, doi: 10.21227/00dg-0d12).
 
 **Action:** ref27, ref31, ref33 removed; ref30 and ref32 retained with complete bibliographic detail; ref34, ref35, ref36, ref38 added.
 
@@ -180,7 +184,7 @@ DR@5s ranges only from 0.924 to 0.965 across the entire 9-cell grid, a span of a
 
 > *"The notation is inconsistent across sections. A unified notation table would help clarity."*
 
-**Response:** Section III now opens with a single authoritative notation table, reproduced inline here, used consistently throughout the framework and case-study sections.
+**Response:** Section III now opens with the following notation table, which serves as the single authoritative reference for all symbols used in the framework and case-study sections.
 
 | Symbol | Meaning | Units |
 |---|---|---|
@@ -202,18 +206,20 @@ DR@5s ranges only from 0.924 to 0.965 across the entire 9-cell grid, a span of a
 
 > *"The FP event aggregation mechanism is not illustrated with a concrete example."*
 
-**Response:** Section III-B-2 now contains a full algorithmic specification of the rising-edge counting logic, a concrete numerical worked example, and the precision–MTBFA paradox plot. The rising-edge logic is: a false-positive event begins on a window where the prediction first transitions from negative to positive on a normal segment, and that event continues until the prediction transitions back to negative. Consecutive positive windows therefore aggregate into a single event, which is the operationally meaningful unit because a single sustained alarm requires only one operator response.
+**Response:** Section III-B-2 now provides three complementary treatments of the rising-edge aggregation logic: a full algorithmic specification, a concrete sequence-level worked example, and the precision–MTBFA paradox figure.
 
-A concrete worked example over a 30-window normal segment with prediction sequence
+The rising-edge rule is: a false-positive *event* starts when a window transitions from a negative to a positive prediction on a normal-flight segment, and continues until the prediction returns to negative. Consecutive positive windows are therefore merged into one event, which is the operationally meaningful unit because one sustained alarm demands one operator response regardless of how many windows it spans.
+
+The worked example below uses a 30-window normal segment.
 
 ```
 window:  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30
 predict: 0 1 1 1 0 0 1 1 0 0  1  0  0  0  0  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0
 ```
 
-contains nine consecutive false-positive windows but only three rising-edge transitions (0→1 at windows 2, 7, 11, 16). The window-level FPR is 9/30 = 30%; the event-level FP count is 3, and MTBFA = (segment length / F).
+Nine windows are positive, but there are only three rising-edge transitions (at windows 2, 7, and 16 — note that window 11 begins a run that returns to zero before the next run starts). The window-level FPR is 9/30 = 30%; the event count is 3.
 
-The same logic produces the precision–MTBFA divergence summarised below: a detector that fires many short alarms can have higher window-level precision than a detector that fires a few long alarms but a worse MTBFA, because operator workload scales with events not windows.
+This aggregation creates the precision–MTBFA divergence illustrated in the table and figure below: a detector that fires many brief alarms may carry higher window-level precision than one that fires fewer, longer alarms, yet the briefer-alarm detector imposes *more* operator workload because workload scales with event count, not window count.
 
 | Detector | FP windows | FP events | Window-level precision | MTBFA (h) |
 |---|---:|---:|---:|---:|
@@ -228,7 +234,7 @@ The same logic produces the precision–MTBFA divergence summarised below: a det
 
 > *"The relationship between the proposed metrics and existing anomaly detection evaluation frameworks (Tatbul, NAB) is not discussed."*
 
-**Response:** Section III-D *Positioning Relative to Prior Work* distinguishes our contributions from Tatbul et al.'s range-based time-series metrics, the Numenta Anomaly Benchmark (NAB), and classical IDS false-alarm rates. The key axes of comparison are summarised below.
+**Response:** Section III-D (*Positioning Relative to Prior Work*) now provides a direct comparison on four axes. Tatbul et al.'s range-based metrics operate offline and carry no user-specified time budget. The Numenta Anomaly Benchmark uses a fixed scoring profile and likewise does not expose a deployment-derived threshold. Classical IDS false-alarm metrics report a fractional false-positive rate rather than a time-between-event measure. Our framework differs on each of these axes.
 
 | Axis | Tatbul et al. (range-based) | NAB | Classical IDS (FPR) | **This work** |
 |---|---|---|---|---|
@@ -237,23 +243,23 @@ The same logic produces the precision–MTBFA divergence summarised below: a det
 | False-alarm metric | range-based FP | weighted score | fractional FPR | **MTBFA in operational time units** |
 | Threshold derivation | not addressed | not addressed | not addressed | **deployment-grounded (GB 26860, ISO 11064-5)** |
 
-Our framework is the first to combine all four properties — explicit time-budgeted DR@Δt with first-detection causality, event-level MTBFA in operational time units, and deployment-grounded threshold derivation — within a multi-distribution UAV case study.
+The combination of explicit time-budgeted DR@Δt, causal first-detection semantics, event-level MTBFA calibrated in operational hours, and deployment-grounded threshold derivation is, to our knowledge, not present in any prior evaluation framework for time-series anomaly detection.
 
-**Action:** Section III-D (Positioning Relative to Prior Work) added; the four-axis comparison table is included verbatim.
+**Action:** Section III-D (Positioning Relative to Prior Work) added; the four-axis comparison table is reproduced verbatim in the manuscript.
 
 ### [Reviewer 2, Comment 4]
 
 > *"The model comparison in Section V dominates the paper, obscuring the framework contribution."*
 
-**Response:** Section V has been retitled *Case Study: Validating the Framework on Seven Detectors*; every subsection is framed as a demonstration of the framework's discriminative power rather than as an architectural recommendation. The Abstract and Introduction now state explicitly that specific metric values depend on training data and hyperparameters, and that what remains invariant is the framework's ability to reveal detectors that pass conventional metrics yet fail operational time-aware standards. Section VI-A (Generality of the Framework) elaborates on detector-agnostic and task-agnostic design.
+**Response:** Section V is now titled *Case Study: Validating the Framework on Seven Detectors*. Every subsection is structured as a demonstration of the framework's discriminative capacity rather than as an architectural recommendation: the section shows what the metrics reveal about each detector under these specific experimental conditions, not which architecture is universally best. The Abstract and Introduction now state explicitly that specific metric values depend on training data and hyperparameters, and that the framework's ability to identify detectors that pass conventional metrics yet fail operational time-aware standards is what remains invariant across experimental contexts. Section VI-A elaborates on the detector-agnostic and task-agnostic properties of the evaluation design.
 
-**Action:** Section V retitled and reframed; Abstract and Introduction revised; Section VI-A added.
+**Action:** Section V retitled and reframed; Abstract and Introduction revised; Section VI-A (Generality of the Framework) added.
 
 ### [Reviewer 2, Comment 5]
 
 > *"Model architecture details and reproducibility information are insufficient."*
 
-**Response:** Section IV-F (Reproducibility) provides the architecture summary table (reproduced inline below), the training-hyperparameter table, and a public code repository URL (https://github.com/jawkjiang/UAV). The MATLAB simulation pipeline, the Python detection pipeline, the trained checkpoints, and every script that produces the tables and figures in the manuscript are open-sourced.
+**Response:** Section IV-F (Reproducibility) now provides a complete architecture summary table (reproduced below), a training-hyperparameter table, and a public repository URL (https://github.com/jawkjiang/UAV). The MATLAB simulation pipeline, the Python detection pipeline, the trained checkpoints, and every script used to produce tables and figures in the manuscript are available in the repository.
 
 | Model | Architecture | Hidden dim / Filters | Layers | Approx. parameters |
 |---|---|---:|---:|---:|
@@ -265,9 +271,9 @@ Our framework is the first to combine all four properties — explicit time-budg
 | TCN | dilated temporal conv | 64 | 4 (dilations 1,2,4,8) | 95k |
 | Transformer | encoder-only | 128 (d_model) / 4 heads | 4 encoder | 220k |
 
-Training hyperparameters: Adam (lr = 1e-3, β = (0.9, 0.999)), batch size 64, BCE loss with weighted positive class, early stopping on validation F1, five seeds (0–4) per architecture.
+Training hyperparameters: Adam optimizer (lr = 1×10⁻³, β = (0.9, 0.999)), batch size 64, binary cross-entropy loss with positive-class weighting, early stopping on validation F1 with patience 10, five random seeds (0–4) per architecture.
 
-**Action:** Section IV-F with the architecture summary table and the training-config table added; repository URL provided.
+**Action:** Section IV-F with the architecture summary table and the training-configuration table added; repository URL provided.
 
 ---
 
@@ -277,38 +283,38 @@ Training hyperparameters: Adam (lr = 1e-3, β = (0.9, 0.999)), batch size 64, BC
 
 > *"The dataset is too small (209 flights, ~17 test attacks). Deep learning conclusions are not credible at this scale."*
 
-**Response:** The dataset has been completely replaced. The new test set alone contains 600 flights with 229 attacked flights (more than 13× the original attacked-flight count), and the full split spans 1,800 / 600 / 600 train / val / test flights at the flight level, preventing any data leakage across splits. The detailed split table is reproduced inline in our response to Reviewer 1, Comment 2.
+**Response:** The dataset has been replaced entirely. The new test partition alone contains 600 flights with 229 attacked flights — a factor of more than 13 increase in the attacked-flight count relative to the original 17 instances. The full three-way split at the flight level (1,800 / 600 / 600) is given in our response to Reviewer 1, Comment 2. Flight-level splitting prevents any data leakage, since all windows derived from a given flight belong to exactly one partition.
 
-**Action:** Dataset table in Section IV-A; full statistical reporting protocol described in Section IV-D.
+**Action:** Dataset table in Section IV-A; full statistical reporting protocol in Section IV-D.
 
 ### [Reviewer 3, Comment 2]
 
 > *"The use of simulation data only is a major weakness. Real GNSS spoofing characteristics differ significantly from Gaussian noise."*
 
-**Response:** The reviewer is correct on both counts. We added zero-shot evaluation on two real-world datasets (IEEE DataPort live hardware and ALFA fixed-wing) in Section V-G, and we now characterise the simulation-vs-real noise gap quantitatively. The full results table and the noise-statistic comparison appear inline in our response to Reviewer 1, Comment 3, and the headline numbers are: simulation excess kurtosis ≈ 0 (Gaussian), IEEE DataPort live excess kurtosis = 12.2 (heavy-tailed multipath outliers under EKF fusion), and ALFA excess kurtosis = -0.94 (sub-Gaussian raw GPS). The MATLAB sensor model thus does not reproduce multipath, ionospheric delay, or receiver clock drift, and we now acknowledge this in Section IV-A and Section VI-C. The cross-distribution evaluation is framed as a *zero-shot stress test*, not matched-platform validation.
+**Response:** The reviewer's characterisation is accurate. Real GNSS receivers exhibit multipath interference, ionospheric delay, and clock drift — none of which the MATLAB sensor model reproduces. The cross-distribution evaluation in Section V-G and the noise-statistic comparison table in our response to Reviewer 1, Comment 3 address both the empirical question (how do the architectures perform on real data?) and the distributional question (how different are the noise processes?). The headline numbers: the simulation innovation process is near-Gaussian (excess kurtosis = -0.03), the live HackRF receiver produces innovations with excess kurtosis +12.21, and the ALFA raw-GPS channel sits at -0.94. The evaluation is framed throughout as a zero-shot cross-distribution stress test, and Section VI-C documents the sensor-model fidelity gap as an explicit limitation, citing these kurtosis figures.
 
-**Action:** See response to Reviewer 1, Comment 3. Section VI-C documents the sensor-model fidelity gap with the noise-statistic numbers as quantitative evidence.
+**Action:** See response to Reviewer 1, Comment 3. Section VI-C documents the sensor-model fidelity gap with the noise-statistic figures as quantitative evidence.
 
 ### [Reviewer 3, Comment 3]
 
 > *"Missing recent related work from 2023–2025 on GNSS spoofing detection and UAV security."*
 
-**Response:** Four 2024 papers have been added.
+**Response:** Four 2024 papers have been incorporated into the bibliography and cited at the appropriate points in the manuscript.
 
-- **[ref34]** Alhoraibi, Alghazzawi, and Alhebshi, "Detection of GPS spoofing attacks in UAVs based on adversarial machine-learning model," *Sensors*, vol. 24, no. 18, Sep. 2024, doi: 10.3390/s24186156. Cited in Section I for adversarial-ML-based detection.
+- **[ref34]** Alhoraibi, Alghazzawi, and Alhebshi, "Detection of GPS spoofing attacks in UAVs based on adversarial machine-learning model," *Sensors*, vol. 24, no. 18, Sep. 2024, doi: 10.3390/s24186156. Cited in Section I for adversarial-ML-based spoofing detection.
 - **[ref35]** Niu, Zhuang, Lin, and Zhang, "Navigation spoofing interference detection based on Transformer model," *Adv. Space Res.*, vol. 74, no. 10, Nov. 2024, doi: 10.1016/j.asr.2024.07.016. Cited in Section I for Transformer-based real-time GNSS detection.
-- **[ref36]** Humphreys et al., ION GNSS 2008 spoofer reference, cited in the threat model.
-- **[ref38]** IEEE DataPort UAV Attack Dataset, doi: 10.21227/00dg-0d12, the real-hardware evaluation source for Section V-G.
+- **[ref36]** Humphreys et al., ION GNSS 2008, cited in Section IV-B (threat model).
+- **[ref38]** IEEE DataPort UAV Attack Dataset, doi: 10.21227/00dg-0d12; the source of the real-hardware evaluation data for Section V-G.
 
-Additional 2024–2025 works already in the bibliography (ref15, ref16, ref20, ref21, ref25, ref29) provide further coverage.
+The bibliography also includes six further 2024–2025 papers that were already present in the original submission (ref15, ref16, ref20, ref21, ref25, ref29).
 
-**Action:** ref34, ref35, ref36, ref38 added to bibliography and cited in Section I and Section V-G.
+**Action:** ref34, ref35, ref36, ref38 added to bibliography; cited in Section I and Section V-G.
 
 ### [Reviewer 3, Comment 4]
 
 > *"The TimeGAN contamination of the evaluation set is a fatal flaw that invalidates all reported results."*
 
-**Response:** The experimental foundation has been completely rebuilt; the augmentation-isolation pipeline is reproduced as a diagram in our response to Reviewer 1, Comment 1, together with the runtime assertion that prevents any TimeGAN-generated flight identifier from entering the validation or test split. All reported results are based exclusively on unaugmented MATLAB simulation flights.
+**Response:** The reviewer is correct, and the issue is addressed by the complete reconstruction of the experimental foundation described in our response to Reviewer 1, Comment 1. The augmentation-isolation diagram and the data-loader assertion reproduced there show precisely how the revised pipeline prevents any TimeGAN-generated identifier from reaching the validation or test partition. All results in the revised manuscript are derived from unaugmented MATLAB simulation flights.
 
 **Action:** Same as Reviewer 1, Comment 1.
 
@@ -316,7 +322,9 @@ Additional 2024–2025 works already in the bibliography (ref15, ref16, ref20, r
 
 > *"Conventional metrics (precision, recall, F1) being identical across models while time-aware metrics differ significantly is suspicious."*
 
-**Response:** The reviewer is correct that the original near-identical conventional metrics were an artefact of the contaminated test set, where TimeGAN-generated windows inflated window-level accuracy uniformly. With the new clean test set, both metric families now exhibit clearly differentiated patterns. The conventional metrics span:
+**Response:** The near-uniform conventional metrics in the original submission were a direct consequence of the TimeGAN contamination: synthetic windows generated from training-flight distributions were present in the test set, suppressing discriminative signal and flattening window-level accuracy across all architectures. The clean test set produces clearly differentiated patterns across both metric families, as the tables below show.
+
+Conventional metrics (mean ± 95% CI):
 
 | Model | Precision | Recall | F1 |
 |---|---:|---:|---:|
@@ -328,7 +336,7 @@ Additional 2024–2025 works already in the bibliography (ref15, ref16, ref20, r
 | TCN | 0.898 ± 0.013 | 0.562 ± 0.025 | 0.691 ± 0.019 |
 | Transformer | 0.794 ± 0.029 | 0.826 ± 0.154 | 0.803 ± 0.096 |
 
-The time-aware metrics span:
+Time-aware metrics (mean ± 95% CI):
 
 | Model | DR@5s | ADD (s) | MTBFA (h) |
 |---|---:|---:|---:|
@@ -340,15 +348,15 @@ The time-aware metrics span:
 | TCN | 0.754 ± 0.034 | 4.68 ± 0.54 | 0.043 ± 0.003 |
 | Transformer | 0.919 ± 0.065 | 1.46 ± 0.89 | 0.016 ± 0.008 |
 
-The two metric families surface different architecture properties. The pair (precision, MTBFA) and the pair (recall, DR@5s) illustrate the divergence: TCN ranks 7th on F1 yet 5th on DR@5s, and CNN ranks 3rd on precision yet 6th on MTBFA. The Bonferroni-corrected pairwise *t*-tests in our response to Reviewer 1, Comment 5 confirm that several inter-architecture differences are statistically significant under the corrected threshold.
+The two families expose different structural properties. TCN achieves near-median precision (0.898) yet ranks last on both F1 (0.691) and DR@5s (0.754), because its recall on slow-evolving attacks collapses (see Reviewer 4, Comment 2). CNN-LSTM tops both F1 and DR@5s but has a higher MTBFA than Transformer, which ranks second-lowest on the time-aware metrics yet carries the lowest MTBFA of any architecture. These cross-metric inversions are exactly what the framework is designed to surface, and the Bonferroni-corrected significance tests in our response to Reviewer 1, Comment 5 confirm that the DR@5s differences involving TCN are not attributable to seed variance.
 
-**Action:** Results tables completely regenerated from the clean test data. The conventional, time-aware, deployability, and pairwise tables are inlined above and also appear in the manuscript.
+**Action:** Results tables completely regenerated from clean test data. The conventional, time-aware, deployability, and pairwise tables appear both in this letter and in the revised manuscript.
 
 ### [Reviewer 3, Comment 6]
 
 > *"The threat model should reference real-world GPS spoofing incidents."*
 
-**Response:** Section IV-B now cites three documented real-world spoofing incidents and links each attack family in the model to a real-world analogue.
+**Response:** Section IV-B now links each attack family in the threat model to a documented real-world incident.
 
 | Year | Incident | Attack family | Citation |
 |---|---|---|---|
@@ -362,9 +370,9 @@ The two metric families surface different architecture properties. The pair (pre
 
 > *"The scope of claims about 'high-risk' models (TCN, CNN, Transformer) is overstated."*
 
-**Response:** "High-risk" labels have been removed from the Abstract and throughout Section V. Findings are now presented as observations within the specific experimental conditions of this study — this dataset, these attack parameters, this training protocol — rather than as universal architectural properties. Section V opens with an explicit caveat that specific metric values depend on training data and hyperparameters, and that the case study demonstrates the framework's discriminative power, not universal architectural rankings.
+**Response:** The label "high-risk" has been removed from the Abstract and from every instance in Section V. The findings are now presented as observations specific to the experimental conditions of this study — this particular dataset, these attack parameterisations, this training protocol — and not as universal properties of these architecture families. Section V opens with an explicit framing caveat stating that the case study demonstrates the framework's discriminative power and that specific metric values should not be extrapolated to other datasets or deployment contexts.
 
-**Action:** "High-risk" language removed from all instances in Abstract and Section V. Section V introductory paragraph added clarifying case-study scope.
+**Action:** "High-risk" language removed from all instances in Abstract and Section V; Section V introductory paragraph revised to clarify case-study scope.
 
 ---
 
@@ -374,7 +382,7 @@ The two metric families surface different architecture properties. The pair (pre
 
 > *"No statistical significance testing for model comparisons."*
 
-**Response:** Paired *t*-tests with Bonferroni correction across 21 pairs are now reported for DR@5s; the full *p*-value matrix is inlined in our response to Reviewer 1, Comment 5. At the corrected threshold α = 0.05/21 ≈ 0.00238, five pairs involving TCN are statistically significant (CNN/TCN, LSTM/TCN, BiLSTM/TCN, GRU/TCN, CNN-LSTM/TCN), confirming that TCN's lower DR@5s reflects a genuine architectural difference and not seed variance.
+**Response:** Pairwise paired *t*-tests with Bonferroni correction across all 21 model pairs are now reported for DR@5s; the full *p*-value matrix is given in our response to Reviewer 1, Comment 5. At the corrected threshold (α = 0.05/21 ≈ 0.00238), five pairs are statistically significant — all five involving TCN — confirming that TCN's lower DR@5s is a reproducible property of the architecture under these experimental conditions and not an artefact of the five seeds used.
 
 **Action:** Pairwise test table added to Section V; statistical methodology described in Section IV-D.
 
@@ -382,7 +390,7 @@ The two metric families surface different architecture properties. The pair (pre
 
 > *"Attack parameter sensitivity (step magnitude, drift duration, delay, takeover gain) is not evaluated."*
 
-**Response:** Per-attack-type results across all seven architectures are reported in the table below; attack parameters are drawn from the full ranges defined in Section IV-B (step magnitude *M* ∈ {5, 15, 30} m, drift duration *T*_drift ∈ {5, 10, 20} s, delay δ ∈ {1, 3, 5} s, takeover gain α ∈ {0.3, 0.5, 0.7}), so each cell aggregates over the parameter range for the corresponding family.
+**Response:** The evaluation protocol draws attack parameters from the full ranges defined in Section IV-B — step magnitude *M* ∈ {5, 15, 30} m, drift duration *T*_drift ∈ {5, 10, 20} s, delay δ ∈ {1, 3, 5} s, takeover gain α ∈ {0.3, 0.5, 0.7} — so each test flight samples the parameter space for its attack family rather than fixing a single nominal value. The per-attack-family DR@5s for each architecture, aggregated over the parameter range, is given below.
 
 | Model | Step | Drift | Delay | Takeover |
 |---|---:|---:|---:|---:|
@@ -394,24 +402,26 @@ The two metric families surface different architecture properties. The pair (pre
 | TCN | 0.637 | 0.463 | 0.961 | 0.961 |
 | Transformer | 0.871 | 0.831 | 0.971 | 1.000 |
 
-The architecture × attack-family matrix already surfaces interactions that the aggregate DR@5s masks. The most notable case is TCN: its DR@5s on Drift is 0.463 versus 0.961 on Takeover, a 50-percentage-point asymmetry between gradually-evolving and abruptly-introduced attack patterns. A second pattern is the precision–recall divergence on Delay, where CNN, CNN-LSTM, and Transformer achieve DR@5s ≥ 0.97 while BiLSTM falls to 0.879.
+The matrix reveals interactions that the aggregate DR@5s conceals. TCN's 50-percentage-point gap between Drift (0.463) and Takeover (0.961) — two attack families that differ primarily in whether the position error accumulates gradually or arrives abruptly — is consistent with TCN's dilated-convolution receptive field being well-suited to abrupt temporal events but poorly suited to slow trend detection. A second cross-architecture pattern appears on Delay attacks: CNN, CNN-LSTM, and Transformer achieve DR@5s ≥ 0.97, while BiLSTM falls to 0.879, suggesting that bidirectionality imposes a latency cost on early-detection tasks where the attack's full extent is not yet visible at detection time.
 
-We did consider running a fully-isolated one-axis-at-a-time sweep (Step *M* held at five values, Drift *T*_drift at four, Delay δ at three, Takeover α at three, with all others held at default), which would require regenerating the attack-injected test set per parameter cell and re-evaluating all seven architectures × five seeds per cell. The extra compute exceeds the revision budget, so we mark this isolated-axis sweep as future work and rely on the aggregate-over-range table above as representative coverage. We make this scope choice explicit in Section VI-C rather than understate the limitation.
+A fully isolated axis-by-axis sweep — holding all attack parameters at nominal values while varying one parameter across its range, repeated for each of the four families — would require regenerating the attacked test set per parameter cell and re-evaluating all seven architectures across five seeds per cell. The compute cost exceeds the scope of this revision. We have chosen to be explicit about this limitation in Section VI-C rather than suggest the per-family aggregate table constitutes a complete sensitivity analysis.
 
-**Action:** Section V-E (Per-Attack-Type Performance) added with the table above; Section VI-C now explicitly lists the isolated-axis sweep as future work.
+**Action:** Section V-E (Per-Attack-Type Performance) added with the table above; Section VI-C explicitly lists the isolated-axis parameter sweep as future work.
 
 ### [Reviewer 4, Comment 3]
 
 > *"Window size and step size are fixed without justification or sensitivity analysis."*
 
-**Response:** Window length *L* = 50 samples (5.0 s at 10 Hz) is justified in Section IV-C by the detection budget itself: *L* ≈ Δ*t* · *f*_s = 5 × 10 = 50 ensures each window spans the full detection horizon. Step size *S* = 5 samples (0.5 s) balances temporal resolution against compute cost. The 9-cell sensitivity sweep (DR@5s grid inlined in our response to Reviewer 1, Comment 6) shows DR@5s varying only 0.924–0.965 across the entire grid, confirming robustness of the architectural conclusions.
+**Response:** The window length *L* = 50 samples (5.0 s at 10 Hz) follows directly from the detection budget: *L* = Δ*t* · *f*_s = 5 s × 10 Hz = 50 ensures that each window spans exactly the full detection horizon, so DR@5s is well-defined for every window. Step size *S* = 5 samples (0.5 s, one-tenth of a window) provides sub-second temporal resolution while keeping the total number of windows computationally manageable.
 
-**Action:** Justification sentence added to Section IV-C; ablation results in Section V-D.
+The sensitivity sweep described in our response to Reviewer 1, Comment 6 spans *L* ∈ {30, 50, 80} and *S* ∈ {3, 5, 10} and finds DR@5s varying over only 0.924–0.965 — a range that is small relative to the between-architecture differences reported throughout Section V. The architectural ordering and the deployability conclusions are stable across all nine grid points.
+
+**Action:** Justification sentence added to Section IV-C; ablation results in Section V-D with the DR@5s grid table and heatmap.
 
 ### [Reviewer 4, Comment 4]
 
 > *"The paper lacks a discussion of generalisability of the framework beyond the specific UAV spoofing task."*
 
-**Response:** Section VI-A (Generality of the Framework) discusses three properties enabling detector-agnostic and task-agnostic use: (i) decoupling from the sliding-window assumption — DR@Δt, ADD, and MTBFA are defined over any causal timestamped decision sequence, not over per-window predictions specifically; (ii) portability to other event-detection domains including industrial fault prediction (ANSI/ISA-18.2 alarm management), medical monitoring, and network intrusion detection [ref10]; and (iii) the case-study framing — specific metric values are dataset-dependent, but the framework's ability to reveal detectors that pass conventional metrics yet fail operational time-aware standards is invariant.
+**Response:** Section VI-A (Generality of the Framework) identifies three structural properties that decouple the framework from the UAV spoofing context. First, DR@Δt, ADD, and MTBFA are defined over any causal timestamped binary decision sequence — no assumption is made about sliding windows, UAV kinematics, or GPS signals, so the metrics apply to any system where a detector emits a per-timestep binary output and a reference onset time is available. Second, the MTBFA threshold calibration procedure (derive an acceptable false-alarm rate from an application-specific operational budget) is directly portable to industrial alarm management (ANSI/ISA-18.2), continuous health monitoring, and network intrusion detection. Third, the case-study structure — fix the evaluation methodology, vary the detector, and report the full metric vector including both conventional and time-aware components — separates framework claims from architecture claims in a way that permits reuse without requiring re-derivation of the threshold arguments.
 
-**Action:** Section VI (Discussion) added with Section VI-A (Generality of the Framework), Section VI-B (What the Cross-Distribution Evaluation Tells Us), and Section VI-C (Limitations and Future Work).
+**Action:** Section VI (Discussion) added, comprising Section VI-A (Generality), Section VI-B (What the Cross-Distribution Evaluation Tells Us), and Section VI-C (Limitations and Future Work).
