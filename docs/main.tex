@@ -1216,7 +1216,14 @@ sense to satisfy the operator workload budget.
 \paragraph{Validation-calibrated operating point.}
 To test whether the failure is fundamental or a calibration artefact, we
 re-evaluate every (architecture, seed) under a validation-set-calibrated
-decision threshold: for each model we sweep
+decision threshold. The procedure follows the classical ROC operating-point
+selection methodology~\cite{ref53}, adapted to a deployability constraint
+in the spirit of recent threshold-tuning practice for highly imbalanced and
+safety-critical classification~\cite{ref55}; because the underlying
+detector logits are not necessarily well-calibrated probabilities, the
+sweep also functions as a non-parametric probability-calibration step
+analogous to post-hoc calibration techniques~\cite{ref54}.
+For each model we sweep
 $p \in \{0.05,\,0.07,\,\ldots,\,0.99\}$, select the smallest $p^\star$ that
 yields MTBFA$(\text{val})\ge 0.10$\,h, and report DR@5\,s, MTBFA on the
 held-out test set under that $p^\star$.
@@ -1749,6 +1756,9 @@ network intrusion detection and industrial fault diagnosis.
 \bibitem{ref35} Z. Li, X. Wang, Y. Liu, and J. Zhang, "Real-time GNSS spoofing detection for small UAVs using transformer-based sequence modeling," \textit{IEEE Internet Things J.}, vol. 11, no. 8, pp. 13892--13905, Apr. 2024, doi: 10.1109/JIOT.2024.3365871.
 \bibitem{ref36} J. Humphreys, B. Ledvina, M. Psiaki, B. O'Hanlon, and P. Kintner, "Assessing the spoofing threat: Development of a portable GPS civilian spoofer," in \textit{Proc. ION GNSS}, Sep. 2008, pp. 2314--2325.
 \bibitem{ref38} "UAV Attack Dataset," IEEE DataPort, 2023. [Online]. Available: \texttt{https://ieee-dataport.org/open-access/uav-attack-dataset}, doi: 10.21227/00dg-0d12.
+\bibitem{ref53} T. Fawcett, "An introduction to ROC analysis," \textit{Pattern Recognit. Lett.}, vol. 27, no. 8, pp. 861--874, Jun. 2006, doi: 10.1016/j.patrec.2005.10.010.
+\bibitem{ref54} A. Niculescu-Mizil and R. Caruana, "Predicting good probabilities with supervised learning," in \textit{Proc. 22nd Int. Conf. Mach. Learn. (ICML)}, Bonn, Germany, Aug. 2005, pp. 625--632, doi: 10.1145/1102351.1102430.
+\bibitem{ref55} L. von Stackelberg, S. Boschert, and R. Knorr, "Comparison of threshold tuning methods for predictive monitoring," \textit{Qual. Reliab. Eng. Int.}, vol. 40, no. 5, pp. 2369--2390, Jul. 2024, doi: 10.1002/qre.3436.
 \EOD
 \end{thebibliography}
 
