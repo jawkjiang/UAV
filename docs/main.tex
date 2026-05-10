@@ -1641,9 +1641,11 @@ labelled real-attack data~\cite{ref52}.
 
 \textbf{Operating-point selection at deployment time.}
 \S\ref{sec:ablation} reports a validation-calibrated operating-point
-experiment showing that MTBFA $\ge 0.10$\,h is achievable for six of
-the seven architectures, but at architecture-dependent DR@5\,s costs
-ranging from $0.08$ (CNN-LSTM) to $0.43$ (Transformer).
+experiment showing that MTBFA $\ge 0.10$\,h is achievable for five of
+the seven architectures (CNN, BiLSTM, CNN-LSTM, TCN, Transformer),
+while LSTM and GRU remain borderline at the swept-threshold boundary;
+the calibration cost is paid in DR@5\,s, ranging from $0.08$ (CNN-LSTM)
+to $0.43$ (Transformer) across the five feasible architectures.
 The default decision threshold $p=0.5$ is therefore not deployable; any
 production use of these detectors requires a calibration step on a
 held-out validation set with operational FA budgets, and the cost of
