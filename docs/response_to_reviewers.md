@@ -188,19 +188,26 @@ DR@5s spans only 0.924–0.965 across the full grid — a range of roughly four 
 
 | Symbol | Meaning | Units |
 |---|---|---|
-| τ_k | onset time of the *k*-th ground-truth attack | s |
-| t_s | wall-clock timestamp of a sliding-window decision | s |
-| t_d | first detection time after τ_k | s |
-| Δt | detection-budget length (default 5 s) | s |
-| L | sliding-window length | samples |
-| S | sliding-window step | samples |
+| k | window index (decision step) | — |
+| τ_k | timestamp of the *k*-th window (end-point) | s |
+| t_s | attack onset time | s |
+| t_d | first detection time after t_s | s |
+| δ_k = t_d − t_s | detection delay | s |
+| Δt | detection time budget (default 5 s) | s |
+| L | window length (number of samples) | samples |
+| S | window stride (step size) | samples |
 | f_s | sensor sampling rate (10 Hz) | Hz |
-| K | number of ground-truth attacks in a flight | — |
-| N | total sliding windows on the test set | — |
-| F | number of false-positive **events** after rising-edge aggregation | — |
+| K | number of windows per flight | — |
+| N | total number of windows in a split | — |
+| F | feature dimensionality (state vector) | — |
+| ŷ_k ∈ {0,1} | binary detector decision at step k | — |
+| DR@Δt | detection rate at time budget Δt | — |
+| ADD | average detection delay | s |
 | MTBFA | mean time between false alarms | h |
 
-**Action:** The notation table is added to Section III.
+Note: the false-alarm event set is denoted **𝓕** (calligraphic F) in the algorithm (Section III-B), distinct from the scalar F used for feature dimensionality.
+
+**Action:** The notation table is added to Section III; all symbols are consistent with this table throughout the manuscript.
 
 ### [Reviewer 2, Comment 2]
 
