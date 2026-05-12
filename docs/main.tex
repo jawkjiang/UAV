@@ -85,14 +85,14 @@ speed matching can hurt.}
 CNN-LSTM, the in-distribution leader (DR@5\,s~$=0.96$), drops to
 $0.20$ on real Holybro\,S500 hardware, and matching the simulator's
 cruise speed to the target further degrades transfer
-(CNN: $0.96 \to 0.00$; CNN-LSTM: $0.92 \to 0.08$), so this is an
-insufficient sim-to-real remedy. We frame this as a zero-shot
-cross-distribution stress test rather than a matched-platform deployment
-validation: the real flights differ from the training distribution along
-airframe, cruise speed, sensor noise, and attack mechanism.
+(CNN: $0.96 \to 0.00$; CNN-LSTM: $0.92 \to 0.08$), so nominal
+platform-speed matching is an insufficient sim-to-real remedy. The
+real flights differ from the training distribution along airframe,
+cruise speed, sensor noise, and attack mechanism.
 Thresholds follow UAV power-line inspection risk constraints; code,
 dataset, and trained checkpoints are released for reproducibility.
 \end{abstract}
+
 
 \begin{keywords}
 UAV security, GPS spoofing detection, time-aware evaluation,
@@ -364,7 +364,7 @@ If the detector produces a sustained false alarm over a time interval, an operat
 
 \subsection{Time-Aware Evaluation Metrics}
 
-Based on the above event-based modeling, we adopt and operationalise three time-aware metrics capturing detection speed and false-alarm frequency. The metrics themselves build on prior event-aware evaluation literature (see \S\ref{sec:related_eval}); our contribution is their systematisation, time-budgeted instantiation, and mission-grounded threshold derivation, not the originality of any individual metric.
+Based on the above event-based modeling, we use three time-aware metrics capturing detection speed and false-alarm frequency, instantiated with explicit time budgets and mission-grounded deployability thresholds (see \S\ref{sec:related_eval} for positioning relative to prior evaluation frameworks).
 
 \subsubsection{Detection Rate at Time Threshold (DR@$\Delta t$)}
 
@@ -633,13 +633,6 @@ Test       & 600  & 229 (38\%) & 69\,636  \\
 The test-set flights are drawn from mission seeds, origin coordinates, and attack
 parameter ranges that are held out from training, providing mild out-of-distribution
 diversity within the simulated domain.
-
-\subsubsection{Augmentation policy}
-
-All training, validation, and test windows are drawn directly from the
-3\,000 MATLAB-simulated flights described in Table~\ref{tab:dataset}.
-No synthetic, generative, or oversampled data are used at any stage of
-training or evaluation.
 
 \subsection{Threat Model and Attack Injection}
 \label{sec:threat_model}
@@ -956,10 +949,6 @@ full CI bounds so practitioners can apply alternative thresholds.
 The following experiments demonstrate the framework's ability to reveal
 risk-identification gaps that conventional metrics miss across seven representative
 detector architectures.
-These results should be interpreted as evidence of the \emph{framework's
-discriminative power}, not as universal architectural recommendations:
-the specific metric values depend on the training data, hyperparameters,
-and spoofing environment.
 
 \subsection{Overall Performance: Traditional vs.\ Time-Aware Metrics}
 
@@ -1509,15 +1498,6 @@ The implication for deployment is that simulator-trained detectors should
 either be calibrated for higher operating thresholds or fine-tuned on a
 small real-flight calibration set before deployment---a recommendation we
 discuss further in \S\ref{sec:limitations}.
-
-\textbf{Scope of the claim.}
-We emphasise that this is a \emph{cross-distribution} rather than a strict
-\emph{sim-to-real} evaluation: the three cross-distribution sources differ
-from the training distribution along multiple axes (vehicle airframe,
-nominal cruise speed, sensor noise statistics, and---for IEEE DataPort
-spoofing---attack mechanism). We design a controlled comparison in
-\S\ref{sec:alfa-controlled} to disentangle the platform-mismatch contribution
-from the broader sim-to-real gap.
 
 \subsection{Controlled Platform-Matching Experiment}
 \label{sec:alfa-controlled}
