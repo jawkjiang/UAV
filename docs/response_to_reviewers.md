@@ -300,7 +300,7 @@ Training hyperparameters: Adam optimizer (lr = 1×10⁻³, β = (0.9, 0.999)), b
 
 **Response:** The reviewer's characterisation is accurate. Real GNSS receivers exhibit multipath interference, ionospheric delay, and clock drift — none of which the MATLAB sensor model reproduces. The cross-distribution evaluation in Section V-G and the noise-statistic comparison table in our response to Reviewer 1, Comment 3 address both the empirical question (how do the architectures perform on real data?) and the distributional question (how different are the noise processes?). The headline numbers: the simulation innovation process is near-Gaussian (excess kurtosis = -0.03), the live HackRF receiver produces innovations with excess kurtosis +12.21, and the ALFA raw-GPS channel sits at -0.94. The evaluation is framed throughout as a zero-shot cross-distribution stress test, and Section VI-C documents the sensor-model fidelity gap as an explicit limitation, citing these kurtosis figures.
 
-**Action:** See response to Reviewer 1, Comment 3. Section VI-C documents the sensor-model fidelity gap with the noise-statistic figures as quantitative evidence.
+**Action:** See response to Reviewer 1, Comment 3. A compact noise-statistics table (Table tab:noise_stats) is now added to Section VI-C (Simulator sensor model paragraph) of the revised manuscript, reporting σ_xy, σ_v, excess kurtosis, and p99 step jump for the MATLAB simulation, IEEE DataPort live, and ALFA data sources. Section VI-C cites the quantitative kurtosis figures as evidence of the sim-to-real gap.
 
 ### [Reviewer 3, Comment 3]
 

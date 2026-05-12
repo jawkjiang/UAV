@@ -1725,7 +1725,44 @@ generalization.
 \textbf{Simulator sensor model.}
 The MATLAB GPS sensor model uses additive Gaussian white noise and does
 not include multipath propagation, ionospheric delay, or receiver clock
-drift. The cross-distribution gap in \S\ref{sec:cross_domain} is consistent
+drift.
+Table~\ref{tab:noise_stats} quantifies the distributional gap between the
+simulated training domain and the two real-world evaluation sources using
+statistics computed on normal-flight segments: per-axis standard deviation
+of the position channel ($\sigma_{xy}$), per-axis velocity standard deviation
+($\sigma_v$), excess kurtosis of the position innovation, and the
+99th-percentile single-step position jump.
+
+\begin{table}[!t]
+\caption{Sensor-noise statistics for normal-flight segments across three
+data sources. Statistics computed from second-order position differences
+(innovation).}
+\label{tab:noise_stats}
+\centering
+\small
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Source} & $\boldsymbol{\sigma}_{xy}$\,\textbf{(m)} &
+$\boldsymbol{\sigma}_v$\,\textbf{(m/s)} &
+\textbf{Kurtosis} & \textbf{p99 step (m)} \\
+\midrule
+MATLAB sim (test, normal) & 3.67 & 1.52 & $-$0.03 & 11.0 \\
+IEEE DataPort live (Holybro S500) & 0.007 & 0.04 & $+$12.21 & 0.04 \\
+ALFA (Carbon-Z, raw GPS) & 2.76 & 0.42 & $-$0.94 & 6.0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The MATLAB sensor model is Gaussian by design (excess kurtosis $= -0.03$),
+producing the smooth innovation sequence that all seven detectors were
+trained to classify. The IEEE DataPort live receiver, read from the
+EKF-fused \texttt{vehicle\_local\_position} topic, has a tighter per-step
+$\sigma_{xy}$ but excess kurtosis of $+12.21$---heavy non-Gaussian tails
+produced by multipath bursts and clock-step events that the EKF cannot
+smooth out. The ALFA raw-GPS channel sits closer to the simulation in
+$\sigma_{xy}$ but is slightly sub-Gaussian (kurtosis $= -0.94$), reflecting
+the fixed-wing platform's smoother flight dynamics.
+The cross-distribution gap in \S\ref{sec:cross_domain} is consistent
 with the hypothesis that real GPS-noise structure is a major confound,
 but disentangling sensor-model effects from the other cross-distribution
 axes would require a sensor-realistic simulator we do not have.
