@@ -636,19 +636,10 @@ diversity within the simulated domain.
 
 \subsubsection{Augmentation policy}
 
-\textbf{No synthetic augmentation is used in the reported experiments.}
 All training, validation, and test windows are drawn directly from the
-3\,000 MATLAB-simulated flights described in Table~\ref{tab:dataset}, with
-no synthetic, generative, or oversampled data added at any stage.
-The released codebase does include an optional TimeGAN-based augmentation
-script~\cite{ref23} for follow-on work that may need additional training
-data; if used, it is structurally restricted to the training split by a
-runtime assertion that raises an error when any augmented flight ID
-appears in the validation or test splits, so the evaluation splits
-remain isolated from all synthetic data. We emphasise that this
-safeguard is moot for the present results---the reported numbers come
-exclusively from unaugmented MATLAB simulation flights---but is included
-for downstream users who may extend the pipeline.
+3\,000 MATLAB-simulated flights described in Table~\ref{tab:dataset}.
+No synthetic, generative, or oversampled data are used at any stage of
+training or evaluation.
 
 \subsection{Threat Model and Attack Injection}
 \label{sec:threat_model}
@@ -1859,7 +1850,6 @@ network intrusion detection and industrial fault diagnosis.
 \bibitem{ref19} G. Michieletto, F. Formaggio, A. Cenedese, and S. Tomasin, "Robust localization for secure navigation of UAV formations under GNSS spoofing attack," \textit{IEEE Trans. Autom. Sci. Eng.}, vol. 20, no. 4, pp. 2383-2396, Oct. 2023, doi: 10.1109/TASE.2022.3208662.
 \bibitem{ref20} L. Wang, L. Chen, B. Li, Z. Liu, Z. Li, and Z. Lu, "Development status and challenges of anti-spoofing technology of GNSS/INS integrated navigation," \textit{Front. Phys.}, vol. 12, p. 1425084, Oct. 2024, doi: 10.3389/fphy.2024.1425084.
 \bibitem{ref21} A. Iqbal, M. N. Aman, and B. Sikdar, "A deep learning based induced GNSS spoof detection framework," \textit{IEEE Trans. Mach. Learn. Commun. Netw.}, vol. 2, pp. 457-478, 2024, doi: 10.1109/TMLCN.2024.3386649.
-\bibitem{ref23} J. Yoon, D. Jarrett, and M. van der Schaar, "Time-series generative adversarial networks," in \textit{Adv. Neural Inf. Process. Syst. (NeurIPS)}, Vancouver, Canada, Dec. 2019, pp. 5508--5518. [Online]. Available: https://papers.nips.cc/paper/2019/hash/c9efe5f26cd17ba6216bbe2a7d26d490-Abstract.html
 \bibitem{ref24} A. J. Kerns, D. P. Shepard, J. A. Bhatti, and T. E. Humphreys, "Unmanned aircraft capture and control via GPS spoofing," \textit{J. Field Robot.}, vol. 31, no. 4, pp. 617-636, Jul. 2014, doi: 10.1002/rob.21513.
 \bibitem{ref25} M. Spanghero and P. Papadimitratos, "Time-based GNSS attack detection," \textit{IEEE Trans. Aerosp. Electron. Syst.}, vol. 61, no. 3, pp. 5594-5610, Jun. 2025, doi: 10.1109/TAES.2024.3516708.
 \bibitem{ref26} H. Sathaye, G. LaMountain, P. Closas, and A. Ranganathan, "SemperFi: Anti-spoofing GPS receiver for UAVs," in \textit{Proceedings 2022 Network and Distributed System Security Symposium}, San Diego, CA, USA: Internet Society, 2022. doi: 10.14722/ndss.2022.23071.
