@@ -270,13 +270,13 @@ The combination of explicit time-budgeted DR@Δt, causal first-detection semanti
 
 | Model | Architecture | Hidden dim / Filters | Layers | Approx. parameters |
 |---|---|---:|---:|---:|
-| CNN | 1D conv stack | 64 | 3 conv + 2 FC | 47k |
-| LSTM | unidirectional LSTM | 128 | 2 | 142k |
-| BiLSTM | bidirectional LSTM | 128 | 2 | 280k |
-| GRU | unidirectional GRU | 128 | 2 | 108k |
-| CNN-LSTM | conv front-end + LSTM | 64 conv / 128 LSTM | 2 conv + 2 LSTM | 175k |
-| TCN | dilated temporal conv | 64 | 4 (dilations 1,2,4,8) | 95k |
-| Transformer | encoder-only | 128 (d_model) / 4 heads | 4 encoder | 220k |
+| CNN | 1D conv stack | 64 filters | 3 conv + 2 FC | 262k |
+| LSTM | unidirectional LSTM | 128 | 2 | 214k |
+| BiLSTM | bidirectional LSTM | 128 | 2 | 148k |
+| GRU | unidirectional GRU | 128 | 2 | 163k |
+| CNN-LSTM | conv front-end + LSTM | 64 conv / 128 LSTM | 2 conv + 2 LSTM | 301k |
+| TCN | dilated temporal conv | 64 | 4 (dilations 1,2,4,8) | 77k |
+| Transformer | encoder-only | 128 (d_model) / 4 heads | 4 encoder | 103k |
 
 Training hyperparameters: Adam optimizer (lr = 1×10⁻³, β = (0.9, 0.999)), batch size 64, binary cross-entropy loss with positive-class weighting, early stopping on validation F1 with patience 10, five random seeds (0–4) per architecture.
 
