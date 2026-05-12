@@ -764,6 +764,13 @@ K = \left\lfloor\frac{M-L}{S}\right\rfloor + 1.
 \end{equation}
 
 Window configuration is summarized in Table~\ref{tab:window-config}.
+The window length $L=50$ samples is chosen because one window must span the
+DR@5\,s detection budget at the simulation rate $f_s = 10$\,Hz, that is,
+$L = \Delta t \cdot f_s = 5\,\text{s} \times 10\,\text{Hz} = 50$ samples.
+The step size $S=5$ samples preserves $90\%$ overlap between successive windows,
+so the detector issues a fresh decision every $0.5$\,s.
+The sensitivity of the framework's conclusions to the choice of $(L, S)$ is
+reported in \S\ref{sec:ablation}.
 
 \begin{table}[!t]
 \caption{Window configuration.}
@@ -1010,6 +1017,30 @@ The paradox is illustrated in Fig.~\ref{fig:precision-mtbfa-paradox}.
 \includegraphics[width=\columnwidth]{fig_b3_precision_mtbfa_paradox.pdf}
 \caption{Illustration of the precision--MTBFA paradox caused by temporal aggregation effects.}
 \label{fig:precision-mtbfa-paradox}
+\end{figure}
+
+The aggregation effect is visible across every architecture in our case study.
+Fig.~\ref{fig:fp-windows-vs-events} contrasts the raw count of false-positive
+windows against the count of aggregated false-alarm events for each detector on
+the test split. All seven detectors collapse roughly $4$--$7$ consecutive
+false-positive windows into a single operational alarm event. The empirical
+aggregation ratio (windows per event) is $4.19$ for CNN, $5.02$ for CNN-LSTM,
+$5.72$ for GRU, $6.34$ for LSTM, $6.35$ for BiLSTM, $6.48$ for Transformer, and
+$6.87$ for TCN. These per-architecture ratios reveal why window-level precision
+is a poor proxy for the alarm rate that an operator actually experiences.
+The two extremes illustrate this point concretely: TCN produces the fewest raw
+false-positive windows ($\approx 1131$), yet its false positives are the most
+temporally clustered, whereas Transformer produces the most raw false-positive
+windows ($\approx 3725$), and these are dispersed into the largest number of
+distinct events. Two detectors with similar precision can therefore differ by
+an order of magnitude in MTBFA, depending on how their false positives
+distribute over time.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{fig_b4_fp_windows_vs_events.pdf}
+\caption{Raw false-positive windows versus aggregated false-alarm events for each detector. Every architecture collapses 4--7 consecutive false-positive windows into a single operational alarm; the ratio is detector-specific and uncorrelated with precision.}
+\label{fig:fp-windows-vs-events}
 \end{figure}
 
 Overall, the models that score highest on both DR@5s and MTBFA represent the best
