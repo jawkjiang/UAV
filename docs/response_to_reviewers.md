@@ -234,18 +234,18 @@ This aggregation creates the precision–MTBFA divergence illustrated in the tab
 
 > *"The relationship between the proposed metrics and existing anomaly detection evaluation frameworks (Tatbul, NAB) is not discussed."*
 
-**Response:** Section III-D (*Positioning Relative to Prior Work*) now provides a direct comparison on four axes. Tatbul et al.'s range-based metrics operate offline and carry no user-specified time budget. The Numenta Anomaly Benchmark uses a fixed scoring profile and likewise does not expose a deployment-derived threshold. Classical IDS false-alarm metrics report a fractional false-positive rate rather than a time-between-event measure. Our framework differs on each of these axes.
+**Response:** Section III-D (*Relation to Prior Time-Series Evaluation Frameworks*) now provides a direct comparison on four axes (causality, event aggregation, explicit time-budgeted DR@Δt, and deployment semantics). Tatbul et al.'s range-based metrics operate post-hoc and carry no user-specified time budget. The Numenta Anomaly Benchmark (Lavin & Ahmad 2015) uses a window-weighted reward profile that is causal but does not expose the time-to-first-detection as an interpretable parameter. Classical IDS false-alarm metrics (Axelsson 2000) report a fractional FPR rather than a time-between-event measure. Our framework differs on each of these axes, as summarised in Table 2 of the revised manuscript.
 
-| Axis | Tatbul et al. (range-based) | NAB | Classical IDS (FPR) | **This work** |
+| Framework | Causality | Event agg. | DR@Δt | Deploy. sem. |
 |---|---|---|---|---|
-| Causality at the metric level | offline (windowed) | offline (windowed) | offline | **causal first-detection only** |
-| User-specified time budget | none | scoring profile (fixed) | none | **explicit Δt parameter** |
-| False-alarm metric | range-based FP | weighted score | fractional FPR | **MTBFA in operational time units** |
-| Threshold derivation | not addressed | not addressed | not addressed | **deployment-grounded (GB 26860, ISO 11064-5)** |
+| Tatbul et al. (range-based) | post-hoc | segment-level | no | no |
+| NAB Score | reward-shaping | window-weighted | no | no |
+| Classical IDS (FPR) | online | none | no | partial |
+| **This work** | **online** | **FP events** | **yes** | **risk-based** |
 
 The combination of explicit time-budgeted DR@Δt, causal first-detection semantics, event-level MTBFA calibrated in operational hours, and deployment-grounded threshold derivation is, to our knowledge, not present in any prior evaluation framework for time-series anomaly detection.
 
-**Action:** Section III-D (Positioning Relative to Prior Work) added; the four-axis comparison table is reproduced verbatim in the manuscript.
+**Action:** Section III-D (*Relation to Prior Time-Series Evaluation Frameworks*) revised; the four-axis comparison table appears as Table 2 in the manuscript. NAB cited as ref57 (Lavin & Ahmad, ICMLA 2015).
 
 ### [Reviewer 2, Comment 4]
 

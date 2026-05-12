@@ -498,21 +498,58 @@ We adopt sliding windows primarily for deep-model compatibility, since fixed-len
 
 As long as an instantiation produces a causal timestamped decision sequence, it can be evaluated under the proposed time-aware framework.
 
-\subsection{Positioning Relative to Prior Work}
-\label{sec:positioning}
+\subsection{Relation to Prior Time-Series Evaluation Frameworks}
+\label{sec:related_eval}
 
-The three metrics adopted here build directly on prior work and are not
-individually novel. Tatbul \emph{et al.}'s range-based time-series
-metrics~\cite{ref18} introduce event-level scoring for time-series anomaly
-detection but operate offline and do not expose a user-specified time
-budget for first-detection recall.
-Classical IDS evaluation literature (e.g., Axelsson~\cite{ref10}; Sommer
-and Paxson~\cite{ref11}) emphasises the operational consequences of
-false-alarm rates but reports fractional FPR rather than time-between-
-event measures aligned with operator workload.
-Our contribution in this paper is therefore not the originality of any
-single metric, but the systematisation of (i)~explicit time-budgeted
-detection-rate (DR@$\Delta t$) with first-detection causality;
+Several evaluation frameworks for time-series anomaly detection have been proposed;
+Table~\ref{tab:eval_comparison} positions our work on four axes on which our contributions are distinct.
+
+\begin{table}[!t]
+\caption{Comparison of time-series evaluation frameworks.
+\emph{Causality}: metric computed without future information;
+\emph{Event agg.}: consecutive abnormal windows aggregated into events;
+\emph{DR@$\Delta t$}: explicit time-budgeted detection rate;
+\emph{Deploy. sem.}: thresholds grounded in physical operating constraints.}
+\label{tab:eval_comparison}
+\centering
+\small
+\begin{tabular}{lcccc}
+\hline
+\textbf{Framework} & \textbf{Causality} & \textbf{Event agg.} & \textbf{DR@$\Delta t$} & \textbf{Deploy.\ sem.} \\
+\hline
+Tatbul et al.\ \cite{ref18}    & post-hoc      & segment-level   & \texttimes & \texttimes \\
+NAB Score~\cite{ref57}         & reward-shaping & window-weighted & \texttimes & \texttimes \\
+Classical IDS~\cite{ref10}     & online        & \texttimes      & \texttimes & partial \\
+\textbf{This work}             & \textbf{online} & \textbf{FP events} & \textbf{\checkmark} & \textbf{risk-based} \\
+\hline
+\end{tabular}
+\end{table}
+
+\textbf{Tatbul et al.'s range-based metrics}~\cite{ref18} score anomaly
+\emph{segments} against predicted ranges in a post-hoc, offline manner,
+rewarding any detection within a labelled anomaly range equally regardless
+of when the first detection occurs.
+Our DR@$\Delta t$ instead scores only the \emph{first detection event}
+within a specified time budget, enforcing causality and response-time
+accountability.
+
+\textbf{The Numenta Anomaly Benchmark (NAB) score}~\cite{ref57}
+applies a window-weighted reward that discounts late detections and
+penalises false positives via score penalties. While NAB is causal, it
+does not expose the time-to-first-detection as an interpretable parameter,
+making it difficult to translate a score into a concrete operational
+response-time budget.
+
+\textbf{Classical IDS false-alarm metrics} (FAR, FPR) quantify false
+positives as a fraction of normal-class windows~\cite{ref10}. These metrics
+treat each window as independent and therefore count the same persistent
+alarm multiple times. Our MTBFA instead aggregates consecutive
+false-positive windows into a single event and expresses the rate in
+operational time (hours), a unit directly interpretable by flight operators.
+
+Our contribution is therefore the systematisation of
+(i)~explicit time-budgeted detection-rate (DR@$\Delta t$) with
+first-detection causality;
 (ii)~event-level false-alarm aggregation expressed in operational time
 units (MTBFA);
 (iii)~deployment-grounded threshold derivation tied to mission-specific
@@ -1814,6 +1851,7 @@ network intrusion detection and industrial fault diagnosis.
 \bibitem{ref54} A. Niculescu-Mizil and R. Caruana, "Predicting good probabilities with supervised learning," in \textit{Proc. 22nd Int. Conf. Mach. Learn. (ICML)}, Bonn, Germany, Aug. 2005, pp. 625--632, doi: 10.1145/1102351.1102430.
 \bibitem{ref55} L. von Stackelberg, S. Boschert, and R. Knorr, "Comparison of threshold tuning methods for predictive monitoring," \textit{Qual. Reliab. Eng. Int.}, vol. 40, no. 5, pp. 2369--2390, Jul. 2024, doi: 10.1002/qre.3436.
 \bibitem{ref56} \textit{Management of Alarm Systems for the Process Industries}, ANSI/ISA-18.2-2016, International Society of Automation, Research Triangle Park, NC, USA, 2016. [Online]. Available: \texttt{https://www.isa.org/products/ansi-isa-18-2-2016-management-of-alarm-systems-for}
+\bibitem{ref57} A. Lavin and S. Ahmad, "Evaluating real-time anomaly detection algorithms: the Numenta Anomaly Benchmark," in \textit{Proc. 14th IEEE Int. Conf. Mach. Learn. Appl. (ICMLA)}, Miami, FL, USA, Dec. 2015, pp. 38--44, doi: 10.1109/ICMLA.2015.141.
 \EOD
 \end{thebibliography}
 
