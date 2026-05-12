@@ -221,10 +221,10 @@ The worked example below uses a 30-window normal segment.
 
 ```
 window:  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30
-predict: 0 1 1 1 0 0 1 1 0 0  1  0  0  0  0  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0
+predict: 0 1 1 0 0 0 1 0 0 0  0  0  0  0  0  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0
 ```
 
-Nine windows are positive, but there are only three rising-edge transitions (at windows 2, 7, and 16 — note that window 11 begins a run that returns to zero before the next run starts). The window-level FPR is 9/30 = 30%; the event count is 3.
+Nine windows are positive (windows 2–3, window 7, and windows 16–21), but there are only three rising-edge transitions (at windows 2, 7, and 16). The window-level FPR is 9/30 = 30%; the event count is 3.
 
 This aggregation creates the precision–MTBFA divergence illustrated in the table and figure below: a detector that fires many brief alarms may carry higher window-level precision than one that fires fewer, longer alarms, yet the briefer-alarm detector imposes *more* operator workload because workload scales with event count, not window count.
 
