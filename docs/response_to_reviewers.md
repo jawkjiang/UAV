@@ -11,7 +11,7 @@ We thank the Associate Editor and all four reviewers for their thorough and cons
 
 ## Summary of major changes
 
-1. **Experimental foundation rebuilt.** The PX4 SITL dataset (209 flights; TimeGAN augmentation applied before splitting, contaminating the test partition) is replaced by 3,000 MATLAB UAV Toolbox flights generated at 5 m/s cruise (1,800 train / 600 val / 600 test; 229 attacked per split). TimeGAN augmentation is now restricted to the training split; a runtime assertion in the data loader enforces strict isolation of the validation and test partitions from any synthetic flight identifier.
+1. **Experimental foundation rebuilt.** The PX4 SITL dataset (209 flights; TimeGAN augmentation applied before splitting, contaminating the test partition) is replaced by 3,000 MATLAB UAV Toolbox flights generated at 5 m/s cruise (1,800 train / 600 val / 600 test; 739 / 237 / 229 attacked per split; 352,387 total sliding windows). TimeGAN exists only as an optional, non-default code module restricted to the training split via runtime assertion; all reported experiments use no synthetic augmentation.
 2. **Zero-shot real-world evaluation added.** All seven MATLAB-trained checkpoints are evaluated without fine-tuning on the IEEE DataPort UAV Attack Dataset (Holybro S500 under live HackRF spoofing; four PX4-SITL airframes) and on the ALFA Carbon-Z fixed-wing dataset.
 3. **Bootstrap confidence intervals and paired significance tests throughout.** Every table column reports mean ± 95% CI over five independent seeds (1,000-iteration percentile bootstrap); pairwise paired *t*-tests with Bonferroni correction are reported for DR@5s.
 4. **Window and step ablation added.** *L* ∈ {30, 50, 80} samples × *S* ∈ {3, 5, 10} samples on GRU; per-attack-type DR@5s for all seven architectures also reported.
@@ -55,12 +55,12 @@ All metrics reported in the revised manuscript derive exclusively from the 600 c
 
 **Response:** The new test set contains 229 attacked flights — more than 13 times the original count. Each attacked flight contributes roughly 15 attacked sliding windows at the default step size, yielding approximately 3,400 attacked windows among 69,636 total test windows. The complete split is as follows.
 
-| Split | Flights | Attacked flights | Attack windows | Total sliding windows |
-|---|---:|---:|---:|---:|
-| Train | 1,800 | 687 | ≈10,200 | 208,908 |
-| Val | 600 | 229 | ≈3,400 | 69,636 |
-| Test | 600 | 229 | ≈3,400 | 69,636 |
-| **Total** | **3,000** | **1,145** | **≈17,000** | **348,180** |
+| Split | Flights | Attacked flights | Total sliding windows |
+|---|---:|---:|---:|
+| Train | 1,800 | 739 (41%) | 212,758 |
+| Val | 600 | 237 (40%) | 69,993 |
+| Test | 600 | 229 (38%) | 69,636 |
+| **Total** | **3,000** | **1,205 (40%)** | **352,387** |
 
 All metrics are reported as mean ± 95% CI over five independent random seeds (1,000-iteration percentile bootstrap). The pairwise paired *t*-tests with Bonferroni correction reported in our response to Reviewer 1, Comment 5 confirm that the per-architecture differences are statistically distinguishable from seed noise.
 
