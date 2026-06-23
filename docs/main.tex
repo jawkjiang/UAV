@@ -85,14 +85,14 @@ speed matching can hurt.}
 CNN-LSTM, the in-distribution leader (DR@5\,s~$=0.96$), drops to
 $0.20$ on real Holybro\,S500 hardware, and matching the simulator's
 cruise speed to the target further degrades transfer
-(CNN: $0.96 \to 0.00$; CNN-LSTM: $0.92 \to 0.08$), so this is an
-insufficient sim-to-real remedy. We frame this as a zero-shot
-cross-distribution stress test rather than a matched-platform deployment
-validation: the real flights differ from the training distribution along
-airframe, cruise speed, sensor noise, and attack mechanism.
+(CNN: $0.96 \to 0.00$; CNN-LSTM: $0.92 \to 0.08$), so nominal
+platform-speed matching is an insufficient sim-to-real remedy. The
+real flights differ from the training distribution along airframe,
+cruise speed, sensor noise, and attack mechanism.
 Thresholds follow UAV power-line inspection risk constraints; code,
 dataset, and trained checkpoints are released for reproducibility.
 \end{abstract}
+
 
 \begin{keywords}
 UAV security, GPS spoofing detection, time-aware evaluation,
@@ -364,7 +364,7 @@ If the detector produces a sustained false alarm over a time interval, an operat
 
 \subsection{Time-Aware Evaluation Metrics}
 
-Based on the above event-based modeling, we adopt and operationalise three time-aware metrics capturing detection speed and false-alarm frequency. The metrics themselves build on prior event-aware evaluation literature (see \S\ref{sec:positioning}); our contribution is their systematisation, time-budgeted instantiation, and mission-grounded threshold derivation, not the originality of any individual metric.
+Based on the above event-based modeling, we use three time-aware metrics capturing detection speed and false-alarm frequency, instantiated with explicit time budgets and mission-grounded deployability thresholds (see \S\ref{sec:related_eval} for positioning relative to prior evaluation frameworks).
 
 \subsubsection{Detection Rate at Time Threshold (DR@$\Delta t$)}
 
@@ -498,21 +498,58 @@ We adopt sliding windows primarily for deep-model compatibility, since fixed-len
 
 As long as an instantiation produces a causal timestamped decision sequence, it can be evaluated under the proposed time-aware framework.
 
-\subsection{Positioning Relative to Prior Work}
-\label{sec:positioning}
+\subsection{Relation to Prior Time-Series Evaluation Frameworks}
+\label{sec:related_eval}
 
-The three metrics adopted here build directly on prior work and are not
-individually novel. Tatbul \emph{et al.}'s range-based time-series
-metrics~\cite{ref18} introduce event-level scoring for time-series anomaly
-detection but operate offline and do not expose a user-specified time
-budget for first-detection recall.
-Classical IDS evaluation literature (e.g., Axelsson~\cite{ref10}; Sommer
-and Paxson~\cite{ref11}) emphasises the operational consequences of
-false-alarm rates but reports fractional FPR rather than time-between-
-event measures aligned with operator workload.
-Our contribution in this paper is therefore not the originality of any
-single metric, but the systematisation of (i)~explicit time-budgeted
-detection-rate (DR@$\Delta t$) with first-detection causality;
+Several evaluation frameworks for time-series anomaly detection have been proposed;
+Table~\ref{tab:eval_comparison} positions our work on four axes on which our contributions are distinct.
+
+\begin{table}[!t]
+\caption{Comparison of time-series evaluation frameworks.
+\emph{Causality}: metric computed without future information;
+\emph{Event agg.}: consecutive abnormal windows aggregated into events;
+\emph{DR@$\Delta t$}: explicit time-budgeted detection rate;
+\emph{Deploy. sem.}: thresholds grounded in physical operating constraints.}
+\label{tab:eval_comparison}
+\centering
+\small
+\begin{tabular}{lcccc}
+\hline
+\textbf{Framework} & \textbf{Causality} & \textbf{Event agg.} & \textbf{DR@$\Delta t$} & \textbf{Deploy.\ sem.} \\
+\hline
+Tatbul et al.\ \cite{ref18}    & post-hoc      & segment-level   & \texttimes & \texttimes \\
+NAB Score~\cite{ref57}         & reward-shaping & window-weighted & \texttimes & \texttimes \\
+Classical IDS~\cite{ref10}     & online        & \texttimes      & \texttimes & partial \\
+\textbf{This work}             & \textbf{online} & \textbf{FP events} & \textbf{\checkmark} & \textbf{risk-based} \\
+\hline
+\end{tabular}
+\end{table}
+
+\textbf{Tatbul et al.'s range-based metrics}~\cite{ref18} score anomaly
+\emph{segments} against predicted ranges in a post-hoc, offline manner,
+rewarding any detection within a labelled anomaly range equally regardless
+of when the first detection occurs.
+Our DR@$\Delta t$ instead scores only the \emph{first detection event}
+within a specified time budget, enforcing causality and response-time
+accountability.
+
+\textbf{The Numenta Anomaly Benchmark (NAB) score}~\cite{ref57}
+applies a window-weighted reward that discounts late detections and
+penalises false positives via score penalties. While NAB is causal, it
+does not expose the time-to-first-detection as an interpretable parameter,
+making it difficult to translate a score into a concrete operational
+response-time budget.
+
+\textbf{Classical IDS false-alarm metrics} (FAR, FPR) quantify false
+positives as a fraction of normal-class windows~\cite{ref10}. These metrics
+treat each window as independent and therefore count the same persistent
+alarm multiple times. Our MTBFA instead aggregates consecutive
+false-positive windows into a single event and expresses the rate in
+operational time (hours), a unit directly interpretable by flight operators.
+
+Our contribution is therefore the systematisation of
+(i)~explicit time-budgeted detection-rate (DR@$\Delta t$) with
+first-detection causality;
 (ii)~event-level false-alarm aggregation expressed in operational time
 units (MTBFA);
 (iii)~deployment-grounded threshold derivation tied to mission-specific
@@ -596,22 +633,6 @@ Test       & 600  & 229 (38\%) & 69\,636  \\
 The test-set flights are drawn from mission seeds, origin coordinates, and attack
 parameter ranges that are held out from training, providing mild out-of-distribution
 diversity within the simulated domain.
-
-\subsubsection{Augmentation policy}
-
-\textbf{No synthetic augmentation is used in the reported experiments.}
-All training, validation, and test windows are drawn directly from the
-3\,000 MATLAB-simulated flights described in Table~\ref{tab:dataset}, with
-no synthetic, generative, or oversampled data added at any stage.
-The released codebase does include an optional TimeGAN-based augmentation
-script~\cite{ref23} for follow-on work that may need additional training
-data; if used, it is structurally restricted to the training split by a
-runtime assertion that raises an error when any augmented flight ID
-appears in the validation or test splits, so the evaluation splits
-remain isolated from all synthetic data. We emphasise that this
-safeguard is moot for the present results---the reported numbers come
-exclusively from unaugmented MATLAB simulation flights---but is included
-for downstream users who may extend the pipeline.
 
 \subsection{Threat Model and Attack Injection}
 \label{sec:threat_model}
@@ -764,6 +785,13 @@ K = \left\lfloor\frac{M-L}{S}\right\rfloor + 1.
 \end{equation}
 
 Window configuration is summarized in Table~\ref{tab:window-config}.
+The window length $L=50$ samples is chosen because one window must span the
+DR@5\,s detection budget at the simulation rate $f_s = 10$\,Hz, that is,
+$L = \Delta t \cdot f_s = 5\,\text{s} \times 10\,\text{Hz} = 50$ samples.
+The step size $S=5$ samples preserves $90\%$ overlap between successive windows,
+so the detector issues a fresh decision every $0.5$\,s.
+The sensitivity of the framework's conclusions to the choice of $(L, S)$ is
+reported in \S\ref{sec:ablation}.
 
 \begin{table}[!t]
 \caption{Window configuration.}
@@ -921,10 +949,6 @@ full CI bounds so practitioners can apply alternative thresholds.
 The following experiments demonstrate the framework's ability to reveal
 risk-identification gaps that conventional metrics miss across seven representative
 detector architectures.
-These results should be interpreted as evidence of the \emph{framework's
-discriminative power}, not as universal architectural recommendations:
-the specific metric values depend on the training data, hyperparameters,
-and spoofing environment.
 
 \subsection{Overall Performance: Traditional vs.\ Time-Aware Metrics}
 
@@ -1010,6 +1034,30 @@ The paradox is illustrated in Fig.~\ref{fig:precision-mtbfa-paradox}.
 \includegraphics[width=\columnwidth]{fig_b3_precision_mtbfa_paradox.pdf}
 \caption{Illustration of the precision--MTBFA paradox caused by temporal aggregation effects.}
 \label{fig:precision-mtbfa-paradox}
+\end{figure}
+
+The aggregation effect is visible across every architecture in our case study.
+Fig.~\ref{fig:fp-windows-vs-events} contrasts the raw count of false-positive
+windows against the count of aggregated false-alarm events for each detector on
+the test split. All seven detectors collapse roughly $4$--$7$ consecutive
+false-positive windows into a single operational alarm event. The empirical
+aggregation ratio (windows per event) is $4.19$ for CNN, $5.02$ for CNN-LSTM,
+$5.72$ for GRU, $6.34$ for LSTM, $6.35$ for BiLSTM, $6.48$ for Transformer, and
+$6.87$ for TCN. These per-architecture ratios reveal why window-level precision
+is a poor proxy for the alarm rate that an operator actually experiences.
+The two extremes illustrate this point concretely: TCN produces the fewest raw
+false-positive windows ($\approx 1131$), yet its false positives are the most
+temporally clustered, whereas Transformer produces the most raw false-positive
+windows ($\approx 3725$), and these are dispersed into the largest number of
+distinct events. Two detectors with similar precision can therefore differ by
+an order of magnitude in MTBFA, depending on how their false positives
+distribute over time.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{fig_b4_fp_windows_vs_events.pdf}
+\caption{Raw false-positive windows versus aggregated false-alarm events for each detector. Every architecture collapses 4--7 consecutive false-positive windows into a single operational alarm; the ratio is detector-specific and uncorrelated with precision.}
+\label{fig:fp-windows-vs-events}
 \end{figure}
 
 Overall, the models that score highest on both DR@5s and MTBFA represent the best
@@ -1451,15 +1499,6 @@ either be calibrated for higher operating thresholds or fine-tuned on a
 small real-flight calibration set before deployment---a recommendation we
 discuss further in \S\ref{sec:limitations}.
 
-\textbf{Scope of the claim.}
-We emphasise that this is a \emph{cross-distribution} rather than a strict
-\emph{sim-to-real} evaluation: the three cross-distribution sources differ
-from the training distribution along multiple axes (vehicle airframe,
-nominal cruise speed, sensor noise statistics, and---for IEEE DataPort
-spoofing---attack mechanism). We design a controlled comparison in
-\S\ref{sec:alfa-controlled} to disentangle the platform-mismatch contribution
-from the broader sim-to-real gap.
-
 \subsection{Controlled Platform-Matching Experiment}
 \label{sec:alfa-controlled}
 
@@ -1657,7 +1696,44 @@ generalization.
 \textbf{Simulator sensor model.}
 The MATLAB GPS sensor model uses additive Gaussian white noise and does
 not include multipath propagation, ionospheric delay, or receiver clock
-drift. The cross-distribution gap in \S\ref{sec:cross_domain} is consistent
+drift.
+Table~\ref{tab:noise_stats} quantifies the distributional gap between the
+simulated training domain and the two real-world evaluation sources using
+statistics computed on normal-flight segments: per-axis standard deviation
+of the position channel ($\sigma_{xy}$), per-axis velocity standard deviation
+($\sigma_v$), excess kurtosis of the position innovation, and the
+99th-percentile single-step position jump.
+
+\begin{table}[!t]
+\caption{Sensor-noise statistics for normal-flight segments across three
+data sources. Statistics computed from second-order position differences
+(innovation).}
+\label{tab:noise_stats}
+\centering
+\small
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Source} & $\boldsymbol{\sigma}_{xy}$\,\textbf{(m)} &
+$\boldsymbol{\sigma}_v$\,\textbf{(m/s)} &
+\textbf{Kurtosis} & \textbf{p99 step (m)} \\
+\midrule
+MATLAB sim (test, normal) & 3.67 & 1.52 & $-$0.03 & 11.0 \\
+IEEE DataPort live (Holybro S500) & 0.007 & 0.04 & $+$12.21 & 0.04 \\
+ALFA (Carbon-Z, raw GPS) & 2.76 & 0.42 & $-$0.94 & 6.0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The MATLAB sensor model is Gaussian by design (excess kurtosis $= -0.03$),
+producing the smooth innovation sequence that all seven detectors were
+trained to classify. The IEEE DataPort live receiver, read from the
+EKF-fused \texttt{vehicle\_local\_position} topic, has a tighter per-step
+$\sigma_{xy}$ but excess kurtosis of $+12.21$---heavy non-Gaussian tails
+produced by multipath bursts and clock-step events that the EKF cannot
+smooth out. The ALFA raw-GPS channel sits closer to the simulation in
+$\sigma_{xy}$ but is slightly sub-Gaussian (kurtosis $= -0.94$), reflecting
+the fixed-wing platform's smoother flight dynamics.
+The cross-distribution gap in \S\ref{sec:cross_domain} is consistent
 with the hypothesis that real GPS-noise structure is a major confound,
 but disentangling sensor-model effects from the other cross-distribution
 axes would require a sensor-realistic simulator we do not have.
@@ -1754,7 +1830,6 @@ network intrusion detection and industrial fault diagnosis.
 \bibitem{ref19} G. Michieletto, F. Formaggio, A. Cenedese, and S. Tomasin, "Robust localization for secure navigation of UAV formations under GNSS spoofing attack," \textit{IEEE Trans. Autom. Sci. Eng.}, vol. 20, no. 4, pp. 2383-2396, Oct. 2023, doi: 10.1109/TASE.2022.3208662.
 \bibitem{ref20} L. Wang, L. Chen, B. Li, Z. Liu, Z. Li, and Z. Lu, "Development status and challenges of anti-spoofing technology of GNSS/INS integrated navigation," \textit{Front. Phys.}, vol. 12, p. 1425084, Oct. 2024, doi: 10.3389/fphy.2024.1425084.
 \bibitem{ref21} A. Iqbal, M. N. Aman, and B. Sikdar, "A deep learning based induced GNSS spoof detection framework," \textit{IEEE Trans. Mach. Learn. Commun. Netw.}, vol. 2, pp. 457-478, 2024, doi: 10.1109/TMLCN.2024.3386649.
-\bibitem{ref23} J. Yoon, D. Jarrett, and M. van der Schaar, "Time-series generative adversarial networks," in \textit{Adv. Neural Inf. Process. Syst. (NeurIPS)}, Vancouver, Canada, Dec. 2019, pp. 5508--5518. [Online]. Available: https://papers.nips.cc/paper/2019/hash/c9efe5f26cd17ba6216bbe2a7d26d490-Abstract.html
 \bibitem{ref24} A. J. Kerns, D. P. Shepard, J. A. Bhatti, and T. E. Humphreys, "Unmanned aircraft capture and control via GPS spoofing," \textit{J. Field Robot.}, vol. 31, no. 4, pp. 617-636, Jul. 2014, doi: 10.1002/rob.21513.
 \bibitem{ref25} M. Spanghero and P. Papadimitratos, "Time-based GNSS attack detection," \textit{IEEE Trans. Aerosp. Electron. Syst.}, vol. 61, no. 3, pp. 5594-5610, Jun. 2025, doi: 10.1109/TAES.2024.3516708.
 \bibitem{ref26} H. Sathaye, G. LaMountain, P. Closas, and A. Ranganathan, "SemperFi: Anti-spoofing GPS receiver for UAVs," in \textit{Proceedings 2022 Network and Distributed System Security Symposium}, San Diego, CA, USA: Internet Society, 2022. doi: 10.14722/ndss.2022.23071.
@@ -1783,6 +1858,7 @@ network intrusion detection and industrial fault diagnosis.
 \bibitem{ref54} A. Niculescu-Mizil and R. Caruana, "Predicting good probabilities with supervised learning," in \textit{Proc. 22nd Int. Conf. Mach. Learn. (ICML)}, Bonn, Germany, Aug. 2005, pp. 625--632, doi: 10.1145/1102351.1102430.
 \bibitem{ref55} L. von Stackelberg, S. Boschert, and R. Knorr, "Comparison of threshold tuning methods for predictive monitoring," \textit{Qual. Reliab. Eng. Int.}, vol. 40, no. 5, pp. 2369--2390, Jul. 2024, doi: 10.1002/qre.3436.
 \bibitem{ref56} \textit{Management of Alarm Systems for the Process Industries}, ANSI/ISA-18.2-2016, International Society of Automation, Research Triangle Park, NC, USA, 2016. [Online]. Available: \texttt{https://www.isa.org/products/ansi-isa-18-2-2016-management-of-alarm-systems-for}
+\bibitem{ref57} A. Lavin and S. Ahmad, "Evaluating real-time anomaly detection algorithms: the Numenta Anomaly Benchmark," in \textit{Proc. 14th IEEE Int. Conf. Mach. Learn. Appl. (ICMLA)}, Miami, FL, USA, Dec. 2015, pp. 38--44, doi: 10.1109/ICMLA.2015.141.
 \EOD
 \end{thebibliography}
 
